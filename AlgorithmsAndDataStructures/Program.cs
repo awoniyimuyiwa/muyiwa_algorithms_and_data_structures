@@ -1,7 +1,4 @@
 ﻿using AlgorithmsAndDataStructures.Algorithms;
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace AlgorithmsAndDataStructures
 {
@@ -9,23 +6,32 @@ namespace AlgorithmsAndDataStructures
     {
         static void Main(string[] args)
         {
-            //BinarySearchImplementation.Main(args);
+            BinarySearchImplementation.Run(args);
 
-            //MergeSortImplementation.Main(args);
+            //MergeSortImplementation.Run(args);
+            //QuickSortImplementation.Run(args);
 
-            //FibonacciSequenceImplementation.Main(args);
-            //NthFibonacciImplementation.Main(args);
+            //FibonacciSequenceImplementation.Run(args);
+            //NthFibonacciImplementation.Run(args);
 
-            //ReverseStringImplementation.Main(args);
-            //PalindromeImplementation.Main(args);
+            //ReverseTextImplementation.Run(args);
+            //PalindromeImplementation.Run(args);
 
-            //NumberOfOccurenceImplementation.Main(args);
-            //RepeatedCharsImplementation.Main(args);
+            //NumberOfOccurenceImplementation.Run(args);
+            //RepeatedCharsImplementation.Run(args);
 
-            //AdditionPairsImplementation.Main(args);
-            //MultiplicationPairsImplementation.Main(args);
+            //RemoveConsecutiveCharImplementation.Run(args);
+            //RemoveAllConsecutiveCharsImplementation.Run(args);
 
-            SerializeToJsonImplementation.Main(args);
+            //NumberOfWordsImplementation.Run(args);
+            //RemoveConsecutiveWordDelimetersImplementation.Run(args);
+
+            //AdditionPairsImplementation.Run(args);
+            //MultiplicationPairsImplementation.Run(args);
+
+            ProjectEulerProblem54Implementation.Run(args);
+
+            //SerializeToJsonImplementation.Run(args);
         }
     }
 }

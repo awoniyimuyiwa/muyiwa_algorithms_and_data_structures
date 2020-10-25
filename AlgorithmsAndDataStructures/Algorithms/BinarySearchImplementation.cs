@@ -4,17 +4,27 @@ using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    /// BEST CASE- TIME: Big-Omega(log (n)), MEMORY: Big-Omega(1) 
-    /// AVERAGE CASE- TIME: Big-Theta(log (n)), MEMORY: Big-Theta(1)
-    /// WORST CASE- TIME: O(log (n)), MEMORY: O(1)
-    /// </summary>
     class BinarySearchImplementation
     {
+        /// <summary>
+        /// Returns the index of needle in haystack
+        /// </summary>
+        /// <param name="needle">item to be searched</param>
+        /// <param name="haystack">array in which to search for needle</param>
+        /// <remarks>
+        /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1) when needle is at the center of haystack
+        /// AVERAGE CASE- TIME: Θ(log(n)), MEMORY: Θ(1)
+        /// WORST CASE- TIME: O(log(n)), MEMORY: O(1)
+        /// 
+        /// The time complexity is log(n) base 2 in the worst case because the size of n gets split by half in each 
+        /// That means the function can be presented as T(n) = a + T(n/2) where a is some constant
+        /// Any function that splits its input size n by X in each iteration has a worst case time complexity of log(n) base X,
+        /// A function that splits its input size n by 5 in every call for instance will have a worst case time complexity of log(n) base 5
+        /// </remarks>
         static int BinarySearch(int needle, int[] haystack)
         {
             int startIndex = 0;
-            int endIndex = haystack.Count() - 1;
+            int endIndex = haystack.Length - 1;
 
             while (startIndex <= endIndex)
             {
@@ -56,17 +66,23 @@ namespace AlgorithmsAndDataStructures.Algorithms
             return isSorted;
         }
 
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
+            var defaultForegroundColor = Console.ForegroundColor;
+
             Console.WriteLine("*******BINARY SEARCH*******");
 
-            Console.WriteLine("Enter numbers separated by comma and space e.g 1, 2, 3:");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nEnter list of numbers. Separate numbers by , and space e.g 1, 2, 3:");
+            Console.ForegroundColor = defaultForegroundColor;
+
+            // Validate input
             string listInput = Console.ReadLine();
             if (string.IsNullOrEmpty(listInput))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine($"ERROR: List of numbers must be provided");
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
@@ -82,7 +98,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"ERROR: {s} is not a valid integer");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = defaultForegroundColor;
                     return;
                 }
             }
@@ -93,23 +109,35 @@ namespace AlgorithmsAndDataStructures.Algorithms
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"ERROR: number to search must be a valid integer");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            // Pre-execution
             var intArray = intList.ToArray();
             // Ensure items in haystack are sorted in ascending order
             if (!IsSorted(intArray))
             {
-                Console.WriteLine("Items are not sorted in ascending order! Sorting...");
-                intArray.OrderBy(x => x);
-                Console.WriteLine("Sorting done!");
+                Console.WriteLine("\nItems are not sorted! Sorting...");
+                intArray = intArray.OrderBy(x => x).ToArray();
+                //intArray = MergeSortImplementation.MergeSort(intArray);
+                Console.WriteLine($"Sorted items: {string.Join(", ", intArray)}");
             }
 
+            Console.WriteLine($"\nSearching...");
+            // Execute
             int index = BinarySearch(numberToSearch, intArray);
-            if (index > -1) { Console.WriteLine($"{numberToSearch} is at index: {index} in the list"); }
-            else { Console.WriteLine($"{numberToSearch} was not found in the list"); }
-            Console.WriteLine("*******END OF BINARY SEARCH*******\n");
+
+            // Display result
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (index > -1) { Console.WriteLine($"\n{numberToSearch} is at position: {index + 1} in the list"); }
+            else { Console.WriteLine($"\n{numberToSearch} was not found in the list"); }
+
+            // Terminate
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("\n*******END OF BINARY SEARCH*******\n");
         }
     }
 }

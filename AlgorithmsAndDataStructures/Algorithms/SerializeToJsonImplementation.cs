@@ -7,6 +7,14 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
     class SerializeToJsonImplementation
     {
+        /// <summary>
+        /// Serializes an in-memory object to json
+        /// </summary>
+        /// <remarks>
+        /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1)
+        /// AVERAGE CASE- TIME: Θ(1), MEMORY: Θ(1)
+        /// WORST CASE- TIME: O(1), MEMORY: O(1)
+        /// </remarks>
         static string SerializeToJson()
         {
             var weatherForecast = new WeatherForeCast
@@ -24,14 +32,23 @@ namespace AlgorithmsAndDataStructures.Algorithms
             return JsonSerializer.Serialize(weatherForecast, SerializationOptions);
         }
 
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
-            Console.WriteLine("*******JSON SERIALIZATION*******");
-            Console.WriteLine("Outputs an in-memory weather forecast object as json");
+            var defaultForegroundColor = Console.ForegroundColor;
 
+            Console.WriteLine("*******JSON SERIALIZATION*******");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nOutputs an in-memory weather forecast object as json:");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nExecuting...");
+            // Execute and display result
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(SerializeToJson());
 
-            Console.WriteLine("*******END OF JSON SERIALIZATION\n*******");
+            // Terminate
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("\n*******END OF JSON SERIALIZATION*******\n");
         }
     }
 

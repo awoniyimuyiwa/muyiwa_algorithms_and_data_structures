@@ -1,50 +1,60 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    /// Best case: time: Big-Omega(nlogn), memory: Big-Omega(n) 
-    /// Average case: time: Big-Theta(nlogn), memory: Big-Theta(n)
-    /// Worst case: time: O(nlogn), memory: O(n)
-    /// </summary>
+
     class MergeSortImplementation
     {
-        private static void MergeSort(int[] array, int startIndex, int lastIndex)
+        /// <summary>
+        /// Sorts a given list of items
+        /// </summary>
+        /// <param name="array">List of items to be sorted</param>
+        /// <param name="startIndex">Index in list to start sorting from</param>
+        /// <param name="endIndex">Index in list to stop sorting</param>
+        /// <remarks>
+        /// BEST CASE- TIME: Ω(n*log(n)), MEMORY: Ω(n)
+        /// AVERAGE CASE- TIME: Θ(n*log(n)), MEMORY: Θ(n)
+        /// WORST CASE- TIME: O(n*log(n)), MEMORY: O(n)
+        /// 
+        /// The time complexity is n*log(n) base 2 in the worst case because the size of n gets split by half in each iteration
+        /// thereby making it log(n) base2 steps. At each step, another n steps are required for sorting.
+        /// maximum of n steps required for sorting in each of the log(n) base 2 steps= n*log(n) base 2 
+        /// </remarks>
+        static void MergeSort(int[] array, int startIndex, int endIndex)
         {
-            if (startIndex < lastIndex)
+            if (startIndex < endIndex)
             {
-                int middleIndex = (startIndex + lastIndex) / 2;
+                int middleIndex = (startIndex + endIndex) / 2;
 
                 MergeSort(array, startIndex, middleIndex); // Divide
-                MergeSort(array, middleIndex, lastIndex); // Divide
-                Merge(array, startIndex, middleIndex, lastIndex); // Conquer
+                MergeSort(array, middleIndex+1, endIndex); // Divide
+                Merge(array, startIndex, middleIndex, endIndex); // Conquer
             }
         }
-
-        private static void Merge(int[] array, int firstIndex, int middleIndex, int lastIndex)
+        // Sorting is done here
+        static void Merge(int[] array, int startIndex, int middleIndex, int endIndex)
         {
-            int leftArrayIndex = firstIndex;
-            int rightArrayIndex = middleIndex;
+            int leftArrayIndex = startIndex;
+            int rightArrayIndex = middleIndex+1;
 
             var sortedArray = new int[array.Length];
             int sortedArrayIndex = 0;
 
-            while (leftArrayIndex <= middleIndex && rightArrayIndex <= lastIndex)
+            while (leftArrayIndex <= middleIndex && rightArrayIndex <= endIndex)
             {
-                if (array[leftArrayIndex] > array[rightArrayIndex])
-                {
-                    sortedArray[sortedArrayIndex] = array[rightArrayIndex];
-                    rightArrayIndex++;
-                }
-                else
+                if (array[leftArrayIndex] < array[rightArrayIndex])
                 {
                     sortedArray[sortedArrayIndex] = array[leftArrayIndex];
                     leftArrayIndex++;
+                    sortedArrayIndex++;
                 }
-
-                sortedArrayIndex++;
+                else
+                {
+                    sortedArray[sortedArrayIndex] = array[rightArrayIndex];
+                    rightArrayIndex++;
+                    sortedArrayIndex++;
+                }
             }
 
             // Copy items remaining in leftArray to sortedArray
@@ -56,33 +66,40 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             // Copy items remaining in rightArray to sortedArray
-            while (rightArrayIndex <= lastIndex)
+            while (rightArrayIndex <= endIndex)
             {
                 sortedArray[sortedArrayIndex] = array[rightArrayIndex];
                 rightArrayIndex++;
                 sortedArrayIndex++;
             }
 
+            //Console.WriteLine($"sortedArrayIndex: {sortedArrayIndex}, startIndex: {startIndex}, endIndex: {endIndex}");
+
             // Copy from sortedArray to array
-            int index = 0;
-            while (index <= sortedArrayIndex)
+            // Note that sortedArrayIndex at this stage will always be equal to the number of items sorted so it needs to be reduced by 1
+            sortedArrayIndex--;
+            int arrayIndex = endIndex;
+            while (arrayIndex >= startIndex)
             {
-                array[index] = sortedArray[index];
-                index++;
+                array[arrayIndex] = sortedArray[sortedArrayIndex];
+                sortedArrayIndex--;
+                arrayIndex--;
             }
         }
 
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
-            Console.WriteLine("*******MERGE SORT*******");
+            var defaultForegroundColor = Console.ForegroundColor;
 
-            Console.WriteLine("Enter list of numbers. Each number should be separated by comma and space e.g 1, 2, 3:");
+            Console.WriteLine("*******MERGE SORT*******");
+            Console.WriteLine("\nEnter list of numbers. Each number should be separated by comma and space e.g 1, 2, 3:");
             string listInput = Console.ReadLine();
+            // Validate input
             if (string.IsNullOrEmpty(listInput))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
@@ -98,17 +115,25 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"ERROR: {s} is not a valid integer");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = defaultForegroundColor;
                     return;
                 }
             }
 
-            MergeSort(intList.ToArray(), 0, intList.Count());
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"\nSorting...");
+            var array = intList.ToArray();
+            // Execute
+            MergeSort(array, 0, array.Length-1);
 
-            Console.WriteLine("Sorted numbers:");
-            Console.WriteLine(string.Join(", ", intList));
+            // Display result
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nResult:");
+            Console.WriteLine(string.Join(", ", array));
 
-            Console.WriteLine("*******END OF MERGE SORT*******\n");
+            // Terminate
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("\n*******END OF MERGE SORT*******\n");
         }
     }
 }

@@ -2,43 +2,38 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class PalindromeImplementation
+    class ReverseTextImplementation
     {
-        /// <summar>
-        /// Returns true if text is a palindrome, false otherwise.   
         /// <summary>
-        /// <param name="text">Text to check</param>
+        /// Reverses a text     
+        /// </summary>
+        /// <param name="text">Text to reverse</param>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        static bool IsPalindrome(string text)
+        public static string Reverse(string text)
         {
             #region Not part of the algorithm
             if (text == null) { throw new ArgumentException($"text cannot be null"); }
             #endregion
 
-            var reversedText = ReverseTextImplementation.Reverse(text);
+            var array = text.ToCharArray();
+            Array.Reverse(array);
 
-            if (reversedText.Equals(text)) { return true; }
-
-            return false;
+            return new string(array);
         }
 
         public static void Run(string[] args)
         {
             var defaultForegroundColor = Console.ForegroundColor;
 
-            Console.WriteLine("*******PALINDROME*******");
+            Console.WriteLine("*******REVERSE TEXT*******");
+            Console.WriteLine("\nEnter text to reverse: ");
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven a text, checks if reverse of the text is the same as the text");
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
-
             // Validate input
             if (string.IsNullOrEmpty(text))
             {
@@ -50,23 +45,16 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"\nExecuting...");
-            // Execute
-            var result = IsPalindrome(text);
+            // Execute algorithm 
+            var result = Reverse(text);
 
-            // Display result
+             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            if (result)
-            {
-                Console.WriteLine($"\n{text} is a palindrome");
-            }
-            else
-            {
-                Console.WriteLine($"\n{text} is not a palindrome");
-            }
+            Console.WriteLine($"\nResult: {result}");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF PALINDROME*******\n");
+            Console.WriteLine("\n*******END OF REVERSE TEXT*******\n");
         }
     }
 }

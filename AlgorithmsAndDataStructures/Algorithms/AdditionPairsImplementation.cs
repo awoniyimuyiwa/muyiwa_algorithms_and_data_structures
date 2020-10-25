@@ -10,6 +10,18 @@ namespace AlgorithmsAndDataStructures.Algorithms
     /// </summary>
     class AdditionPairsImplementation
     {
+        /// <summary>
+        /// Given a list of numbers, and a number X,
+        /// find and print all pairs of numbers within the list that can be added to get X
+        /// </summary>
+        /// <param name="list">List of numbers to search</param>
+        /// <param name="X">Addition result</param>
+        /// <remarks>
+        /// Where n is the size of the list
+        /// BEST CASE- TIME: Ω(n^2), MEMORY: Ω(1)
+        /// AVERAGE CASE- TIME: Θ(n^2), MEMORY: Θ(1)
+        /// WORST CASE- TIME: O(n^2), MEMORY: O(1)
+        /// </remarks>
         static void AdditionPairs(List<int> list, int X)
         {
             var listCount = list.Count();
@@ -29,18 +41,23 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
         }
 
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
-            Console.WriteLine("*******ADDITION PAIRS*******");
-            Console.WriteLine("Given a list of numbers, and a number X, finds and prints all pairs of numbers within the list that can be added to get X");
+            var defaultForegroundColor = Console.ForegroundColor;
 
+            Console.WriteLine("*******ADDITION PAIRS*******");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nGiven a list of numbers, and a number X, finds and prints all pairs of numbers within the list that can be added to get X");
+            Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter list of numbers. Each number should be separated by comma and space e.g 1, 2, 3:");
             string listInput = Console.ReadLine();
+            
+            // Validate input 
             if (string.IsNullOrEmpty(listInput))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
@@ -56,7 +73,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"ERROR: {s} is not a valid integer");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = defaultForegroundColor;
                     return;
                 }
             }
@@ -67,15 +84,20 @@ namespace AlgorithmsAndDataStructures.Algorithms
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"ERROR: X must be a valid integer");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
-            Console.WriteLine($"All pairs of numbers that can be added to get {xInput}:");
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nExecuting...");
+            // Execute and display result
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nAll pairs of numbers that can be added to get {xInput}:");
             AdditionPairs(intList, x);
 
-            Console.WriteLine("*******END OF ADDITION PAIRS*******\n");
+            // Terminate
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("\n*******END OF ADDITION PAIRS*******\n");
         }
     }
 }

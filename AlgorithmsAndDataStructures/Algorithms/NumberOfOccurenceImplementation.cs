@@ -7,33 +7,50 @@ namespace AlgorithmsAndDataStructures.Algorithms
     /// </summary>
     class NumberOfOccurenceImplementation
     {
+        /// <summary>
+        /// Returns the number of times a pattern occurs in a text    
+        /// </summary>
+        /// <param name="pattern">Pattern to check in text</param>
+        /// <param name="text">Text to search</param>
+        /// <remarks>
+        /// Where n is length of the text
+        /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
+        /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
+        /// WORST CASE- TIME: O(n), MEMORY: O(n)
+        /// </remarks>
         static int NumberOfOCcurence(string pattern, string text)
         {
             var patternLength = pattern.Length;
-            var index = -1;
             var count = 0;
 
+            int index;
             while ((index = text.IndexOf(pattern)) > -1)
             {
-                count += 1;
+                count++;
                 text = text.Remove(index, patternLength);
             };
 
             return count;
         }
 
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
-            Console.WriteLine("*******NUMBER OF OCCURRENCE*******");
-            Console.WriteLine("Finds the number of times a pattern (char or string) appears in a text");
-            Console.WriteLine("Enter string: ");
+            var defaultForegroundColor = Console.ForegroundColor;
 
+            Console.WriteLine("*******NUMBER OF OCCURRENCE*******");
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nFinds the number of times a pattern (character or string) occurs in a text");
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
+
+            // Validate input
             if (string.IsNullOrEmpty(text))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"ERROR: Text must be provided");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
@@ -43,14 +60,22 @@ namespace AlgorithmsAndDataStructures.Algorithms
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"ERROR: Pattern must be either a string or character");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nExecuting...");
+            // Execute
             var result = NumberOfOCcurence(pattern, text);
-            Console.WriteLine($"{pattern} occured {result} time(s) in {text}");
 
-            Console.WriteLine("*******END OF NUMBER OF OCCURRENCE*******\n");
+            // Display result
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\n{pattern} occured {result} time(s)");
+
+            // Terminate
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("\n*******END OF NUMBER OF OCCURRENCE*******\n");
         }
     }
 }

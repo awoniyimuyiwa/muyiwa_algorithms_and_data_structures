@@ -4,16 +4,24 @@ using System.Collections.Generic;
 namespace AlgorithmsAndDataStructures.Algorithms
 {
     /// <summary>
-    /// Finds the characters that occur more than once in a string, prints the characters and the number of times they occur
+    /// Finds the characters that occur more than once in a text, prints the characters and the number of times they occur
     /// </summary>
     class RepeatedCharsImplementation
     {
         /// <summary>
-        /// Finds the number of times each character in a string occurs
+        /// Finds and returns a dictionary containing characters in the text as keys
+        /// and the number of times each character occurs as value     
         /// </summary>
-        static Dictionary<char, int> GetCharCountPairs(string input)
+        /// <param name="text">Text to check</param>
+        /// <remarks>
+        /// Where n is length of the text
+        /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
+        /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
+        /// WORST CASE- TIME: O(n), MEMORY: O(n)
+        /// </remarks>
+        static Dictionary<char, int> GetCharCountPairs(string text)
         {
-            var array = input.ToCharArray();
+            var array = text.ToCharArray();
             var charCountPairs = new Dictionary<char, int>();
 
             foreach (char c in array)
@@ -31,22 +39,34 @@ namespace AlgorithmsAndDataStructures.Algorithms
             return charCountPairs;
         }
 
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
+            var defaultForegroundColor = Console.ForegroundColor;
             Console.WriteLine("*******REPEATED CHARACTERS*******");
-            Console.WriteLine("Finds characters that occur more than once in a string");
-            Console.WriteLine("Enter string: ");
+            
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nFinds all characters that occur more than once in a text, prints the repeated characters and the number of times they occur");
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("Enter text: ");
 
-            string input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
+            // Validate input
+            string text = Console.ReadLine();
+            if (string.IsNullOrEmpty(text))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine($"ERROR: Text must be provided");
+                Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
-            var charCountPairs = GetCharCountPairs(input);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nExecuting...");
+            // Execute
+            var charCountPairs = GetCharCountPairs(text);
+
+            // Display result
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nResult:");
             var enumerator = charCountPairs.GetEnumerator();
             var hasDuplicateChars = false;
             KeyValuePair<char, int> keyValuePair;
@@ -56,14 +76,16 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 keyValuePair = enumerator.Current;
                 if (keyValuePair.Value > 1)
                 {
-                    Console.WriteLine($"{keyValuePair.Key} has {keyValuePair.Value - 1} duplicate(s)");
+                    Console.WriteLine($"{keyValuePair.Key} occurs {keyValuePair.Value} time(s)");
                     hasDuplicateChars = true;
                 }
             } while (enumerator.MoveNext());
 
-            if (!hasDuplicateChars) { Console.WriteLine("No duplicate characters"); }
+            if (!hasDuplicateChars) { Console.WriteLine("No repeated characters"); }
 
-            Console.WriteLine("*******END OF REPEATED CHARACTERS*******\n");
+            // Terminate
+            Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("\n*******END OF REPEATED CHARACTERS*******\n");
         }
     }
 }
