@@ -501,7 +501,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             	}
             	else 
             	{
-                    // Finally try to resolve tie by comparing highest value of ranks
+                    // Finally try to resolve tie by comparing value of ranks
                     var player1RankValues = GetRankValues(hand1);
                     var player2RankValues = GetRankValues(hand2);
                     Array.Sort(player1RankValues);
