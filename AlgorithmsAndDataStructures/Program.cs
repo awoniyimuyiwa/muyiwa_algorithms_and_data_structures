@@ -6,7 +6,7 @@ namespace AlgorithmsAndDataStructures
     {
         static void Main(string[] args)
         {
-            BinarySearchImplementation.Run(args);
+            //BinarySearchImplementation.Run(args);
 
             //MergeSortImplementation.Run(args);
             //QuickSortImplementation.Run(args);

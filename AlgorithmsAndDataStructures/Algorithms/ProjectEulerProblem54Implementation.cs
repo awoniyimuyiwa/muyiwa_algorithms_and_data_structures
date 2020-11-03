@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
+    /// <summary>
+    /// https://projecteuler.net/problem=54
+    /// </summary>
     class ProjectEulerProblem54Implementation
     {
         static readonly Dictionary<char, int> RankToValueMap = new Dictionary<char, int>() {
@@ -11,13 +14,26 @@ namespace AlgorithmsAndDataStructures.Algorithms
             {'T', 10}, {'J', 11}, {'Q', 12}, {'K', 13}, {'A', 14}
         };
 
-        // Club, Diamond, Heart and Ace
+        // Club, Diamond, Heart and Spade
         static readonly List<char> Suits = new List<char>() {'C', 'D', 'H', 'S'};
+
+        enum Score 
+        {
+            OnePair,
+            TwoPairs,
+            ThreeOfAKind,
+            Straight,
+            Flush,
+            FullHouse,
+            FourOfAKind,
+            StraightFlush,
+            RoyalFlush
+        }
 
         static Dictionary<char, int> GetRankToCountMap(string[] cards)
         {
             char rank;
-            Dictionary<char, int> rankToCountMap = new Dictionary<char, int>();
+            var rankToCountMap = new Dictionary<char, int>();
 
             foreach (string card in cards)
             {
@@ -38,15 +54,15 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
         static int[] GetRankValues(string[] cards)
         {
-            int[] rankValues = new int[5];
-            int rankValuesIndex = 0;
+            var rankValues = new int[5];
+            int index = 0;
             char rank;
 
             foreach (string card in cards)
             {
                 rank = card[0];
-                rankValues[rankValuesIndex] = RankToValueMap[rank];
-                rankValuesIndex++;
+                rankValues[index] = RankToValueMap[rank];
+                index++;
             }
 
             return rankValues;
@@ -55,25 +71,21 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <summary>
         /// Returns true if there are two cards of the same rank, false otherwise
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static bool IsOnePair(string[] cards)
+        static bool IsOnePair(Dictionary<char, int> rankToCountMap)
         {
-            var rankToCountMap = GetRankToCountMap(cards);
-
             if (rankToCountMap.Count == 4) { return true; }
-            
             return false;
         }
 
         /// <summary>
         /// Returns true if two cards are of the same rank and another two are of a different rank plus any fifth of a different rank, false otherwise 
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static bool IsTwoPairs(string[] cards)
+        static bool IsTwoPairs(Dictionary<char, int> rankToCountMap)
         {
-            var rankToCountMap = GetRankToCountMap(cards);
             var pairsCount = 0;
 
             foreach (char rank in rankToCountMap.Keys)
@@ -88,12 +100,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <summary>
         /// Returns true if there are 3 cards of the same rank, false otherwise
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static bool IsThreeOfAKind(string[] cards)
+        static bool IsThreeOfAKind(Dictionary<char, int> rankToCountMap)
         {
-            var rankToCountMap = GetRankToCountMap(cards);
-
             foreach (char rank in rankToCountMap.Keys)
             {
                 if (rankToCountMap[rank] == 3) { return true; }
@@ -109,8 +119,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <returns></returns>
         static bool IsStraight(string[] cards)
         {
-            int[] rankValues = GetRankValues(cards);
-            
+            var rankValues = GetRankValues(cards);
             Array.Sort(rankValues);
 
             if (rankValues[0] + 1 == rankValues[1] &&
@@ -139,31 +148,23 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <returns></returns>
         static bool IsFlush(string[] cards)
         {
-            List<char> list = new List<char>();
-            char suit;
+            var firstSuit = cards[0][1];
             
-            foreach (string card in cards)
+            for (int index = 1; index<=cards.Length-1; index++)
             {
-                suit = card[1];
-
-                if (!list.Contains(suit)) 
-                {
-                    list.Add(suit);
-                }
+                if (firstSuit != cards[index][1]) { return false; }
             }
     
-            if (list.Count == 1) { return true; }
-            return false;
+            return true;
         }
 
         /// <summary>
         /// Returns true when there are three cards of the same rank and two cards of another rank, false otherwise
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static bool IsFullHouse(string[] cards)
+        static bool IsFullHouse(Dictionary<char, int> rankToCountMap)
         {
-            var rankToCountMap = GetRankToCountMap(cards);
             if (rankToCountMap.Count != 2) { return false; }
           
             foreach (char rank in rankToCountMap.Keys)
@@ -177,12 +178,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <summary>
         /// Returns true if there are 4 cards of the same rank, false otherwise
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static bool IsFourOfAKind(string[] cards)
-        {
-            var rankToCountMap = GetRankToCountMap(cards);
-            
+        static bool IsFourOfAKind(Dictionary<char, int> rankToCountMap)
+        { 
             foreach (char rank in rankToCountMap.Keys)
             {
                 if (rankToCountMap[rank] == 4) { return true; }
@@ -204,7 +203,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         }
 
         /// <summary>
-        /// Retuns true when the cards are all of the same suit (i.e flush) and 
+        /// Retuns true when the cards are all of the same suit (i.e flush) and the rank of each card is either T, J, Q, K or A. Returns false otherwise
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
@@ -212,47 +211,103 @@ namespace AlgorithmsAndDataStructures.Algorithms
         {
             if (!IsFlush(cards)) { return false; }
      
-            bool isRoyal = true;
             foreach (string card in cards)
             {
                 if (card[0] != 'T' || card[0] != 'J' || card[0] != 'Q' || card[0] != 'K' || card[0] != 'A')
                 {
-                    isRoyal = false;
-                    break;
+                   return false;
                 }
             }
 
-            return isRoyal;
+            return true;
         }
 
-        static int GetHighestPair(string[] cards)
+        static int GetScore(string[] cards) 
         {
-            int highestPair = 0;
-            int value;
             var rankToCountMap = GetRankToCountMap(cards);
+
+            if (IsRoyalFlush(cards))
+            {
+                return (int)Score.RoyalFlush;
+            }
+            else if (IsStraightFlush(cards))
+            {
+                return (int)Score.StraightFlush;
+            }
+            else if (IsFourOfAKind(rankToCountMap))
+            {
+               return (int)Score.FourOfAKind;
+            }
+            else if (IsFullHouse(rankToCountMap))
+            {
+                return (int)Score.FullHouse;
+            }
+            else if (IsFlush(cards))
+            {
+                return (int)Score.Flush;
+            }
+            else if (IsStraight(cards))
+            {
+               return (int)Score.Straight;
+            }
+            else if (IsThreeOfAKind(rankToCountMap))
+            {
+                return (int)Score.ThreeOfAKind;
+            }
+            else if (IsTwoPairs(rankToCountMap))
+            {
+               return (int)Score.TwoPairs;
+            }
+            else if (IsOnePair(rankToCountMap))
+            {
+                return (int)Score.OnePair;
+            }
+
+            return 0;
+        }
+
+        static int[] GetPairedRankValues(Dictionary<char, int> rankToCountMap)
+        {
+            var pairedRankValues = new int[2];
+            var index = 0;
+            int value;
 
             foreach (char rank in rankToCountMap.Keys) 
             {
                 value = RankToValueMap[rank];
 
-                if (rankToCountMap[rank] == 2 && highestPair < value)
+                if (rankToCountMap[rank] == 2)
                 {
-                    highestPair = value;
+                    pairedRankValues[index] = value;
+                    index++;
                 }
             }
 
-            return highestPair;
+            return pairedRankValues;
+        }
+
+        /// <summary>
+        /// Returns the value of the rank that 2 cards belong to
+        /// </summary>
+        /// <param name="rankToCountMap"></param>
+        /// <returns></returns>
+        static int GetValueOfRankThat2CardsBelongTo(Dictionary<char, int> rankToCountMap)
+        {
+            foreach (char rank in rankToCountMap.Keys)
+            {
+                if (rankToCountMap[rank] == 2) { return RankToValueMap[rank]; }
+            }
+
+            return 0;
         }
 
         /// <summary>
         /// Returns the value of the rank that 3 cards belong to
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static int GetValueOfRankThat3CardsBelongTo(string[] cards)
+        static int GetValueOfRankThat3CardsBelongTo(Dictionary<char, int> rankToCountMap)
         {
-            var rankToCountMap = GetRankToCountMap(cards);
-            
             foreach (char rank in rankToCountMap.Keys)
             {
                 if (rankToCountMap[rank] == 3) { return RankToValueMap[rank]; }
@@ -264,62 +319,16 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <summary>
         /// Returns the value of the rank that 4 cards belong to
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="rankToCountMap"></param>
         /// <returns></returns>
-        static int GetValueOfRankThat4CardsBelongTo(string[] cards)
+        static int GetValueOfRankThat4CardsBelongTo(Dictionary<char, int> rankToCountMap)
         {
-            var rankToCountMap = GetRankToCountMap(cards);
-           
             foreach (char rank in rankToCountMap.Keys)
             {
                 if (rankToCountMap[rank] == 4) { return RankToValueMap[rank]; }
             }
 
             return 0;
-        }
-
-        static int GetScore(string[] cards) 
-        {
-            int score = 0;
-
-            if (IsRoyalFlush(cards))
-            {
-                score = 9000;
-            }
-            else if (IsStraightFlush(cards))
-            {
-                score = 8000;
-            }
-            else if (IsFourOfAKind(cards))
-            {
-                score = 7000 + GetValueOfRankThat4CardsBelongTo(cards);
-            }
-            else if (IsFullHouse(cards))
-            {
-                score = 6000 + GetValueOfRankThat3CardsBelongTo(cards);
-            }
-            else if (IsFlush(cards))
-            {
-                score = 5000;
-            }
-            else if (IsStraight(cards))
-            {
-                score = 4000;
-            }
-            else if (IsThreeOfAKind(cards))
-            {
-                score = 3000 + GetValueOfRankThat3CardsBelongTo(cards);
-            }
-            else if (IsTwoPairs(cards))
-            {
-                score = 2000 + GetHighestPair(cards);
-            }
-            else if (IsOnePair(cards))
-            {
-                score = 1000 + GetHighestPair(cards);
-            }
-            
-            return score;
         }
 
         static bool IsValidCards(string[] cards)
@@ -358,7 +367,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         {
             var defaultForegroundColor = Console.ForegroundColor;
 
-            Console.WriteLine("*******PROJECT EULER PROBLEM 54*******");
+            Console.WriteLine("*******PROJECT EULER PROBLEM 54: https://projecteuler.net/problem=54*******");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nGiven 5 cards each for two players in a game of poker, determines which of the two players is the winner");
             Console.WriteLine("Each card should be a string of 2 characters. The first character represents the card's rank, the second character represents the card's suit");
@@ -408,48 +417,118 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Green;
 
             // Execute and dispaly result
-            int player1Score = GetScore(hand1);
-            int player2Score = GetScore(hand2);
+            var player1Score = GetScore(hand1);
+            var player2Score = GetScore(hand2);
+            var isTie = true;
 
             //Console.WriteLine($"player1Score: {player1Score} player2Score: {player2Score}");
 
             if (player1Score > player2Score) 
             {
                 Console.WriteLine("\nPlayer 1 wins!");
+                isTie = false;
             } 
             else if (player2Score > player1Score) 
             {
                 Console.WriteLine("\nPlayer 2 wins!");
+                isTie = false;
             }
-            else 
+            else if (player1Score == (int)Score.OnePair && player2Score == (int)Score.OnePair) 
+            { 
+                var rankToCountMap = GetRankToCountMap(hand1);
+                player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);
+
+                rankToCountMap = GetRankToCountMap(hand2);
+                player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);  
+            }
+            else if (player1Score == (int)Score.TwoPairs && player2Score == (int)Score.TwoPairs) 
             {
-                int[] player1RankValues = GetRankValues(hand1);
-                int[] player2RankValues = GetRankValues(hand2);
+                var pairedRankValuesPlayer1 = GetPairedRankValues(GetRankToCountMap(hand1));
+                var pairedRankValuesPlayer2 = GetPairedRankValues(GetRankToCountMap(hand2));
+                Array.Sort(pairedRankValuesPlayer1);
+                Array.Sort(pairedRankValuesPlayer2);
 
-                Array.Sort(player1RankValues);
-                Array.Sort(player2RankValues);
+                player1Score = pairedRankValuesPlayer1[1];
+                player2Score = pairedRankValuesPlayer2[1];
 
-                // Start from the highest rank values which will be the last item after sorting
-                int index = 4;
+                if (player1Score == player2Score) 
+                {
+                   player1Score = pairedRankValuesPlayer1[0];
+                   player2Score = pairedRankValuesPlayer2[0]; 
+                }
+            }
+            else if (player1Score == (int)Score.ThreeOfAKind && player2Score == (int)Score.ThreeOfAKind) 
+            {
+                var rankToCountMap = GetRankToCountMap(hand1);
+                player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
 
-                while ((player1RankValues[index] == player2RankValues[index]) && index > 0)
-                {
-                    index--;
-                }
+                rankToCountMap = GetRankToCountMap(hand2);
+                player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
+            }
+            else if (player1Score == (int)Score.FourOfAKind && player2Score == (int)Score.FourOfAKind) 
+            {
+                var rankToCountMap = GetRankToCountMap(hand1);
+                player1Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
 
-                if (player1RankValues[index] > player2RankValues[index])
+                rankToCountMap = GetRankToCountMap(hand2);
+                player2Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
+            }
+            else if (player1Score == (int)Score.FullHouse && player2Score == (int)Score.FullHouse) 
+            {
+                var rankToCountMapPlayer1 = GetRankToCountMap(hand1);
+                player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer1);
+
+                var rankToCountMapPlayer2 = GetRankToCountMap(hand2);
+                player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer2);
+
+                if (player1Score == player2Score) 
                 {
-                    Console.WriteLine("\nPlayer 1 Wins!");
+                   player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMapPlayer1);
+                   player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMapPlayer2);
                 }
-                else if (player2RankValues[index] > player1RankValues[index])
+            }
+
+            // Try to determine winner again
+            if (isTie) 
+            {
+            	if (player1Score > player2Score) 
                 {
-                    Console.WriteLine("\nPlayer 2 Wins!");
+               	   Console.WriteLine("\nPlayer 1 wins!");
                 }
-                else
-                {
-                    Console.WriteLine("\nTIE. No Winner!");
-                }
-            } 
+            	else if (player2Score > player1Score)
+            	{
+                   Console.WriteLine("\nPlayer 2 wins!");
+            	}
+            	else 
+            	{
+                    // Finally try to resolve tie by comparing highest value of ranks
+                    var player1RankValues = GetRankValues(hand1);
+                    var player2RankValues = GetRankValues(hand2);
+                    Array.Sort(player1RankValues);
+                    Array.Sort(player2RankValues);
+
+                    // Start from the highest rank values which will be the last item after sorting
+                    int index = 4;
+
+                    while ((player1RankValues[index] == player2RankValues[index]) && index > 0)
+                    {
+                        index--;
+                    }
+
+                    if (player1RankValues[index] > player2RankValues[index])
+                    {
+                        Console.WriteLine("\nPlayer 1 Wins!");
+                    }
+                    else if (player2RankValues[index] > player1RankValues[index])
+                    {
+                        Console.WriteLine("\nPlayer 2 Wins!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nTIE. No Winner!");
+                    }
+                } 
+            }
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
