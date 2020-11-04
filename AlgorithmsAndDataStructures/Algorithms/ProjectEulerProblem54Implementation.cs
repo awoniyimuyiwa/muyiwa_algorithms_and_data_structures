@@ -331,36 +331,137 @@ namespace AlgorithmsAndDataStructures.Algorithms
             return 0;
         }
 
-        static bool IsValidCards(string[] cards)
+        static void ValidateCards(string[] cards)
         {
             if (cards.Length > 5 || cards.Length < 5) 
             {
-                Console.WriteLine("Cards must be 5");
-                return false;
+                throw new ArgumentException("Cards must be 5");
             }
     
             foreach (string s in cards)
             {
                 if (s.Length < 2 || s.Length > 2) 
                 {
-                    Console.WriteLine($"{s} must be two characters");
-                    return false; 
+                    throw new ArgumentException($"{s} must be two characters");
                 }
 
                 if (!RankToValueMap.ContainsKey(s[0])) 
                 {
-                    Console.WriteLine($"{s[0]} is not a valid rank");
-                    return false; 
+                    throw new ArgumentException($"{s[0]} is not a valid rank");
                 }
 
                 if (!Suits.Contains(s[1])) 
                 {
-                    Console.WriteLine($"{s[1]} is not a valid suit");
-                    return false; 
+                    throw new ArgumentException($"{s[1]} is not a valid suit");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Given 5 cards each for two players in a game of poker, determines the winner between the players.
+        /// </summary>
+        /// <param name="cardsForPlayer1">Cards for player 1</param>
+        /// <param name="cardsForPlayer2">Cards for player 2</param>
+        /// <returns>1 if player 1 wins, 2 if player 2 wins and 0 if there is a tie</returns>
+        public static int GetWinner(string[] cardsForPlayer1, string[] cardsForPlayer2)
+        {
+            try
+            {
+                ValidateCards(cardsForPlayer1);
+            } 
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException($"Error in cards for player 1. {ex.Message}");
+            }
+
+            try
+            {
+                ValidateCards(cardsForPlayer2);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException($"Error in cards for player 2. { ex.Message}");
+            }
+
+            var player1Score = GetScore(cardsForPlayer1);
+            var player2Score = GetScore(cardsForPlayer2);
+
+            if (player1Score > player2Score) { return 1;}
+            else if (player2Score > player1Score) { return 2; }
+            else if (player1Score == (int)Score.OnePair && player2Score == (int)Score.OnePair)
+            {
+                var rankToCountMap = GetRankToCountMap(cardsForPlayer1);
+                player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);
+
+                rankToCountMap = GetRankToCountMap(cardsForPlayer2);
+                player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);
+            }
+            else if (player1Score == (int)Score.TwoPairs && player2Score == (int)Score.TwoPairs)
+            {
+                var pairedRankValuesPlayer1 = GetPairedRankValues(GetRankToCountMap(cardsForPlayer1));
+                var pairedRankValuesPlayer2 = GetPairedRankValues(GetRankToCountMap(cardsForPlayer2));
+                Array.Sort(pairedRankValuesPlayer1);
+                Array.Sort(pairedRankValuesPlayer2);
+
+                player1Score = pairedRankValuesPlayer1[1];
+                player2Score = pairedRankValuesPlayer2[1];
+
+                if (player1Score == player2Score)
+                {
+                    player1Score = pairedRankValuesPlayer1[0];
+                    player2Score = pairedRankValuesPlayer2[0];
+                }
+            }
+            else if (player1Score == (int)Score.ThreeOfAKind && player2Score == (int)Score.ThreeOfAKind)
+            {
+                var rankToCountMap = GetRankToCountMap(cardsForPlayer1);
+                player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
+
+                rankToCountMap = GetRankToCountMap(cardsForPlayer2);
+                player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
+            }
+            else if (player1Score == (int)Score.FourOfAKind && player2Score == (int)Score.FourOfAKind)
+            {
+                var rankToCountMap = GetRankToCountMap(cardsForPlayer1);
+                player1Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
+
+                rankToCountMap = GetRankToCountMap(cardsForPlayer2);
+                player2Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
+            }
+            else if (player1Score == (int)Score.FullHouse && player2Score == (int)Score.FullHouse)
+            {
+                var rankToCountMapPlayer1 = GetRankToCountMap(cardsForPlayer1);
+                player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer1);
+
+                var rankToCountMapPlayer2 = GetRankToCountMap(cardsForPlayer2);
+                player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer2);
+
+                if (player1Score == player2Score)
+                {
+                    player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMapPlayer1);
+                    player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMapPlayer2);
                 }
             }
 
-            return true;
+            // Try to determine winner again
+            if (player1Score > player2Score) { return 1; }
+            else if (player2Score > player1Score) { return 2; }
+            else
+            {
+                // Finally try to resolve tie by comparing value of ranks
+                var player1RankValues = GetRankValues(cardsForPlayer1);
+                var player2RankValues = GetRankValues(cardsForPlayer2);
+                Array.Sort(player1RankValues);
+                Array.Sort(player2RankValues);
+
+                // Start comparing from the highest rank values which will be the last item after sorting
+                int index = 4;
+                while ((player1RankValues[index] == player2RankValues[index]) && index > 0) { index--; }
+
+                if (player1RankValues[index] > player2RankValues[index]) { return 1; }
+                else if (player2RankValues[index] > player1RankValues[index]) { return 2; }
+                else { return 0; }
+            }
         }
 
         public static void Run(string[] args) 
@@ -371,8 +472,8 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nGiven 5 cards each for two players in a game of poker, determines which of the two players is the winner");
             Console.WriteLine("Each card should be a string of 2 characters. The first character represents the card's rank, the second character represents the card's suit");
-            Console.WriteLine($"Valid ranks are: {String.Join(", ", RankToValueMap.Keys)}. Where T is for Ten, J for Jack, Q for Queen, K for King, and A is for Ace");
-            Console.WriteLine($"Valid suits are: {String.Join(", ", Suits)}. Where C is for Club, D is for Diamond, H is for Heart and S is for Spades");
+            Console.WriteLine($"Valid ranks are: {string.Join(", ", RankToValueMap.Keys)}. Where T is for Ten, J for Jack, Q for Queen, K for King, and A is for Ace");
+            Console.WriteLine($"Valid suits are: {string.Join(", ", Suits)}. Where C is for Club, D is for Diamond, H is for Heart and S is for Spades");
             Console.WriteLine("Cards should be separated by comma and space e.g 2S, 3D, 4H, 9C, QH:");
             
             Console.ForegroundColor = defaultForegroundColor;
@@ -386,13 +487,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
-            
             var hand1 = cardsInput.Split(", ");
-            if (!IsValidCards(hand1)) 
-            {
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
             
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("\nEnter 5 cards for player 2:");
@@ -404,131 +499,29 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
-
             var hand2 = cardsInput.Split(", ");
-            if (!IsValidCards(hand2)) 
+           
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nExecuting...");
+            // Execute
+            var winner = 0;
+            try
             {
+                winner = GetWinner(hand1, hand2);
+            } 
+            catch (ArgumentException ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nERROR: {ex.Message}");
                 Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-
-            // Execute and dispaly result
-            var player1Score = GetScore(hand1);
-            var player2Score = GetScore(hand2);
-            var isTie = true;
-
-            //Console.WriteLine($"player1Score: {player1Score} player2Score: {player2Score}");
-
-            if (player1Score > player2Score) 
-            {
-                Console.WriteLine("\nPlayer 1 wins!");
-                isTie = false;
-            } 
-            else if (player2Score > player1Score) 
-            {
-                Console.WriteLine("\nPlayer 2 wins!");
-                isTie = false;
-            }
-            else if (player1Score == (int)Score.OnePair && player2Score == (int)Score.OnePair) 
-            { 
-                var rankToCountMap = GetRankToCountMap(hand1);
-                player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);
-
-                rankToCountMap = GetRankToCountMap(hand2);
-                player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);  
-            }
-            else if (player1Score == (int)Score.TwoPairs && player2Score == (int)Score.TwoPairs) 
-            {
-                var pairedRankValuesPlayer1 = GetPairedRankValues(GetRankToCountMap(hand1));
-                var pairedRankValuesPlayer2 = GetPairedRankValues(GetRankToCountMap(hand2));
-                Array.Sort(pairedRankValuesPlayer1);
-                Array.Sort(pairedRankValuesPlayer2);
-
-                player1Score = pairedRankValuesPlayer1[1];
-                player2Score = pairedRankValuesPlayer2[1];
-
-                if (player1Score == player2Score) 
-                {
-                   player1Score = pairedRankValuesPlayer1[0];
-                   player2Score = pairedRankValuesPlayer2[0]; 
-                }
-            }
-            else if (player1Score == (int)Score.ThreeOfAKind && player2Score == (int)Score.ThreeOfAKind) 
-            {
-                var rankToCountMap = GetRankToCountMap(hand1);
-                player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
-
-                rankToCountMap = GetRankToCountMap(hand2);
-                player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
-            }
-            else if (player1Score == (int)Score.FourOfAKind && player2Score == (int)Score.FourOfAKind) 
-            {
-                var rankToCountMap = GetRankToCountMap(hand1);
-                player1Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
-
-                rankToCountMap = GetRankToCountMap(hand2);
-                player2Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
-            }
-            else if (player1Score == (int)Score.FullHouse && player2Score == (int)Score.FullHouse) 
-            {
-                var rankToCountMapPlayer1 = GetRankToCountMap(hand1);
-                player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer1);
-
-                var rankToCountMapPlayer2 = GetRankToCountMap(hand2);
-                player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer2);
-
-                if (player1Score == player2Score) 
-                {
-                   player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMapPlayer1);
-                   player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMapPlayer2);
-                }
-            }
-
-            // Try to determine winner again
-            if (isTie) 
-            {
-            	if (player1Score > player2Score) 
-                {
-               	   Console.WriteLine("\nPlayer 1 wins!");
-                }
-            	else if (player2Score > player1Score)
-            	{
-                   Console.WriteLine("\nPlayer 2 wins!");
-            	}
-            	else 
-            	{
-                    // Finally try to resolve tie by comparing value of ranks
-                    var player1RankValues = GetRankValues(hand1);
-                    var player2RankValues = GetRankValues(hand2);
-                    Array.Sort(player1RankValues);
-                    Array.Sort(player2RankValues);
-
-                    // Start from the highest rank values which will be the last item after sorting
-                    int index = 4;
-
-                    while ((player1RankValues[index] == player2RankValues[index]) && index > 0)
-                    {
-                        index--;
-                    }
-
-                    if (player1RankValues[index] > player2RankValues[index])
-                    {
-                        Console.WriteLine("\nPlayer 1 Wins!");
-                    }
-                    else if (player2RankValues[index] > player1RankValues[index])
-                    {
-                        Console.WriteLine("\nPlayer 2 Wins!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nTIE. No Winner!");
-                    }
-                } 
-            }
+            if (winner == 0) { Console.WriteLine("\nTIE. No Winner!"); }
+            else if (winner == 1) { Console.WriteLine("\nPlayer 1 wins!"); }
+            else if (winner == 2) { Console.WriteLine("\nPlayer 2 wins!"); } 
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
