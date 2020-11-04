@@ -2,21 +2,7 @@ using System;
 
 namespace AlgorithmsAndDataStructures.DataStructures
 {
-    public interface INodeData 
-    {
-        public bool IsLessThan(INodeData other);
-        public bool IsEqual(INodeData other);
-        public string Serialize();
-    }
-
-    public class Node<T> where T : INodeData
-    {
-        public T Data { get; set; }
-        public Node<T> Left { get; set; } 
-        public Node<T> Right { get; set; }
-    }
-
-    public class BinarySearchTree<T> where T : INodeData
+    public class BinarySearchTree<T> where T : IComparable
     {
         Node<T> Root;
 
@@ -27,15 +13,17 @@ namespace AlgorithmsAndDataStructures.DataStructures
 
         void Insert(Node<T> node, T data)
         {
-            if (data.IsLessThan(node.Data)) 
+            if (data.CompareTo(node.Data) < 0) 
             {
                 if (node.Left != null) { Insert(node.Left, data); }
                 else
                 {
-                    node.Left = new Node<T>();
-                    node.Left.Data = data;
-                    node.Left.Left = null;
-                    node.Left.Right = null;
+                    node.Left = new Node<T>
+                    {
+                        Data = data,
+                        Left = null,
+                        Right = null
+                    };
                 }
             }
             else 
@@ -43,10 +31,12 @@ namespace AlgorithmsAndDataStructures.DataStructures
                 if (node.Right != null) { Insert(node.Right, data); }
                 else
                 {
-                    node.Right = new Node<T>();
-                    node.Right.Data = data;
-                    node.Right.Left = null;
-                    node.Right.Right = null;
+                    node.Right = new Node<T>
+                    {
+                        Data = data,
+                        Left = null,
+                        Right = null
+                    };
                 }
             }
         }
@@ -56,25 +46,12 @@ namespace AlgorithmsAndDataStructures.DataStructures
             if (Root != null) { Insert(Root, data); }
             else
             {
-                Root = new Node<T>();
-                Root.Data = data;
-                Root.Left = null;
-                Root.Right = null;
-            }
-        }
-
-        bool Search(T data, Node<T> node)
-        {
-            if (node == null) { return false; }
-            if (data.IsEqual(node.Data)) { return true; }
-            
-            if (data.IsLessThan(node.Data)) 
-            {
-                return Search(data, node.Left);
-            } 
-            else 
-            {
-                return Search(data, node.Right);
+                Root = new Node<T>
+                {
+                    Data = data,
+                    Left = null,
+                    Right = null
+                };
             }
         }
 
@@ -87,32 +64,52 @@ namespace AlgorithmsAndDataStructures.DataStructures
             }
         }
 
+        public void InOrder()
+        {
+            InOrder(Root);
+        }
+
+        public void PreOrder()
+        {
+            PreOrder(Root);
+        }
+
+        public void PostOrder()
+        {
+            PostOrder(Root);
+        }
+
+        bool Search(T data, Node<T> node)
+        {
+            if (node == null) { return false; }
+            if (data.CompareTo(node.Data) == 0) { return true; }
+
+            if (data.CompareTo(node.Data) < 0)
+            {
+                return Search(data, node.Left);
+            }
+            else
+            {
+                return Search(data, node.Right);
+            }
+        }
+
         void InOrder(Node<T> node)
         {
             if (node == null) { return; }
 
             InOrder(node.Left);
-            Console.WriteLine(node.Data.Serialize());
+            Console.WriteLine(node.Data.ToString());
             InOrder(node.Right);
-        }
-
-        public void InOrder()
-        {
-            InOrder(Root);
         }
 
         void PreOrder(Node<T> node)
         {
             if (node == null) { return; }
 
-            Console.WriteLine(node.Data.Serialize());
+            Console.WriteLine(node.Data.ToString());
             PreOrder(node.Left);
             PreOrder(node.Right);
-        }
-
-        public void PreOrder()
-        {
-            PreOrder(Root);
         }
 
         void PostOrder(Node<T> node)
@@ -121,12 +118,14 @@ namespace AlgorithmsAndDataStructures.DataStructures
 
             PostOrder(node.Left);
             PostOrder(node.Right);
-            Console.WriteLine(node.Data.Serialize());
+            Console.WriteLine(node.Data.ToString());
         }
+    }
 
-        public void PostOrder()
-        {
-            PostOrder(Root);
-        }
+    class Node<T>
+    {
+        public T Data { get; set; }
+        public Node<T> Left { get; set; }
+        public Node<T> Right { get; set; }
     }
 }
