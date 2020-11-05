@@ -6,7 +6,7 @@ namespace AlgorithmsAndDataStructures
     {
         static void Main(string[] args)
         {
-            //BinarySearchImplementation.Run(args);
+            BinarySearchImplementation.Run(args);
 
             //MergeSortImplementation.Run(args);
             //QuickSortImplementation.Run(args);
@@ -31,7 +31,7 @@ namespace AlgorithmsAndDataStructures
 
             //ProjectEulerProblem54Implementation.Run(args);
 
-            BinarySearchTreeTraversalImplementation.Run(args);
+            //BinarySearchTreeTraversalImplementation.Run(args);
 
             //SerializeToJsonImplementation.Run(args);
         }

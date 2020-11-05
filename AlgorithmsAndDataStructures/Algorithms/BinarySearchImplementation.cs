@@ -21,7 +21,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// Any function that splits its input size n by X in each iteration has a worst case time complexity of log(n) base X,
         /// A function that splits its input size n by 5 in every call for instance will have a worst case time complexity of log(n) base 5
         /// </remarks>
-        static int BinarySearch(int needle, int[] haystack)
+        public static int BinarySearch(int needle, int[] haystack)
         {
             int startIndex = 0;
             int endIndex = haystack.Length - 1;
@@ -38,7 +38,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             return -1;
         }
 
-        static bool IsSorted(int[] array, bool ascending = true)
+        public static bool IsSorted(int[] array, bool ascending = true)
         {
             var isSorted = true;
             var arrayLength = array.Length;
@@ -71,10 +71,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             var defaultForegroundColor = Console.ForegroundColor;
 
             Console.WriteLine("*******BINARY SEARCH*******");
-
-            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nEnter list of numbers. Separate numbers by , and space e.g 1, 2, 3:");
-            Console.ForegroundColor = defaultForegroundColor;
 
             // Validate input
             string listInput = Console.ReadLine();
