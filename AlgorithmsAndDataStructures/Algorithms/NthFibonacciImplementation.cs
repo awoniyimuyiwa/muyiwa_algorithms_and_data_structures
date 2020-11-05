@@ -97,7 +97,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nExecuting...");
             // Execute
-            var result = FibonacciIterative(n-1); //var result = FibonacciImperative(iteration)
+            var result = Fibonacci(n - 1); //var result = FibonacciIterative(n - 1);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;

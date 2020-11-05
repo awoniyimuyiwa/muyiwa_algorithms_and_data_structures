@@ -48,7 +48,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nGiven a list of numbers, and a number X, finds and prints all pairs of numbers within the list that can be added to get X");
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("Enter list of numbers. Each number should be separated by comma and space e.g 1, 2, 3:");
+            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
             string listInput = Console.ReadLine();
             
             // Validate input 
@@ -61,7 +61,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             var intList = new List<int>();
-            var stringArray = listInput.Split(", ");
+            var stringArray = listInput.Split(" ");
             foreach (string s in stringArray)
             {
                 if (int.TryParse(s, out int sAsInt))
@@ -91,12 +91,19 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("\nExecuting...");
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nAll pairs of numbers that can be added to get {xInput}:");
 
             var tuples = GetAdditionPairs(intList, x);
-            foreach (Tuple<int, int> tuple in tuples)
+            if (tuples.Count() > 0)
             {
-                Console.WriteLine($"{tuple.Item1}, {tuple.Item2}");
+                Console.WriteLine($"\nPairs of numbers that can be added to get {xInput}:");
+                foreach (Tuple<int, int> tuple in tuples)
+                {
+                    Console.WriteLine($"{tuple.Item1}, {tuple.Item2}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\nNone of the numbers can be multiplied to get {xInput}");
             }
 
             // Terminate

@@ -90,7 +90,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             var defaultForegroundColor = Console.ForegroundColor;
 
             Console.WriteLine("*******MERGE SORT*******");
-            Console.WriteLine("\nEnter list of numbers. Each number should be separated by comma and space e.g 1, 2, 3:");
+            Console.WriteLine("\nEnter list of numbers. Separate numbers by space e.g 1 20 3:");
             string listInput = Console.ReadLine();
             // Validate input
             if (string.IsNullOrEmpty(listInput))
@@ -102,7 +102,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             var intList = new List<int>();
-            var stringArray = listInput.Split(", ");
+            var stringArray = listInput.Split(" ");
             foreach (string s in stringArray)
             {
                 if (int.TryParse(s, out int sAsInt))
@@ -126,8 +126,8 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nResult:");
-            Console.WriteLine(string.Join(", ", array));
+            Console.Write("\nResult: ");
+            Console.WriteLine(string.Join(" ", array));
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;

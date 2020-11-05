@@ -62,12 +62,12 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nExecuting...");
             // Execute
-            var charCountPairs = GetCharToCountMap(text);
+            var charToCountMap = GetCharToCountMap(text);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nResult:");
-            var enumerator = charCountPairs.GetEnumerator();
+            var enumerator = charToCountMap.GetEnumerator();
             var hasDuplicateChars = false;
             KeyValuePair<char, int> keyValuePair;
 

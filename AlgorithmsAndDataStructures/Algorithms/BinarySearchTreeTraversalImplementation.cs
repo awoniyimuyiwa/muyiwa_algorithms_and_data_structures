@@ -15,7 +15,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("\nGiven a list of numbers, stores them in a binary search tree and prints out the result of traversing the tree using different tree traversal algorithms");
 
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter list of numbers. Separate numbers by , and space e.g 5, 2, 6:");
+            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
 
             // Validate input
             string input = Console.ReadLine();
@@ -28,7 +28,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             var intList = new List<int>();
-            var stringArray = input.Split(", ");
+            var stringArray = input.Split(" ");
             foreach (string s in stringArray)
             {
                 if (int.TryParse(s, out int sAsInt))
@@ -78,7 +78,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         {
             public void Visit(T t)
             {
-                Console.Write($"{t}, ");
+                Console.Write($"{t} ");
             }
         }
     }

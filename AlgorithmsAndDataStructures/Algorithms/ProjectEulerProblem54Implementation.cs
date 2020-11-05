@@ -6,7 +6,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
     /// <summary>
     /// https://projecteuler.net/problem=54
     /// </summary>
-    class ProjectEulerProblem54Implementation
+    public class ProjectEulerProblem54Implementation
     {
         static readonly Dictionary<char, int> RankToValueMap = new Dictionary<char, int>() {
             {'2', 2}, {'3', 3}, {'4', 4}, {'5', 5}, 
@@ -360,11 +360,12 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <summary>
         /// Given 5 cards each for two players in a game of poker, determines the winner between the players.
         /// </summary>
-        /// <param name="cardsForPlayer1">Cards for player 1</param>
-        /// <param name="cardsForPlayer2">Cards for player 2</param>
+        /// <param name="hand1">5 Cards for player 1, each card seperated by a space</param>
+        /// <param name="hand2">5 Cards for player 2, each card seperated by a space</param>
         /// <returns>1 if player 1 wins, 2 if player 2 wins and 0 if there is a tie</returns>
-        public static int GetWinner(string[] cardsForPlayer1, string[] cardsForPlayer2)
+        public static int GetWinner(string hand1, string hand2)
         {
+            var cardsForPlayer1 = hand1.Split(" "); 
             try
             {
                 ValidateCards(cardsForPlayer1);
@@ -374,6 +375,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 throw new ArgumentException($"Error in cards for player 1. {ex.Message}");
             }
 
+            var cardsForPlayer2 = hand2.Split(" ");
             try
             {
                 ValidateCards(cardsForPlayer2);
@@ -472,39 +474,37 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nGiven 5 cards each for two players in a game of poker, determines which of the two players is the winner");
             Console.WriteLine("Each card should be a string of 2 characters. The first character represents the card's rank, the second character represents the card's suit");
-            Console.WriteLine($"Valid ranks are: {string.Join(", ", RankToValueMap.Keys)}. Where T is for Ten, J for Jack, Q for Queen, K for King, and A is for Ace");
-            Console.WriteLine($"Valid suits are: {string.Join(", ", Suits)}. Where C is for Club, D is for Diamond, H is for Heart and S is for Spades");
-            Console.WriteLine("Cards should be separated by comma and space e.g 2S, 3D, 4H, 9C, QH:");
+            Console.WriteLine($"Valid ranks are: {string.Join(" ", RankToValueMap.Keys)}. Where T is for Ten, J for Jack, Q for Queen, K for King, and A is for Ace");
+            Console.WriteLine($"Valid suits are: {string.Join(" ", Suits)}. Where C is for Club, D is for Diamond, H is for Heart and S is for Spades");
+            Console.WriteLine("Cards should be separated by a space e.g 2S 3D 4H 9C QH:");
             
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("\nEnter 5 cards for player 1:");
-            string cardsInput = Console.ReadLine();
+            string hand1 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Red;
             // Validate input 
-            if (string.IsNullOrEmpty(cardsInput))
+            if (string.IsNullOrEmpty(hand1))
             {
                 Console.WriteLine($"ERROR: Input must be a valid string");
                 Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
-            var hand1 = cardsInput.Split(", ");
             
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("\nEnter 5 cards for player 2:");
-            cardsInput = Console.ReadLine();
+            string hand2 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            if (string.IsNullOrEmpty(cardsInput))
+            if (string.IsNullOrEmpty(hand2))
             {
                 Console.WriteLine($"ERROR: Input must be a valid string");
                 Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
-            var hand2 = cardsInput.Split(", ");
-           
+            
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nExecuting...");
             // Execute
-            var winner = 0;
+            int winner;
             try
             {
                 winner = GetWinner(hand1, hand2);

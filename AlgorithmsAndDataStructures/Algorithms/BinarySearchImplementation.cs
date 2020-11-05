@@ -71,7 +71,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             var defaultForegroundColor = Console.ForegroundColor;
 
             Console.WriteLine("*******BINARY SEARCH*******");
-            Console.WriteLine("\nEnter list of numbers. Separate numbers by , and space e.g 1, 2, 3:");
+            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
 
             // Validate input
             string listInput = Console.ReadLine();
@@ -84,7 +84,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             var intList = new List<int>();
-            var stringArray = listInput.Split(", ");
+            var stringArray = listInput.Split(" ");
             foreach (string s in stringArray)
             {
                 if (int.TryParse(s, out int sAsInt))
