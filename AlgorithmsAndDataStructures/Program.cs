@@ -29,7 +29,9 @@ namespace AlgorithmsAndDataStructures
             //AdditionPairsImplementation.Run(args);
             //MultiplicationPairsImplementation.Run(args);
 
-            ProjectEulerProblem54Implementation.Run(args);
+            //ProjectEulerProblem54Implementation.Run(args);
+
+            BinarySearchTreeTraversalImplementation.Run(args);
 
             //SerializeToJsonImplementation.Run(args);
         }

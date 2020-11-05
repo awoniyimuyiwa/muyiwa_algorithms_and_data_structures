@@ -11,48 +11,10 @@ namespace AlgorithmsAndDataStructures.DataStructures
             Root = null;
         }
 
-        void Insert(Node<T> node, T data)
-        {
-            if (data.CompareTo(node.Data) < 0) 
-            {
-                if (node.Left != null) { Insert(node.Left, data); }
-                else
-                {
-                    node.Left = new Node<T>
-                    {
-                        Data = data,
-                        Left = null,
-                        Right = null
-                    };
-                }
-            }
-            else 
-            {
-                if (node.Right != null) { Insert(node.Right, data); }
-                else
-                {
-                    node.Right = new Node<T>
-                    {
-                        Data = data,
-                        Left = null,
-                        Right = null
-                    };
-                }
-            }
-        }
-
         public void Insert(T data)
         {
-            if (Root != null) { Insert(Root, data); }
-            else
-            {
-                Root = new Node<T>
-                {
-                    Data = data,
-                    Left = null,
-                    Right = null
-                };
-            }
+            if (Root == null) { Root = new Node<T>(data); }
+            else { Insert(Root, data); }
         }
 
         public bool Search(T data)
@@ -64,27 +26,34 @@ namespace AlgorithmsAndDataStructures.DataStructures
             }
         }
 
-        public void InOrder()
-        {
-            InOrder(Root);
-        }
+        public void InOrderTraverse(IVisitor<T> visitor) => InOrderTraverse(Root, visitor);
 
-        public void PreOrder()
-        {
-            PreOrder(Root);
-        }
+        public void PreOrderTraverse(IVisitor<T> visitor) => PreOrderTraverse(Root, visitor);
 
-        public void PostOrder()
+        public void PostOrderTraverse(IVisitor<T> visitor) => PostOrderTraverse(Root, visitor);
+
+        void Insert(Node<T> node, T data)
         {
-            PostOrder(Root);
+            if (data.CompareTo(node.Data) < 0)
+            {
+                if (node.Left == null) { node.Left = new Node<T>(data); }
+                else { Insert(node.Left, data); }
+            }
+            else
+            {
+                if (node.Right == null) { node.Right = new Node<T>(data); }
+                else { Insert(node.Right, data); }
+            }
         }
 
         bool Search(T data, Node<T> node)
         {
             if (node == null) { return false; }
-            if (data.CompareTo(node.Data) == 0) { return true; }
 
-            if (data.CompareTo(node.Data) < 0)
+            var comaparisonResult = data.CompareTo(node.Data);
+
+            if (comaparisonResult == 0) { return true; }
+            else if (comaparisonResult < 0)
             {
                 return Search(data, node.Left);
             }
@@ -94,38 +63,53 @@ namespace AlgorithmsAndDataStructures.DataStructures
             }
         }
 
-        void InOrder(Node<T> node)
+        void InOrderTraverse(Node<T> node, IVisitor<T> visitor)
         {
             if (node == null) { return; }
 
-            InOrder(node.Left);
-            Console.WriteLine(node.Data.ToString());
-            InOrder(node.Right);
+            InOrderTraverse(node.Left, visitor);
+            node.Accept(visitor);
+            InOrderTraverse(node.Right, visitor);
         }
 
-        void PreOrder(Node<T> node)
+        void PreOrderTraverse(Node<T> node, IVisitor<T> visitor)
         {
             if (node == null) { return; }
 
-            Console.WriteLine(node.Data.ToString());
-            PreOrder(node.Left);
-            PreOrder(node.Right);
+            node.Accept(visitor);
+            PreOrderTraverse(node.Left, visitor);
+            PreOrderTraverse(node.Right, visitor);
         }
 
-        void PostOrder(Node<T> node)
+        void PostOrderTraverse(Node<T> node, IVisitor<T> visitor)
         {
             if (node == null) { return; }
 
-            PostOrder(node.Left);
-            PostOrder(node.Right);
-            Console.WriteLine(node.Data.ToString());
+            PostOrderTraverse(node.Left, visitor);
+            PostOrderTraverse(node.Right, visitor);
+            node.Accept(visitor);
         }
     }
 
-    class Node<T>
+    public class Node<T>
     {
-        public T Data { get; set; }
+        public T Data { get; }
         public Node<T> Left { get; set; }
         public Node<T> Right { get; set; }
+
+        public Node(T data)
+        {
+            Data = data;
+        }
+
+        public void Accept(IVisitor<T> visitor)
+        {
+            visitor.Visit(Data);
+        }
+    }
+
+    public interface IVisitor<T>
+    {
+        void Visit(T t);
     }
 }
