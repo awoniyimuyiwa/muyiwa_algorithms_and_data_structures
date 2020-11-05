@@ -21,7 +21,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// thereby making it log(n) base2 steps. At each step, another n steps are required for sorting.
         /// maximum of n steps required for sorting in each of the log(n) base 2 steps = n*log(n) base 2 
         /// </remarks>
-        static void QuickSort(int[] array, int startIndex, int endIndex)
+        public static void QuickSort(int[] array, int startIndex, int endIndex)
         {
             if (startIndex < endIndex)
             {

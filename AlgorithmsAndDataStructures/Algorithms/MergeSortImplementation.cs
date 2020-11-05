@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-
     class MergeSortImplementation
     {
         /// <summary>
@@ -21,7 +20,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// thereby making it log(n) base2 steps. At each step, another n steps are required for sorting.
         /// maximum of n steps required for sorting in each of the log(n) base 2 steps= n*log(n) base 2 
         /// </remarks>
-        static void MergeSort(int[] array, int startIndex, int endIndex)
+        public static void MergeSort(int[] array, int startIndex, int endIndex)
         {
             if (startIndex < endIndex)
             {
@@ -32,6 +31,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 Merge(array, startIndex, middleIndex, endIndex); // Conquer
             }
         }
+
         // Sorting is done here
         static void Merge(int[] array, int startIndex, int middleIndex, int endIndex)
         {
@@ -72,8 +72,6 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 rightArrayIndex++;
                 sortedArrayIndex++;
             }
-
-            //Console.WriteLine($"sortedArrayIndex: {sortedArrayIndex}, startIndex: {startIndex}, endIndex: {endIndex}");
 
             // Copy from sortedArray to array
             // Note that sortedArrayIndex at this stage will always be equal to the number of items sorted so it needs to be reduced by 1

@@ -4,15 +4,11 @@ using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    /// Given a list of numbers, and a number X,
-    /// find and print all pairs of numbers within the list that can be added to get X
-    /// </summary>
     class AdditionPairsImplementation
     {
         /// <summary>
         /// Given a list of numbers, and a number X,
-        /// find and print all pairs of numbers within the list that can be added to get X
+        /// find pairs of numbers within the list that can be added to get X
         /// </summary>
         /// <param name="list">List of numbers to search</param>
         /// <param name="X">Addition result</param>
@@ -22,8 +18,9 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n^2), MEMORY: Θ(1)
         /// WORST CASE- TIME: O(n^2), MEMORY: O(1)
         /// </remarks>
-        static void AdditionPairs(List<int> list, int X)
+        public static List<Tuple<int, int>> GetAdditionPairs(List<int> list, int X)
         {
+            var tuples = new List<Tuple<int, int>>();
             var listCount = list.Count();
             int remainder;
 
@@ -34,11 +31,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 {
                     if (list[index2] == remainder)
                     {
-                        Console.WriteLine($"{list[index]}, {list[index2]}");
+                        tuples.Add(Tuple.Create(list[index], list[index2]));
                         break;
                     }
                 }
             }
+
+            return tuples;
         }
 
         public static void Run(string[] args)
@@ -93,7 +92,12 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nAll pairs of numbers that can be added to get {xInput}:");
-            AdditionPairs(intList, x);
+
+            var tuples = GetAdditionPairs(intList, x);
+            foreach (Tuple<int, int> tuple in tuples)
+            {
+                Console.WriteLine($"{tuple.Item1}, {tuple.Item2}");
+            }
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;

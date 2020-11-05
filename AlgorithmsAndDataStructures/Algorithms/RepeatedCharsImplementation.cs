@@ -19,24 +19,24 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        static Dictionary<char, int> GetCharCountPairs(string text)
+        public static Dictionary<char, int> GetCharToCountMap(string text)
         {
             var array = text.ToCharArray();
-            var charCountPairs = new Dictionary<char, int>();
+            var charToCountMap = new Dictionary<char, int>();
 
             foreach (char c in array)
             {
-                if (charCountPairs.ContainsKey(c))
+                if (charToCountMap.ContainsKey(c))
                 {
-                    charCountPairs[c] += 1;
+                    charToCountMap[c] += 1;
                 }
                 else
                 {
-                    charCountPairs.Add(c, 1);
+                    charToCountMap.Add(c, 1);
                 }
             }
 
-            return charCountPairs;
+            return charToCountMap;
         }
 
         public static void Run(string[] args)
@@ -62,7 +62,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nExecuting...");
             // Execute
-            var charCountPairs = GetCharCountPairs(text);
+            var charCountPairs = GetCharToCountMap(text);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;

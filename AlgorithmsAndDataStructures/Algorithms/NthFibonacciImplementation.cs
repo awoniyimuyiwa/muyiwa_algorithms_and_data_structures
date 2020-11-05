@@ -49,7 +49,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// Actually, T(n) will take T(n-2) steps 
         /// but in asymptotic analysis, the focus is on growth as n->infinity
         /// </remarks>
-        static int FibonacciIterative(int n)
+        public static int FibonacciIterative(int n)
         {
             #region Not part of the algorithm
             if (n < 0) { throw new ArgumentException($"{n} must be at least 0"); }

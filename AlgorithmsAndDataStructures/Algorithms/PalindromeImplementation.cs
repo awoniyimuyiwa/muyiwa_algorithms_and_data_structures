@@ -14,7 +14,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        static bool IsPalindrome(string text)
+        public static bool IsPalindrome(string text)
         {
             #region Not part of the algorithm
             if (text == null) { throw new ArgumentException($"text cannot be null"); }

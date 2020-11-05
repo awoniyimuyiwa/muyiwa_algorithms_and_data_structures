@@ -17,7 +17,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        static int NumberOfWords(string text)
+        public static int GetNumberOfWords(string text)
         {
             if (string.IsNullOrWhiteSpace(text)) { return 0; }
 
@@ -67,7 +67,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nExecuting...");
             // Execute
-            var result = NumberOfWords(text);
+            var result = GetNumberOfWords(text);
             
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;

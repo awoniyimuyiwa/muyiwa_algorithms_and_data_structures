@@ -18,7 +18,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        static string RemoveConsecutiveChar(string text, char theChar)
+        public static string RemoveConsecutiveChar(string text, char theChar)
         { 
             // If text has just one character
             if (text.Length == 1) { return text; }

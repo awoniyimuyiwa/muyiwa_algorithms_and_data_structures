@@ -18,7 +18,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        static int NumberOfOCcurence(string pattern, string text)
+        public static int GetNumberOfOCcurence(string pattern, string text)
         {
             var patternLength = pattern.Length;
             var count = 0;
@@ -67,7 +67,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nExecuting...");
             // Execute
-            var result = NumberOfOCcurence(pattern, text);
+            var result = GetNumberOfOCcurence(pattern, text);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;

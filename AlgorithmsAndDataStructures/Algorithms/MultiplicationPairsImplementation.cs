@@ -4,15 +4,11 @@ using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    /// Given a list of numbers, and a number X,
-    /// find and print all pairs of numbers within the list that can be multiplied to get X
-    /// </summary>
     class MultiplicationPairsImplementation
     {
-         // <summary>
+        /// <summary>
         /// Given a list of numbers, and a number X,
-        /// find and print all pairs of numbers within the list that can be multiplied to get X
+        /// finds all pairs of numbers within the list that can be multiplied to get X
         /// </summary>
         /// <param name="list">List of numbers to search</param>
         /// <param name="X">Multiplication result</param>
@@ -22,8 +18,9 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n^2), MEMORY: Θ(1)
         /// WORST CASE- TIME: O(n^2), MEMORY: O(1)
         /// </remarks>
-        static void PrintMultiplicationPairs(List<int> list, int X)
+        public static List<Tuple<int, int>> GetMultiplicationPairs(List<int> list, int X)
         {
+            var tuples = new List<Tuple<int, int>>();
             var listCount = list.Count();
             int quotient = 0;
 
@@ -39,15 +36,17 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 {
                     if (list[index] == 0 && X == 0)
                     {
-                        Console.WriteLine($"{list[index]}, {list[index2]}");
+                        tuples.Add(Tuple.Create(list[index], list[index2]));
                     }
                     else if (list[index2] == quotient)
                     {
-                        Console.WriteLine($"{list[index]}, {list[index2]}");
+                        tuples.Add(Tuple.Create(list[index], list[index2]));
                         break;
                     }
                 }
             }
+
+            return tuples;
         }
 
         public static void Run(string[] args)
@@ -102,8 +101,12 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nAll pairs of numbers that can be multiplied to get {xInput}:");
-            // Execute
-            PrintMultiplicationPairs(intList, x);
+           
+            var tuples = GetMultiplicationPairs(intList, x);
+            foreach (Tuple<int,int> tuple in tuples)
+            {
+                Console.WriteLine($"{tuple.Item1}, {tuple.Item2}");
+            }
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
