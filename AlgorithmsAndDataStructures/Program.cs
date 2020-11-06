@@ -6,34 +6,34 @@ namespace AlgorithmsAndDataStructures
     {
         static void Main(string[] args)
         {
-            BinarySearchImplementation.Run(args);
+            BinarySearch.Run(args);
 
-            //MergeSortImplementation.Run(args);
-            //QuickSortImplementation.Run(args);
+            //MergeSort.Run(args);
+            //QuickSort.Run(args);
 
-            //FibonacciSequenceImplementation.Run(args);
-            //NthFibonacciImplementation.Run(args);
+            //FibonacciSequence.Run(args);
+            //NthFibonacci.Run(args);
 
-            //ReverseTextImplementation.Run(args);
-            //PalindromeImplementation.Run(args);
+            //ReverseText.Run(args);
+            //Palindrome.Run(args);
 
-            //NumberOfOccurenceImplementation.Run(args);
-            //NumberOfOccurenceOfEachCharacterImplementation.Run(args);
+            //NumberOfOccurence.Run(args);
+            //NumberOfOccurenceOfEachCharacter.Run(args);
 
-            //RemoveConsecutiveCharImplementation.Run(args);
-            //RemoveAllConsecutiveCharsImplementation.Run(args);
+            //RemoveConsecutiveCharacter.Run(args);
+            //RemoveAllConsecutiveCharacters.Run(args);
 
-            //NumberOfWordsImplementation.Run(args);
-            //RemoveConsecutiveWordDelimetersImplementation.Run(args);
+            //NumberOfWords.Run(args);
+            //RemoveConsecutiveWordDelimeters.Run(args);
 
-            //AdditionPairsImplementation.Run(args);
-            //MultiplicationPairsImplementation.Run(args);
+            //AdditionPairs.Run(args);
+            //MultiplicationPairs.Run(args);
 
-            //ProjectEulerProblem54Implementation.Run(args);
+            //ProjectEulerProblem54.Run(args);
 
-            //BinarySearchTreeTraversalImplementation.Run(args);
+            //BinarySearchTreeTraversal.Run(args);
 
-            //SerializeToJsonImplementation.Run(args);
+            //SerializeToJson.Run(args);
         }
     }
 }
