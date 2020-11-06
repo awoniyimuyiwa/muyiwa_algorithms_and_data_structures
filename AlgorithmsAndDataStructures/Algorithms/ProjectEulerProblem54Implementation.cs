@@ -358,14 +358,14 @@ namespace AlgorithmsAndDataStructures.Algorithms
         }
 
         /// <summary>
-        /// Given 5 cards each for two players in a game of poker, determines the winner between the players.
+        /// Given 5 cards each for two players in a game of poker, determines the winner.
         /// </summary>
-        /// <param name="hand1">5 Cards for player 1, each card seperated by a space</param>
-        /// <param name="hand2">5 Cards for player 2, each card seperated by a space</param>
+        /// <param name="cards1">5 Cards for player 1, each card seperated by a space</param>
+        /// <param name="cards2">5 Cards for player 2, each card seperated by a space</param>
         /// <returns>1 if player 1 wins, 2 if player 2 wins and 0 if there is a tie</returns>
-        public static int GetWinner(string hand1, string hand2)
+        public static int GetWinner(string cards1, string cards2)
         {
-            var cardsForPlayer1 = hand1.Split(" "); 
+            var cardsForPlayer1 = cards1.Split(" "); 
             try
             {
                 ValidateCards(cardsForPlayer1);
@@ -375,7 +375,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 throw new ArgumentException($"Error in cards for player 1. {ex.Message}");
             }
 
-            var cardsForPlayer2 = hand2.Split(" ");
+            var cardsForPlayer2 = cards2.Split(" ");
             try
             {
                 ValidateCards(cardsForPlayer2);

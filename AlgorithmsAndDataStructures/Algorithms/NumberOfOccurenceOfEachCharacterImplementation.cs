@@ -3,16 +3,14 @@ using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    /// Finds the characters that occur more than once in a text, prints the characters and the number of times they occur
-    /// </summary>
-    class RepeatedCharsImplementation
+    public class NumberOfOccurenceOfEachCharacterImplementation
     {
         /// <summary>
         /// Finds and returns a dictionary containing characters in the text as keys
         /// and the number of times each character occurs as value     
         /// </summary>
         /// <param name="text">Text to check</param>
+        /// <returns>Dictionary containing characters in the text as keys and the number of times each character occurs as value</returns>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
@@ -28,7 +26,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             {
                 if (charToCountMap.ContainsKey(c))
                 {
-                    charToCountMap[c] += 1;
+                    charToCountMap[c]++;
                 }
                 else
                 {
@@ -42,12 +40,12 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static void Run(string[] args)
         {
             var defaultForegroundColor = Console.ForegroundColor;
-            Console.WriteLine("*******REPEATED CHARACTERS*******");
+            Console.WriteLine("*******NUMBER OF OCCURENCE OF EACH CHARACTER*******");
             
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nFinds all characters that occur more than once in a text, prints the repeated characters and the number of times they occur");
+            Console.WriteLine("\nFinds and prints the number of times each character in a text occurs");
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("Enter text: ");
+            Console.WriteLine("\nEnter text: ");
 
             // Validate input
             string text = Console.ReadLine();
@@ -67,25 +65,15 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nResult:");
-            var enumerator = charToCountMap.GetEnumerator();
-            var hasDuplicateChars = false;
-            KeyValuePair<char, int> keyValuePair;
-
-            do
+            
+            foreach(char c in charToCountMap.Keys)
             {
-                keyValuePair = enumerator.Current;
-                if (keyValuePair.Value > 1)
-                {
-                    Console.WriteLine($"{keyValuePair.Key} occurs {keyValuePair.Value} time(s)");
-                    hasDuplicateChars = true;
-                }
-            } while (enumerator.MoveNext());
-
-            if (!hasDuplicateChars) { Console.WriteLine("No repeated characters"); }
+                Console.WriteLine($"{c} occurs {charToCountMap[c]} time(s)");
+            }
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF REPEATED CHARACTERS*******\n");
+            Console.WriteLine("\n*******END OF NUMBER OF OCCURENCE OF EACH CHARACTER*******\n");
         }
     }
 }

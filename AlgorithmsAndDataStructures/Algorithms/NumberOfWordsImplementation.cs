@@ -21,8 +21,8 @@ namespace AlgorithmsAndDataStructures.Algorithms
         {
             if (string.IsNullOrWhiteSpace(text)) { return 0; }
 
-            // Remove leading and trailing spaces from text, this cuase new memory to be allocated 
-            // if there are no trailing spaces then the size of the memory is the same as n 
+            // Remove leading and trailing spaces from text. 
+            // New memory will be allocated when trailing spaces are removed, if there are no trailing spaces then the size of the memory is the same as n 
             text = text.Trim();
 
             // If text has just one character

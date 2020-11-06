@@ -18,7 +18,7 @@ namespace AlgorithmsAndDataStructures
             //PalindromeImplementation.Run(args);
 
             //NumberOfOccurenceImplementation.Run(args);
-            //RepeatedCharsImplementation.Run(args);
+            //NumberOfOccurenceOfEachCharacterImplementation.Run(args);
 
             //RemoveConsecutiveCharImplementation.Run(args);
             //RemoveAllConsecutiveCharsImplementation.Run(args);

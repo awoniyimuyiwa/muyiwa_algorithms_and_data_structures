@@ -2,7 +2,7 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class ReverseTextImplementation
+    public class ReverseTextImplementation
     {
         /// <summary>
         /// Reverses a text     
