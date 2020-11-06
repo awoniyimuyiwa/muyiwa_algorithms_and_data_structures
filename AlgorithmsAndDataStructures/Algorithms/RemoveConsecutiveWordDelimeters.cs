@@ -2,7 +2,7 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class RemoveConsecutiveWordDelimeters
+    public class RemoveConsecutiveWordDelimeters
     {
         /// <summary>
         /// Removes consecutive word delimeters from a given text
@@ -14,7 +14,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static string DoRemoveConsecutiveWordDelimeters(string text)
+        public static string Execute(string text)
         { 
             // If text has just one character
             if (text.Length == 1) { return text; }
@@ -44,7 +44,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******REMOVE CONSECUTIVE WORD DELIMETERS*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven a text, removes all consecutive space, tab and newline characters from the text");
+            Console.WriteLine($"{Environment.NewLine}Given a text, removes all consecutive space, tab and newline characters from the text");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
@@ -59,19 +59,19 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             //Console.WriteLine($"text length is: {text.Length}"); 
             // Execute
-            text = DoRemoveConsecutiveWordDelimeters(text);
+            text = Execute(text);
             //Console.WriteLine($"result length is: {text.Length}"); 
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nResult: {text}");
+            Console.WriteLine($"{Environment.NewLine}Result: {text}");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF REMOVE CONSECUTIVE WORD DELIMETERS*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF REMOVE CONSECUTIVE WORD DELIMETERS*******{Environment.NewLine}");
         }
     }
 }

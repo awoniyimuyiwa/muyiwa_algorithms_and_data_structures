@@ -11,7 +11,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("*******FIBONACCI SEQUENCE*******");
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGenerates the first n fibonacci numbers");
+            Console.WriteLine($"{Environment.NewLine}Generates the first n fibonacci numbers");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter n: ");
             string input = Console.ReadLine();
@@ -26,11 +26,11 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
 
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nResult: ");
+            Console.WriteLine($"{Environment.NewLine}Result: ");
             for (int iteration = 1; iteration <= n; iteration++)
             {
                 Console.WriteLine(NthFibonacci.Fibonacci(iteration - 1));
@@ -38,7 +38,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF FIBONACCI SEQUENCE*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF FIBONACCI SEQUENCE*******{Environment.NewLine}");
         }
     }
 }

@@ -43,9 +43,9 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("*******NUMBER OF OCCURENCE OF EACH CHARACTER*******");
             
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nFinds and prints the number of times each character in a text occurs");
+            Console.WriteLine($"{Environment.NewLine}Finds and prints the number of times each character in a text occurs");
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter text: ");
+            Console.WriteLine($"{Environment.NewLine}Enter text: ");
 
             // Validate input
             string text = Console.ReadLine();
@@ -58,13 +58,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             var charToCountMap = GetCharToCountMap(text);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nResult:");
+            Console.WriteLine($"{Environment.NewLine}Result:");
             
             foreach(char c in charToCountMap.Keys)
             {
@@ -73,7 +73,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF NUMBER OF OCCURENCE OF EACH CHARACTER*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF NUMBER OF OCCURENCE OF EACH CHARACTER*******{Environment.NewLine}");
         }
     }
 }

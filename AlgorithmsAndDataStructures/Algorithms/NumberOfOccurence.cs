@@ -40,7 +40,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("*******NUMBER OF OCCURRENCE*******");
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nFinds the number of times a pattern (character or string) occurs in a text");
+            Console.WriteLine($"{Environment.NewLine}Finds the number of times a pattern (character or string) occurs in a text");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
@@ -65,17 +65,17 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             var result = GetNumberOfOCcurence(pattern, text);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n{pattern} occured {result} time(s)");
+            Console.WriteLine($"{Environment.NewLine}{pattern} occured {result} time(s)");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF NUMBER OF OCCURRENCE*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF NUMBER OF OCCURRENCE*******{Environment.NewLine}");
         }
     }
 }

@@ -48,7 +48,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("*******REMOVE CONSECUTIVE CHARACTER*******");
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven a text and a character C, removes consecutive Cs from text");
+            Console.WriteLine($"{Environment.NewLine}Given a text and a character C, removes consecutive Cs from text");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
@@ -73,7 +73,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             //Console.WriteLine($"text length is: {text.Length}");
             text = RemoveConsecutiveChar(text, (char)theChar);
@@ -81,11 +81,11 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nResult: {text}");
+            Console.WriteLine($"{Environment.NewLine}Result: {text}");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF REMOVE CONSECUTIVE CHARACTER*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF REMOVE CONSECUTIVE CHARACTER*******{Environment.NewLine}");
         }
     }
 }

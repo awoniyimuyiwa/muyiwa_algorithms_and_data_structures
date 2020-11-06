@@ -34,7 +34,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine("*******PALINDROME*******");
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven a text, checks if reverse of the text is the same as the text");
+            Console.WriteLine($"{Environment.NewLine}Given a text, checks if reverse of the text is the same as the text");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
@@ -49,7 +49,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             var result = IsPalindrome(text);
 
@@ -57,16 +57,16 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Green;
             if (result)
             {
-                Console.WriteLine($"\n{text} is a palindrome");
+                Console.WriteLine($"{Environment.NewLine}{text} is a palindrome");
             }
             else
             {
-                Console.WriteLine($"\n{text} is not a palindrome");
+                Console.WriteLine($"{Environment.NewLine}{text} is not a palindrome");
             }
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF PALINDROME*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF PALINDROME*******{Environment.NewLine}");
         }
     }
 }

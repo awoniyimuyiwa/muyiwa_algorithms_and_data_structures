@@ -31,7 +31,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             var defaultForegroundColor = Console.ForegroundColor;
 
             Console.WriteLine("*******REVERSE TEXT*******");
-            Console.WriteLine("\nEnter text to reverse: ");
+            Console.WriteLine($"{Environment.NewLine}Enter text to reverse: ");
 
             string text = Console.ReadLine();
             // Validate input
@@ -44,17 +44,17 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute algorithm 
             var result = Reverse(text);
 
              // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nResult: {result}");
+            Console.WriteLine($"{Environment.NewLine}Result: {result}");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF REVERSE TEXT*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF REVERSE TEXT******{Environment.NewLine}");
         }
     }
 }

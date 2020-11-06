@@ -472,14 +472,14 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******PROJECT EULER PROBLEM 54: https://projecteuler.net/problem=54*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven 5 cards each for two players in a game of poker, determines which of the two players is the winner");
+            Console.WriteLine($"{Environment.NewLine}Given 5 cards each for two players in a game of poker, determines which of the two players is the winner");
             Console.WriteLine("Each card should be a string of 2 characters. The first character represents the card's rank, the second character represents the card's suit");
             Console.WriteLine($"Valid ranks are: {string.Join(" ", RankToValueMap.Keys)}. Where T is for Ten, J for Jack, Q for Queen, K for King, and A is for Ace");
             Console.WriteLine($"Valid suits are: {string.Join(" ", Suits)}. Where C is for Club, D is for Diamond, H is for Heart and S is for Spades");
             Console.WriteLine("Cards should be separated by a space e.g 2S 3D 4H 9C QH:");
             
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter 5 cards for player 1:");
+            Console.WriteLine($"{Environment.NewLine}Enter 5 cards for player 1:");
             string hand1 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Red;
             // Validate input 
@@ -491,7 +491,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
             
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter 5 cards for player 2:");
+            Console.WriteLine($"{Environment.NewLine}Enter 5 cards for player 2:");
             string hand2 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Red;
             if (string.IsNullOrEmpty(hand2))
@@ -502,7 +502,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
             
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             int winner;
             try
@@ -512,20 +512,20 @@ namespace AlgorithmsAndDataStructures.Algorithms
             catch (ArgumentException ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nERROR: {ex.Message}");
+                Console.WriteLine($"{Environment.NewLine}ERROR: {ex.Message}");
                 Console.ForegroundColor = defaultForegroundColor;
                 return;
             }
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            if (winner == 0) { Console.WriteLine("\nTIE. No Winner!"); }
-            else if (winner == 1) { Console.WriteLine("\nPlayer 1 wins!"); }
-            else if (winner == 2) { Console.WriteLine("\nPlayer 2 wins!"); } 
+            if (winner == 0) { Console.WriteLine($"{Environment.NewLine}TIE. No Winner!"); }
+            else if (winner == 1) { Console.WriteLine($"{Environment.NewLine}Player 1 wins!"); }
+            else if (winner == 2) { Console.WriteLine($"{Environment.NewLine}Player 2 wins!"); } 
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF PROJECT EULER PROBLEM 54*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF PROJECT EULER PROBLEM 54*******{Environment.NewLine}");
         }
     }
 }

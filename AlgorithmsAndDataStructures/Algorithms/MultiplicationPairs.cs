@@ -55,9 +55,9 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******MULTIPLICATION PAIRS*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven a list of numbers, and a number X, finds and prints all pairs of numbers within the list that can be multiplied to get X");
+            Console.WriteLine($"{Environment.NewLine}Given a list of numbers, and a number X, finds and prints all pairs of numbers within the list that can be multiplied to get X");
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
+            Console.WriteLine($"{Environment.NewLine}Enter list of numbers. Separate numbers by a space e.g 1 20 3:");
             string listInput = Console.ReadLine();
 
             // Validate input 
@@ -97,14 +97,14 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
             
             var tuples = GetMultiplicationPairs(intList, x);
             if (tuples.Count() > 0)
             {
-                Console.WriteLine($"\nPairs of numbers that can be multiplied to get {xInput}:");
+                Console.WriteLine($"{Environment.NewLine}Pairs of numbers that can be multiplied to get {xInput}:");
                 foreach (Tuple<int, int> tuple in tuples)
                 {
                     Console.WriteLine($"{tuple.Item1}, {tuple.Item2}");
@@ -112,13 +112,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
             } 
             else
             {
-                Console.WriteLine($"\nNone of the numbers can be multiplied to get {xInput}");
+                Console.WriteLine($"{Environment.NewLine}None of the numbers can be multiplied to get {xInput}");
             }
             
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF MULTIPLICATION PAIRS*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF MULTIPLICATION PAIRS*******{Environment.NewLine}");
         }
     }
 }

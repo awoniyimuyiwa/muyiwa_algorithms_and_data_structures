@@ -80,7 +80,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             var defaultForegroundColor = Console.ForegroundColor;
 
             Console.WriteLine("*******QUICK SORT*******");
-            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
+            Console.WriteLine($"{Environment.NewLine}Enter list of numbers. Separate numbers by a space e.g 1 20 3:");
             string listInput = Console.ReadLine();
             // Validate input
             if (string.IsNullOrEmpty(listInput))
@@ -109,19 +109,19 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"\nSorting...");
+            Console.WriteLine($"{Environment.NewLine}Sorting...");
             var array = intList.ToArray();
             // Execute
             Sort(array, 0, array.Length-1);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("\nResult: ");
+            Console.Write($"{Environment.NewLine}Result: ");
             Console.WriteLine(string.Join(" ", array));
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF QUICK SORT*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF QUICK SORT*******{Environment.NewLine}");
         }
     }
 }

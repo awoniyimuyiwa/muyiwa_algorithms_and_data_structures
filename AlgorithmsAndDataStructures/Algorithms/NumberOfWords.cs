@@ -33,8 +33,8 @@ namespace AlgorithmsAndDataStructures.Algorithms
             for (int index = 0; index < text.Length-1; index++)
             {
                 // Ignore consecutive delimiters, count them as 1
-                if ((text[index].Equals(' ') || text[index].Equals('\t') || text[index].Equals('\n')) &&
-                !(text[index+1].Equals(' ') || text[index+1].Equals('\t') || text[index+1].Equals('\n')))
+                if ((text[index].Equals(' ') || text[index].Equals('\t') || text[index].Equals(Environment.NewLine)) &&
+                !(text[index+1].Equals(' ') || text[index+1].Equals('\t') || text[index+1].Equals(Environment.NewLine)))
                 {
                     delimitersCount++;
                 }
@@ -50,7 +50,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******NUMBER OF WORDS*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nCounts the number of words in a text");
+            Console.WriteLine($"{Environment.NewLine}Counts the number of words in a text");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter text: ");
             string text = Console.ReadLine();
@@ -65,17 +65,17 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             var result = GetNumberOfWords(text);
             
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n{result} word(s)");
+            Console.WriteLine($"{Environment.NewLine}{result} word(s)");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF NUMBER OF WORDS*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF NUMBER OF WORDS*******{Environment.NewLine}");
         }
     }
 }

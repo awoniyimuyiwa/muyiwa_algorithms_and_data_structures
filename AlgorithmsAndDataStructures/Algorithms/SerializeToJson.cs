@@ -37,10 +37,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******SERIALIZE TO JSON*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nOutputs an in-memory weather forecast object as json:");
+            Console.WriteLine($"{Environment.NewLine}Outputs an in-memory weather forecast object as json:");
 
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter temperature in celsius: ");
+            Console.WriteLine($"{Environment.NewLine}Enter temperature in celsius: ");
             string temperatureInput = Console.ReadLine();
             // Validate input
             if (!double.TryParse(temperatureInput, out double temperature))
@@ -80,15 +80,15 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nResult: ");
+            Console.WriteLine($"{Environment.NewLine}Result: ");
             Console.WriteLine(DoSerializeToJson(temperature, summary));
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF SERIALIZE TO JSON*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF SERIALIZE TO JSON*******{Environment.NewLine}");
         }
     }
 

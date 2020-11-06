@@ -80,7 +80,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******NTH FIBONACCI*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nFinds the number at position n in the fibonacci sequence");
+            Console.WriteLine($"{Environment.NewLine}Finds the number at position n in the fibonacci sequence");
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Enter n: ");
             string input = Console.ReadLine();
@@ -95,17 +95,17 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             var result = Fibonacci(n - 1); //var result = FibonacciIterative(n - 1);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nNumber at position {n} in the fibonacci sequence is: {result}");
+            Console.WriteLine($"{Environment.NewLine}Number at position {n} in the fibonacci sequence is: {result}");
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF NTH FIBONACCI*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF NTH FIBONACCI*******{Environment.NewLine}");
         }
     }
 }

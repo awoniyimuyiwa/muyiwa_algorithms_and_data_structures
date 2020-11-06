@@ -71,7 +71,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             var defaultForegroundColor = Console.ForegroundColor;
 
             Console.WriteLine("*******BINARY SEARCH*******");
-            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
+            Console.WriteLine($"{Environment.NewLine}Enter list of numbers. Separate numbers by a space e.g 1 20 3:");
 
             // Validate input
             string listInput = Console.ReadLine();
@@ -117,24 +117,24 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Ensure items in haystack are sorted in ascending order
             if (!IsSorted(intArray))
             {
-                Console.WriteLine("\nItems are not sorted! Sorting...");
+                Console.WriteLine($"{Environment.NewLine}Items are not sorted! Sorting...");
                 intArray = intArray.OrderBy(x => x).ToArray();
                 //intArray = MergeSort.Sort(intArray);
                 Console.WriteLine($"Sorted items: {string.Join(", ", intArray)}");
             }
 
-            Console.WriteLine($"\nSearching...");
+            Console.WriteLine($"{Environment.NewLine}Searching...");
             // Execute
             int index = Search(numberToSearch, intArray);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;
-            if (index > -1) { Console.WriteLine($"\n{numberToSearch} is at position: {index + 1} in the list"); }
-            else { Console.WriteLine($"\n{numberToSearch} was not found in the list"); }
+            if (index > -1) { Console.WriteLine($"{Environment.NewLine}{numberToSearch} is at position: {index + 1} in the list"); }
+            else { Console.WriteLine($"{Environment.NewLine}{numberToSearch} was not found in the list"); }
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n*******END OF BINARY SEARCH*******\n");
+            Console.WriteLine($"{Environment.NewLine}*******END OF BINARY SEARCH*******{Environment.NewLine}");
         }
     }
 }

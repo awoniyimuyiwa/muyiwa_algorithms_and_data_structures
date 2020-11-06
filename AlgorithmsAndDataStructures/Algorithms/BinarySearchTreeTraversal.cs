@@ -12,10 +12,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             Console.WriteLine("*******BINARY SEARCH TREE TRAVERSAL*******");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\nGiven a list of numbers, stores them in a binary search tree and prints out the result of traversing the tree using different tree traversal algorithms");
+            Console.WriteLine($"{Environment.NewLine}Given a list of numbers, stores them in a binary search tree and prints out the result of traversing the tree using different tree traversal algorithms");
 
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\nEnter list of numbers. Separate numbers by a space e.g 1 20 3:");
+            Console.WriteLine($"{Environment.NewLine}Enter list of numbers. Separate numbers by a space e.g 1 20 3:");
 
             // Validate input
             string input = Console.ReadLine();
@@ -46,7 +46,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nExecuting...");
+            Console.WriteLine($"{Environment.NewLine}Executing...");
             Console.ForegroundColor = ConsoleColor.Green;
 
             var binarySearchTree = new BinarySearchTree<int>();
@@ -57,18 +57,18 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
             var visitor = new ConsoleWriter<int>();
 
-            Console.Write("\nIn-order traversal result: ");
+            Console.Write($"{Environment.NewLine}In-order traversal result: ");
             binarySearchTree.InOrderTraverse(visitor);
             
-            Console.Write("\nPre-order traversal result: ");
+            Console.Write($"{Environment.NewLine}Pre-order traversal result: ");
             binarySearchTree.PreOrderTraverse(visitor);
            
-            Console.Write("\nPost-order traversal result: ");
+            Console.Write($"{Environment.NewLine}Post-order traversal result: ");
             binarySearchTree.PostOrderTraverse(visitor);
            
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("\n\n*******END OF BINARY SEARCH TREE TRAVERSAL*******\n");
+            Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}*******END OF BINARY SEARCH TREE TRAVERSAL*******{Environment.NewLine}");
         }
 
         /// <summary>
