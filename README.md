@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/awoniyimuyiwa/muyiwa_algorithms_and_data_structures/badge.svg?branch=master)](https://coveralls.io/github/awoniyimuyiwa/muyiwa_algorithms_and_data_structures?branch=master)
 # Algorithms & DataStructures
 
 > Implements common algorithms and data structures
