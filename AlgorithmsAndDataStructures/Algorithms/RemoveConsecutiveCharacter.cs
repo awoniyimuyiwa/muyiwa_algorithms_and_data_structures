@@ -2,27 +2,24 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    ///  Removes consecutive occurence of a given character from a given text
-    /// </summary>
-    class RemoveConsecutiveCharacter
+    public class RemoveConsecutiveCharacter
     {
         /// <summary>
-        /// Removes consecutive occurence of the given character from the given text   
+        /// Removes consecutive occurence of <paramref name="theChar"/> from <paramref name="text"/>   
         /// <summary>
         /// <param name="text">Text to search</param>
-        /// <param name="text">The character to remove its occurence</param>
+        /// <param name="theChar">The character to remove its occurence</param>
+        /// <returns>The adjusted text</returns>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(1) when there are no consecutives
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static string RemoveConsecutiveChar(string text, char theChar)
-        { 
-            // If text has just one character
-            if (text.Length == 1) { return text; }
-
+        public static string Run(string text, char theChar)
+        {
+            if (text == null || text.Length == 1) { return text; }
+            
             // Since items might be removed while iterating, start iteration from the last character to avoid IndexOutOfBoundException
             var index = text.Length - 1;
 
@@ -76,7 +73,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             //Console.WriteLine($"text length is: {text.Length}");
-            text = RemoveConsecutiveChar(text, (char)theChar);
+            text = Run(text, (char)theChar);
             //Console.WriteLine($"result length is: {text.Length}");
 
             // Display result

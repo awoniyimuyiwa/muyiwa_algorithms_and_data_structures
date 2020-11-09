@@ -2,12 +2,13 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class NthFibonacci
+    public class NthFibonacci
     {
         /// <summary> 
         /// Returns the number in the fibonacci series at position n
         /// </summary>
         /// <param name="n">Position in the fibonacci series</param>
+        /// <returns>Number in the fibonacci series at position <paramref name="n"/></returns>
         /// <remarks>
         /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1) when n is 0 or 1
         /// AVERAGE CASE- TIME: Θ(2^n), MEMORY: Θ(n)
@@ -41,6 +42,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// Returns the number in the fibonacci series at position n
         /// </summary>
         /// <param name="n">Position in the fibonacci series</param>
+        /// <returns>Number in the fibonacci series at position <paramref name="n"/></returns>
         /// <remarks>
         /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1) when n is 0 or 1
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(1)

@@ -11,14 +11,19 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </summary>
         /// <param name="text">Text to check</param>
         /// <returns>Dictionary containing characters in the text as keys and the number of times each character occurs as value</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="text"/> is null</exception>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static Dictionary<char, int> GetCharToCountMap(string text)
+        public static Dictionary<char, int> Run(string text)
         {
+            #region Not part of the algorithm
+            if (text == null) { throw new ArgumentNullException("text cannot be null"); }
+            #endregion
+
             var array = text.ToCharArray();
             var charToCountMap = new Dictionary<char, int>();
 
@@ -60,7 +65,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
-            var charToCountMap = GetCharToCountMap(text);
+            var charToCountMap = Run(text);
 
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;

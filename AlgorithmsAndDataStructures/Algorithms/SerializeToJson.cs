@@ -14,7 +14,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(1), MEMORY: Θ(1)
         /// WORST CASE- TIME: O(1), MEMORY: O(1)
         /// </remarks>
-        static string DoSerializeToJson(double temperature, string summary)
+        static string Run(double temperature, string summary)
         {
             var weatherForecast = new WeatherForeCast
             {
@@ -84,7 +84,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{Environment.NewLine}Result: ");
-            Console.WriteLine(DoSerializeToJson(temperature, summary));
+            Console.WriteLine(Run(temperature, summary));
 
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;

@@ -363,8 +363,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <param name="cards1">5 Cards for player 1, each card seperated by a space</param>
         /// <param name="cards2">5 Cards for player 2, each card seperated by a space</param>
         /// <returns>1 if player 1 wins, 2 if player 2 wins and 0 if there is a tie</returns>
+        /// <exception cref="ArgumentException">Thrown when cards1 <paramref name="cards1"/> or <paramref name="cards2"/> is invalid</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="cards1"/> or <paramref name="cards2"/> is null</exception>
         public static int GetWinner(string cards1, string cards2)
         {
+            if (cards1 == null) { throw new ArgumentNullException("cards1 cannot be null"); }
+            if (cards2 == null) { throw new ArgumentNullException("cards2 cannot be null"); }
+            
             var cardsForPlayer1 = cards1.Split(" "); 
             try
             {

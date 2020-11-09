@@ -1,6 +1,5 @@
 ﻿using AlgorithmsAndDataStructures.DataStructures;
 using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
@@ -27,13 +26,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 return;
             }
 
-            var intList = new List<int>();
             var stringArray = input.Split(" ");
+            var binarySearchTree = new BinarySearchTree<int>();
             foreach (string s in stringArray)
             {
                 if (int.TryParse(s, out int sAsInt))
                 {
-                    intList.Add(sAsInt);
+                    binarySearchTree.Insert(sAsInt);
                 }
                 else
                 {
@@ -49,22 +48,16 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine($"{Environment.NewLine}Executing...");
             Console.ForegroundColor = ConsoleColor.Green;
 
-            var binarySearchTree = new BinarySearchTree<int>();
-            foreach (int item in intList)
-            {
-                binarySearchTree.Insert(item);
-            }
-
-            var visitor = new ConsoleWriter<int>();
+            var nodeDataProcessor = new ConsoleNodeDataProcessor<int>();
 
             Console.Write($"{Environment.NewLine}In-order traversal result: ");
-            binarySearchTree.InOrderTraverse(visitor);
+            binarySearchTree.InOrderTraverse(nodeDataProcessor);
             
             Console.Write($"{Environment.NewLine}Pre-order traversal result: ");
-            binarySearchTree.PreOrderTraverse(visitor);
+            binarySearchTree.PreOrderTraverse(nodeDataProcessor);
            
             Console.Write($"{Environment.NewLine}Post-order traversal result: ");
-            binarySearchTree.PostOrderTraverse(visitor);
+            binarySearchTree.PostOrderTraverse(nodeDataProcessor);
            
             // Terminate
             Console.ForegroundColor = defaultForegroundColor;
@@ -72,13 +65,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
         }
 
         /// <summary>
-        /// Writes items it visits to the standard output stream
+        /// Writes data to standard output
         /// </summary>
-        class ConsoleWriter<T> : IVisitor<T>
+        class ConsoleNodeDataProcessor<T> : INodeDataProcessor<T>
         {
-            public void Visit(T t)
+            public void Process(T data)
             {
-                Console.Write($"{t} ");
+                Console.Write($"{data} ");
             }
         }
     }

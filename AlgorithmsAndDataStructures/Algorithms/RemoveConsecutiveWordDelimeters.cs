@@ -5,19 +5,19 @@ namespace AlgorithmsAndDataStructures.Algorithms
     public class RemoveConsecutiveWordDelimeters
     {
         /// <summary>
-        /// Removes consecutive word delimeters from a given text
+        /// Removes consecutive word delimeters from <paramref name="text"/>
         /// </summary>
         /// <param name="text">Text to search</param>
+        /// <returns>The adjusted text</returns>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(1) when there are no consecutive word delimeters
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static string Execute(string text)
-        { 
-            // If text has just one character
-            if (text.Length == 1) { return text; }
+        public static string Run(string text)
+        {
+            if (text == null || text.Equals("") || text.Length == 1) { return text; }
 
             // Since items might be removed while iterating, start iteration from the last character to avoid IndexOutOfBoundException
             var index = text.Length - 1;
@@ -62,7 +62,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine($"{Environment.NewLine}Executing...");
             //Console.WriteLine($"text length is: {text.Length}"); 
             // Execute
-            text = Execute(text);
+            text = Run(text);
             //Console.WriteLine($"result length is: {text.Length}"); 
 
             // Display result

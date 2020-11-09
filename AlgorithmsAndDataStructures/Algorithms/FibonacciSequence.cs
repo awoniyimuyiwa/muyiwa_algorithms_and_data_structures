@@ -2,7 +2,7 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class FibonacciSequence
+    public class FibonacciSequence
     {
         public static void Run(string[] args)
         {

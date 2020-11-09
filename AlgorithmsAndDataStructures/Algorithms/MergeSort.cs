@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class MergeSort
+    public class MergeSort
     {
         /// <summary>
-        /// Sorts a given list of items
+        /// Sorts <paramref name="items"/> from <paramref name="startIndex"/> to <paramref name="endIndex"/> using merge sort algorithm
         /// </summary>
-        /// <param name="array">List of items to be sorted</param>
+        /// <param name="items">List of items to be sorted</param>
         /// <param name="startIndex">Index in list to start sorting from</param>
         /// <param name="endIndex">Index in list to stop sorting</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="items"/> is null</exception>
         /// <remarks>
         /// BEST CASE- TIME: Ω(n*log(n)), MEMORY: Ω(n)
         /// AVERAGE CASE- TIME: Θ(n*log(n)), MEMORY: Θ(n)
@@ -20,15 +21,19 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// thereby making it log(n) base2 steps. At each step, another n steps are required for sorting.
         /// maximum of n steps required for sorting in each of the log(n) base 2 steps= n*log(n) base 2 
         /// </remarks>
-        public static void Sort(int[] array, int startIndex, int endIndex)
+        public static void Sort(int[] items, int startIndex, int endIndex)
         {
+            #region Not part of the algorithm
+            if (items == null) { throw new ArgumentNullException("items cannot be null"); }
+            #endregion
+
             if (startIndex < endIndex)
             {
                 int middleIndex = (startIndex + endIndex) / 2;
 
-                Sort(array, startIndex, middleIndex); // Divide
-                Sort(array, middleIndex+1, endIndex); // Divide
-                Merge(array, startIndex, middleIndex, endIndex); // Conquer
+                Sort(items, startIndex, middleIndex); // Divide
+                Sort(items, middleIndex+1, endIndex); // Divide
+                Merge(items, startIndex, middleIndex, endIndex); // Conquer
             }
         }
 

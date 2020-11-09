@@ -4,34 +4,40 @@ using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class AdditionPairs
+    public class AdditionPairs
     {
         /// <summary>
-        /// Given a list of numbers, and a number X,
-        /// find pairs of numbers within the list that can be added to get X
+        /// Given a list of <paramref name="numbers"/>, and a number <paramref name="X"/>,
+        /// find pairs of numbers within <paramref name="numbers"/> can be added to get <paramref name="X"/>
         /// </summary>
-        /// <param name="list">List of numbers to search</param>
+        /// <param name="numbers">List of numbers to search</param>
         /// <param name="X">Addition result</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="numbers"/> is null</exception>
         /// <remarks>
         /// Where n is the size of the list
         /// BEST CASE- TIME: Ω(n^2), MEMORY: Ω(1)
         /// AVERAGE CASE- TIME: Θ(n^2), MEMORY: Θ(1)
         /// WORST CASE- TIME: O(n^2), MEMORY: O(1)
         /// </remarks>
-        public static List<Tuple<int, int>> GetAdditionPairs(List<int> list, int X)
+        public static List<Tuple<int, int>> GetPairs(List<int> numbers, int X)
         {
+            #region Not part of the algorithm
+            if (numbers == null) { throw new ArgumentNullException("numbers cannot be null"); }
+            #endregion
+
+            numbers = numbers.Distinct().ToList();
+            var numbersCount = numbers.Count();
             var tuples = new List<Tuple<int, int>>();
-            var listCount = list.Count();
             int remainder;
 
-            for (int index = 0; index < listCount; index++)
+            for (int index = 0; index < numbersCount; index++)
             {
-                remainder = X - list[index];
-                for (int index2 = index + 1; index2 < listCount; index2++)
+                remainder = X - numbers[index];
+                for (int index2 = index + 1; index2 < numbersCount; index2++)
                 {
-                    if (list[index2] == remainder)
+                    if (numbers[index2] == remainder)
                     {
-                        tuples.Add(Tuple.Create(list[index], list[index2]));
+                        tuples.Add(Tuple.Create(numbers[index], numbers[index2]));
                         break;
                     }
                 }
@@ -92,7 +98,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
 
-            var tuples = GetAdditionPairs(intList, x);
+            var tuples = GetPairs(intList, x);
             if (tuples.Count() > 0)
             {
                 Console.WriteLine($"{Environment.NewLine}Pairs of numbers that can be added to get {xInput}:");

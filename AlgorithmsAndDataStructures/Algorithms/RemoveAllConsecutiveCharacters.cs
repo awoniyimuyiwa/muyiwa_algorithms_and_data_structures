@@ -2,25 +2,22 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    ///  Removes all consecutive occurence of characters from text
-    /// </summary>
-    class RemoveAllConsecutiveCharacters
+    public class RemoveAllConsecutiveCharacters
     {
         /// <summary>
-        /// Removes all consecutive occurence of any character from the given text   
+        /// Removes all consecutive occurence of any character from <paramref name="text"/>   
         /// </summary>
         /// <param name="text">Text to search</param>
+        /// <returns>The adjusted text</returns>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(1) when there are no consecutives 
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static string RemoveAllConsecutiveChars(string text)
+        public static string Run(string text)
         {
-            // If text has just one character
-            if (text.Length == 1) { return text; }
+            if (text == null || text.Length == 1) { return text; }
 
             // Since items might be removed while iterating, start iteration from the last character to avoid IndexOutOfBoundException
             var index = text.Length - 1;
@@ -65,7 +62,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
             //Console.WriteLine($"text length is: {text.Length}"); 
-            text = RemoveAllConsecutiveChars(text);
+            text = Run(text);
             //Console.WriteLine($"result length is: {text.Length}"); 
 
             // Display result

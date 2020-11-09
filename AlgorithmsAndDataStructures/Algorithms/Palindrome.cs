@@ -2,12 +2,13 @@ using System;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class Palindrome
+    public class Palindrome
     {
-        /// <summar>
-        /// Returns true if text is a palindrome, false otherwise.   
         /// <summary>
+        /// Checks if <paramref name="text"/> is a palindrome
+        /// </summary>
         /// <param name="text">Text to check</param>
+        /// <returns>true if <paramref name="text"/> is a palindrome, false otherwise</returns>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
@@ -16,11 +17,9 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </remarks>
         public static bool IsPalindrome(string text)
         {
-            #region Not part of the algorithm
-            if (text == null) { throw new ArgumentException($"text cannot be null"); }
-            #endregion
-
-            var reversedText = ReverseText.Reverse(text);
+            if (text == null) { return false; }
+           
+            var reversedText = ReverseText.Run(text);
 
             if (reversedText.Equals(text)) { return true; }
 

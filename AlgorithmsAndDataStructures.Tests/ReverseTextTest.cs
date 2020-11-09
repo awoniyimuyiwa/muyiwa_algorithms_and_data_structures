@@ -1,4 +1,5 @@
 ﻿using AlgorithmsAndDataStructures.Algorithms;
+using System;
 using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
@@ -8,9 +9,11 @@ namespace AlgorithmsAndDataStructures.Tests
         [Theory]
         [InlineData("hello", "olleh")]
         [InlineData("world", "dlrow")]
-        public void Reverse_WhenCalled_ReturnsValidResult(string text, string expected)
+        [InlineData(null, null)]
+        [InlineData("  ", "  ")]
+        public void Run_WhenCalled_ReturnsValidResult(string text, string expected)
         {
-            var actual = ReverseText.Reverse(text);
+            var actual = ReverseText.Run(text);
 
             Assert.Equal(expected, actual);
         }

@@ -5,20 +5,20 @@ namespace AlgorithmsAndDataStructures.Algorithms
     public class ReverseText
     {
         /// <summary>
-        /// Reverses a text     
+        /// Reverses <paramref name="text"/>  
         /// </summary>
         /// <param name="text">Text to reverse</param>
+        /// <returns>The reversed text</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="text"/> is null</exception>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static string Reverse(string text)
+        public static string Run(string text)
         {
-            #region Not part of the algorithm
-            if (text == null) { throw new ArgumentException($"text cannot be null"); }
-            #endregion
+            if (string.IsNullOrWhiteSpace(text)) { return text; }
 
             var array = text.ToCharArray();
             Array.Reverse(array);
@@ -46,7 +46,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute algorithm 
-            var result = Reverse(text);
+            var result = Run(text);
 
              // Display result
             Console.ForegroundColor = ConsoleColor.Green;

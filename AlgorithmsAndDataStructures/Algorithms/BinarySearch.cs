@@ -4,13 +4,16 @@ using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class BinarySearch
+    public class BinarySearch
     {
         /// <summary>
-        /// Returns the index of needle in haystack
+        /// Searches for <paramref name="needle"/> in <paramref name="haystack"/> using binary search algorithm
         /// </summary>
         /// <param name="needle">item to be searched</param>
-        /// <param name="haystack">array in which to search for needle</param>
+        /// <param name="haystack">list in which to search for needle, items in the list must be sorted in ascending order</param>
+        /// <returns>The index of <paramref name="needle"/> in <paramref name="haystack"/> if <paramref name="needle"/> exists in <paramref name="haystack"/>, -1 otherwise</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="haystack"/> is not sorted in ascending order</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="haystack"/> is null</exception>
         /// <remarks>
         /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1) when needle is at the center of haystack
         /// AVERAGE CASE- TIME: Θ(log(n)), MEMORY: Θ(1)
@@ -23,6 +26,11 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </remarks>
         public static int Search(int needle, int[] haystack)
         {
+            #region Not part of the algorithm
+            if (haystack == null) { throw new ArgumentNullException("haystack cannot be null"); }
+            if (!IsSorted(haystack)) { throw new ArgumentException($"Items in haystack must be sorted in ascending order"); }
+            #endregion
+
             int startIndex = 0;
             int endIndex = haystack.Length - 1;
 
@@ -38,16 +46,27 @@ namespace AlgorithmsAndDataStructures.Algorithms
             return -1;
         }
 
-        public static bool IsSorted(int[] array, bool ascending = true)
+        /// <summary>
+        /// Detects if <paramref name="items"/> are sorted in the desired order
+        /// </summary>
+        /// <param name="items"></param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="items"/> is null</exception>
+        /// <param name="isAscending">Set to true to check if <paramref name="items"/> are sorted in ascending order, set to false otherwise</param>
+        /// <returns>true if items are sorted in the desired order, false otherwise</returns>
+        public static bool IsSorted(int[] items, bool isAscending = true)
         {
+            #region Not part of the algorithm
+            if (items == null) { throw new ArgumentNullException("items cannot be null"); }
+            #endregion
+
             var isSorted = true;
-            var arrayLength = array.Length;
+            var arrayLength = items.Length;
 
             for (int index = 1; index < arrayLength; index++)
             {
-                if (ascending)
+                if (isAscending)
                 {
-                    if (array[index - 1] > array[index])
+                    if (items[index - 1] > items[index])
                     {
                         isSorted = false;
                         break;
@@ -55,7 +74,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 }
                 else
                 {
-                    if (array[index - 1] < array[index])
+                    if (items[index - 1] < items[index])
                     {
                         isSorted = false;
                         break;

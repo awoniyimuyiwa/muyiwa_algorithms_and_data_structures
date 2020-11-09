@@ -1,4 +1,5 @@
 ﻿using AlgorithmsAndDataStructures.Algorithms;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -7,15 +8,24 @@ namespace AlgorithmsAndDataStructures.Tests
     public class NumberOfOccurenceOfEachCharacterTest
     {
         [Theory]
-        [MemberData(nameof(GetTheoryData))]
-        public void GetCharToCountMap_WhenCalled_ReturnsValidResult(string text, Dictionary<char, int> expected)
+        [MemberData(nameof(GetData))]
+        public void Run_WhenTextIsNotNull_ReturnsValidResult(string text, Dictionary<char, int> expected)
         {
-            var actual = NumberOfOccurenceOfEachCharacter.GetCharToCountMap(text);
+            var actual = NumberOfOccurenceOfEachCharacter.Run(text);
 
             Assert.Equal(expected, actual);
         }
 
-        public static TheoryData<string, Dictionary<char, int>> GetTheoryData()
+        [Fact]
+        public void Run_WhenTextIsNull_ThrowsArgumentNullException()
+        {
+            Action actual = () => NumberOfOccurenceOfEachCharacter.Run((string)null);
+
+            Assert.Throws<ArgumentNullException>(actual);
+        }
+
+
+        public static TheoryData<string, Dictionary<char, int>> GetData()
         {
             return new TheoryData<string, Dictionary<char, int>>()
             {

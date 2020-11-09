@@ -1,14 +1,12 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    /// <summary>
-    /// Finds the number of words in a text
-    /// </summary>
-    class NumberOfWords
+    public class NumberOfWords
     {
         /// <summary>
-        /// Returns the number of words in the text
+        /// Returns the number of words in <paramref name="text"/>
         /// </summary>
         /// <param name="text">Text to search</param>
         /// <remarks>
@@ -17,31 +15,44 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// AVERAGE CASE- TIME: Θ(n), MEMORY: Θ(n)
         /// WORST CASE- TIME: O(n), MEMORY: O(n)
         /// </remarks>
-        public static int GetNumberOfWords(string text)
+        public static int Run(string text)
         {
             if (string.IsNullOrWhiteSpace(text)) { return 0; }
 
-            // Remove leading and trailing spaces from text. 
-            // New memory will be allocated when trailing spaces are removed, if there are no trailing spaces then the size of the memory is the same as n 
-            text = text.Trim();
+            // Pre processing, new memory will be allocated by methods called for preprocessing 
+            // Remove consecutive word delimeters
+            text = RemoveConsecutiveWordDelimeters.Run(text);
+            // Remove word delimeters at the start and end of text.             
+            text = text.Trim(' ', '\t', '\n');
 
             // If text has just one character
             if (text.Length == 1) { return 1; }
 
             int delimitersCount = 0;
-
-            for (int index = 0; index < text.Length-1; index++)
+            for (int index = 0; index < text.Length; index++)
             {
-                // Ignore consecutive delimiters, count them as 1
-                if ((text[index].Equals(' ') || text[index].Equals('\t') || text[index].Equals(Environment.NewLine)) &&
-                !(text[index+1].Equals(' ') || text[index+1].Equals('\t') || text[index+1].Equals(Environment.NewLine)))
-                {
+                if (text[index].Equals(' ') || text[index].Equals('\t') || text[index].Equals('\n')) 
+                { 
                     delimitersCount++;
                 }
             }
-           
+
             // If n delimiters were counted then there are n+1 words
             return delimitersCount + 1;
+        }
+
+        /// <summary>
+        /// Returns the number of words in <paramref name="text"/> using regular expression
+        /// </summary>
+        /// <param name="text">Text to search</param>
+        public static int RunUsingRegex(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) { return 0; }
+
+            string pattern = "\\w+";
+            Regex regex = new Regex(pattern);
+
+            return regex.Matches(text).Count;
         }
 
         public static void Run(string[] args)
@@ -67,7 +78,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{Environment.NewLine}Executing...");
             // Execute
-            var result = GetNumberOfWords(text);
+            var result = Run(text);
             
             // Display result
             Console.ForegroundColor = ConsoleColor.Green;

@@ -4,43 +4,49 @@ using System.Linq;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
-    class MultiplicationPairs
+    public class MultiplicationPairs
     {
         /// <summary>
-        /// Given a list of numbers, and a number X,
-        /// finds all pairs of numbers within the list that can be multiplied to get X
+        /// Given a list of <paramref name="numbers"/>, and a number <paramref name="X"/>,
+        /// find pairs of numbers within <paramref name="numbers"/> can be multiplied to get <paramref name="X"/>
         /// </summary>
-        /// <param name="list">List of numbers to search</param>
+        /// <param name="numbers">List of numbers to search</param>
         /// <param name="X">Multiplication result</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="numbers"/> is null</exception>
         /// <remarks>
         /// Where n is the size of the list
         /// BEST CASE- TIME: Ω(n^2), MEMORY: Ω(1)
         /// AVERAGE CASE- TIME: Θ(n^2), MEMORY: Θ(1)
         /// WORST CASE- TIME: O(n^2), MEMORY: O(1)
         /// </remarks>
-        public static List<Tuple<int, int>> GetMultiplicationPairs(List<int> list, int X)
+        public static List<Tuple<int, int>> GetPairs(List<int> numbers, int X)
         {
+            #region Not part of the algorithm
+            if (numbers == null) { throw new ArgumentNullException("numbers cannot be null"); }
+            #endregion
+
+            numbers = numbers.Distinct().ToList();
+            var numbersCount = numbers.Count();
             var tuples = new List<Tuple<int, int>>();
-            var listCount = list.Count();
             int quotient = 0;
 
-            for (int index = 0; index < listCount; index++)
+            for (int index = 0; index < numbersCount; index++)
             {
                 // Avoid division by zero exception
-                if (list[index] != 0)
+                if (numbers[index] != 0)
                 {
-                    quotient = X / list[index];
+                    quotient = X / numbers[index];
                 }
 
-                for (int index2 = index + 1; index2 < listCount; index2++)
+                for (int index2 = index + 1; index2 < numbersCount; index2++)
                 {
-                    if (list[index] == 0 && X == 0)
+                    if (numbers[index] == 0 && X == 0)
                     {
-                        tuples.Add(Tuple.Create(list[index], list[index2]));
+                        tuples.Add(Tuple.Create(numbers[index], numbers[index2]));
                     }
-                    else if (list[index2] == quotient)
+                    else if (numbers[index2] == quotient)
                     {
-                        tuples.Add(Tuple.Create(list[index], list[index2]));
+                        tuples.Add(Tuple.Create(numbers[index], numbers[index2]));
                         break;
                     }
                 }
@@ -101,7 +107,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             // Execute and display result
             Console.ForegroundColor = ConsoleColor.Green;
             
-            var tuples = GetMultiplicationPairs(intList, x);
+            var tuples = GetPairs(intList, x);
             if (tuples.Count() > 0)
             {
                 Console.WriteLine($"{Environment.NewLine}Pairs of numbers that can be multiplied to get {xInput}:");
