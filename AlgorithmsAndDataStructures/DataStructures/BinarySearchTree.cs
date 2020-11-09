@@ -126,10 +126,7 @@ namespace AlgorithmsAndDataStructures.DataStructures
         /// <summary>
         /// Nodes are traversed in the order: Left, Right, Node (LRN)
         /// </summary>
-        /// <param name="processor">For processing data stored in nodes encountered during traversal</param>
-        /// <remarks>
-        /// LRN traversal order is used when deleting nodes
-        /// </remarks>
+        /// <param name="processor">For processing data stored in nodes encountered during traversal</param>       
         /// <remarks>
         /// Where n is the number of nodes in the tree.
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n)
