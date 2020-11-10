@@ -1,17 +1,14 @@
 using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
     public class MergeSort
     {
         /// <summary>
-        /// Sorts <paramref name="items"/> from <paramref name="startIndex"/> to <paramref name="endIndex"/> using merge sort algorithm
+        /// Sorts <paramref name="items"/> using merge sort algorithm
         /// </summary>
         /// <param name="items">List of items to be sorted</param>
-        /// <param name="startIndex">Index in list to start sorting from</param>
-        /// <param name="endIndex">Index in list to stop sorting</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="items"/> is null</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="items"/> is null</exception>      
         /// <remarks>
         /// BEST CASE- TIME: Ω(n*log(n)), MEMORY: Ω(n)
         /// AVERAGE CASE- TIME: Θ(n*log(n)), MEMORY: Θ(n)
@@ -21,10 +18,22 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// thereby making it log(n) base2 steps. At each step, another n steps are required for sorting.
         /// maximum of n steps required for sorting in each of the log(n) base 2 steps= n*log(n) base 2 
         /// </remarks>
-        public static void Sort(int[] items, int startIndex, int endIndex)
+        public static void Sort<T>(T[] items) where T : IComparable
         {
             #region Not part of the algorithm
             if (items == null) { throw new ArgumentNullException("items cannot be null"); }
+            #endregion
+
+            Sort(items, 0, items.Length - 1);
+        }
+
+        static void Sort<T>(T[] items, int startIndex, int endIndex) where T : IComparable
+        {
+            #region Not part of the algorithm
+            if (items == null) { throw new ArgumentNullException("items cannot be null"); }
+            if (startIndex < 0) { throw new ArgumentException("startIndex cannot be less than zero"); }
+            if (startIndex > endIndex) { throw new ArgumentException("startIndex cannot be greater than endIndex"); }
+            if (endIndex > items.Length - 1) { throw new ArgumentException($"endIndex cannot be greater than { items.Length -1 }"); }
             #endregion
 
             if (startIndex < endIndex)
@@ -38,105 +47,56 @@ namespace AlgorithmsAndDataStructures.Algorithms
         }
 
         // Sorting is done here
-        static void Merge(int[] array, int startIndex, int middleIndex, int endIndex)
+        static void Merge<T>(T[] items, int startIndex, int middleIndex, int endIndex) where T : IComparable
         {
-            int leftArrayIndex = startIndex;
-            int rightArrayIndex = middleIndex+1;
+            int leftSideIndex = startIndex;
+            int rightSideIndex = middleIndex+1;
 
-            var sortedArray = new int[array.Length];
-            int sortedArrayIndex = 0;
+            var sortedItems = new T[items.Length];
+            int sortedItemsIndex = 0;
 
-            while (leftArrayIndex <= middleIndex && rightArrayIndex <= endIndex)
+            while (leftSideIndex <= middleIndex && rightSideIndex <= endIndex)
             {
-                if (array[leftArrayIndex] < array[rightArrayIndex])
+                if (items[leftSideIndex].CompareTo(items[rightSideIndex]) < 0)
                 {
-                    sortedArray[sortedArrayIndex] = array[leftArrayIndex];
-                    leftArrayIndex++;
-                    sortedArrayIndex++;
+                    sortedItems[sortedItemsIndex] = items[leftSideIndex];
+                    leftSideIndex++;
+                    sortedItemsIndex++;
                 }
                 else
                 {
-                    sortedArray[sortedArrayIndex] = array[rightArrayIndex];
-                    rightArrayIndex++;
-                    sortedArrayIndex++;
+                    sortedItems[sortedItemsIndex] = items[rightSideIndex];
+                    rightSideIndex++;
+                    sortedItemsIndex++;
                 }
             }
 
             // Copy items remaining in leftArray to sortedArray
-            while (leftArrayIndex <= middleIndex)
+            while (leftSideIndex <= middleIndex)
             {
-                sortedArray[sortedArrayIndex] = array[leftArrayIndex];
-                leftArrayIndex++;
-                sortedArrayIndex++;
+                sortedItems[sortedItemsIndex] = items[leftSideIndex];
+                leftSideIndex++;
+                sortedItemsIndex++;
             }
 
             // Copy items remaining in rightArray to sortedArray
-            while (rightArrayIndex <= endIndex)
+            while (rightSideIndex <= endIndex)
             {
-                sortedArray[sortedArrayIndex] = array[rightArrayIndex];
-                rightArrayIndex++;
-                sortedArrayIndex++;
+                sortedItems[sortedItemsIndex] = items[rightSideIndex];
+                rightSideIndex++;
+                sortedItemsIndex++;
             }
 
-            // Copy from sortedArray to array
-            // Note that sortedArrayIndex at this stage will always be equal to the number of items sorted so it needs to be reduced by 1
-            sortedArrayIndex--;
-            int arrayIndex = endIndex;
-            while (arrayIndex >= startIndex)
+            // Copy from sortedItems back to items
+            // Note that sortedItemsIndex at this stage will always be equal to the total number of items sorted so it needs to be reduced by 1
+            sortedItemsIndex--;
+            int itemsIndex = endIndex;
+            while (itemsIndex >= startIndex)
             {
-                array[arrayIndex] = sortedArray[sortedArrayIndex];
-                sortedArrayIndex--;
-                arrayIndex--;
+                items[itemsIndex] = sortedItems[sortedItemsIndex];
+                sortedItemsIndex--;
+                itemsIndex--;
             }
-        }
-
-        public static void Run(string[] args)
-        {
-            var defaultForegroundColor = Console.ForegroundColor;
-
-            Console.WriteLine("*******MERGE SORT*******");
-            Console.WriteLine($"{Environment.NewLine}Enter list of numbers. Separate numbers by space e.g 1 20 3:");
-            string listInput = Console.ReadLine();
-            // Validate input
-            if (string.IsNullOrEmpty(listInput))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-
-            var intList = new List<int>();
-            var stringArray = listInput.Split(" ");
-            foreach (string s in stringArray)
-            {
-                if (int.TryParse(s, out int sAsInt))
-                {
-                    intList.Add(sAsInt);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"ERROR: {s} is not a valid integer");
-                    Console.ForegroundColor = defaultForegroundColor;
-                    return;
-                }
-            }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{Environment.NewLine}Sorting...");
-            var array = intList.ToArray();
-            // Execute
-            Sort(array, 0, array.Length-1);
-
-            // Display result
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($"{Environment.NewLine}Result: ");
-            Console.WriteLine(string.Join(" ", array));
-
-            // Terminate
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}*******END OF MERGE SORT*******{Environment.NewLine}");
         }
     }
 }

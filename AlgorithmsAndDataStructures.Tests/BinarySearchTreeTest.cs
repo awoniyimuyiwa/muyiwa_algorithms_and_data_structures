@@ -8,19 +8,8 @@ namespace AlgorithmsAndDataStructures.Tests
     public class BinarySearchTreeTest
     {
         [Theory]
-        [MemberData(nameof(GetDataForTestingContainsOnIntegers))]
-        public void Contains_WhenItemsAreIntegers_ExecutesCorrectly(int[] items, int item, bool expected)
-        {
-            var binarySearchTree = GetBinarySearchTree(items);
-
-            var actual = binarySearchTree.Contains(item);
-           
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetDataForTestingContainsOnStrings))]
-        public void Contains_WhenItemsAreStrings_ExecutesCorrectly(string[] items, string item, bool expected)
+        [MemberData(nameof(GetDataForTestingContains))]
+        public void Contains_WhenCalled_ExecutesCorrectly(string[] items, string item, bool expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
 
@@ -30,23 +19,8 @@ namespace AlgorithmsAndDataStructures.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GetDataForTestingDeleteOnIntegers))]
-        public void Delete_WhenItemsAreIntegers_ExecutesCorrectly(int[] items, int item, int[] expected)
-        {
-            var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<int>();
-
-            binarySearchTree.Delete(item);
-
-            binarySearchTree.InOrderTraverse(visitor);
-            var actual = visitor.ReadOnlyItems;
-            IReadOnlyCollection<int> expectedAsReadOnly = Array.AsReadOnly(expected);
-            Assert.Equal(expectedAsReadOnly, actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetDataForTestingDeleteOnStrings))]
-        public void Delete_WhenItemsAreStrings_ExecutesCorrectly(string[] items, string item, string[] expected)
+        [MemberData(nameof(GetDataForTestingDelete))]
+        public void Delete_WhenCalled_ExecutesCorrectly(string[] items, string item, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
             var visitor = new CustomNodeDataProcessor<string>();
@@ -60,22 +34,8 @@ namespace AlgorithmsAndDataStructures.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GetDataForTestingInOrderTraverseOnIntegers))]
-        public void InOrderTraverse_WhenItemsAreIntegers_ExecutesCorrectly(int[] items, int[] expected)
-        {
-            var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<int>();
-
-            binarySearchTree.InOrderTraverse(visitor);
-
-            var actual = visitor.ReadOnlyItems;
-            IReadOnlyCollection<int> expectedAsReadOnly = Array.AsReadOnly(expected);
-            Assert.Equal(expectedAsReadOnly, actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetDataForTestingInOrderTraverseOnStrings))]
-        public void InOrderTraverse_WhenItemsAreStrings_ExecutesCorrectly(string[] items, string[] expected)
+        [MemberData(nameof(GetDataForTestingInOrderTraverse))]
+        public void InOrderTraverse_WhenCalled_ExecutesCorrectly(string[] items, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
             var visitor = new CustomNodeDataProcessor<string>();
@@ -88,22 +48,8 @@ namespace AlgorithmsAndDataStructures.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GetDataForTestingPreOrderTraverseOnIntegers))]
-        public void PreOrderTraverse_WhenItemsAreIntegers_ExecutesCorrectly(int[] items, int[] expected)
-        {
-            var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<int>();
-
-            binarySearchTree.PreOrderTraverse(visitor);
-
-            var actual = visitor.ReadOnlyItems;
-            IReadOnlyCollection<int> expectedAsReadOnly = Array.AsReadOnly(expected);
-            Assert.Equal(expectedAsReadOnly, actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetDataForTestingPreOrderTraverseOnStrings))]
-        public void PreOrderTraverse_WhenItemsAreStrings_ExecutesCorrectly(string[] items, string[] expected)
+        [MemberData(nameof(GetDataForTestingPreOrderTraverse))]
+        public void PreOrderTraverse_WhenCalled_ExecutesCorrectly(string[] items, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
             var visitor = new CustomNodeDataProcessor<string>();
@@ -116,22 +62,8 @@ namespace AlgorithmsAndDataStructures.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GetDataForTestingPostOrderTraverseOnIntegers))]
-        public void PostOrderTraverse_WhenItemsAreIntegers_ExecutesCorrectly(int[] items, int[] expected)
-        {
-            var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<int>();
-
-            binarySearchTree.PostOrderTraverse(visitor);
-
-            var actual = visitor.ReadOnlyItems;
-            IReadOnlyCollection<int> expectedAsReadOnly = Array.AsReadOnly(expected);
-            Assert.Equal(expectedAsReadOnly, actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetDataForTestingPostOrderTraverseOnStrings))]
-        public void PostOrderTraverse_WhenItemsAreStrings_ExecutesCorrectly(string[] items, string[] expected)
+        [MemberData(nameof(GetDataForTestingPostOrderTraverse))]
+        public void PostOrderTraverse_WhenCalled_ExecutesCorrectly(string[] items, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
             var visitor = new CustomNodeDataProcessor<string>();
@@ -143,25 +75,7 @@ namespace AlgorithmsAndDataStructures.Tests
             Assert.Equal(expectedAsReadOnly, actual);
         }
 
-        public static TheoryData<int[], int, bool> GetDataForTestingContainsOnIntegers()
-        {
-            return new TheoryData<int[], int, bool>()
-            {
-                {
-                    new int[] { 6, 4, 2, 7 },
-                    4,
-                    true
-                },
-
-                {
-                    new int[] { 6, 4, 2, 7 },
-                    0,
-                    false
-                }
-            };
-        }
-
-        public static TheoryData<string[], string, bool> GetDataForTestingContainsOnStrings()
+        public static TheoryData<string[], string, bool> GetDataForTestingContains()
         {
             return new TheoryData<string[], string, bool>()
             {
@@ -178,32 +92,8 @@ namespace AlgorithmsAndDataStructures.Tests
                 },
             };
         }
-
-        public static TheoryData<int[], int, int[]> GetDataForTestingDeleteOnIntegers()
-        {
-            return new TheoryData<int[], int, int[]>()
-            {                
-                {
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 },
-                    7,
-                    new int[] { 2, 4, 6, 9, 12, 15 }
-                },
-
-                {
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 },
-                    2,
-                    new int[] { 4, 6, 7, 9, 12, 15 }
-                },
-
-                {
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 },
-                    0,
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 }
-                }
-            };
-        }
-
-        public static TheoryData<string[], string, string[]> GetDataForTestingDeleteOnStrings()
+       
+        public static TheoryData<string[], string, string[]> GetDataForTestingDelete()
         {
             return new TheoryData<string[], string, string[]>()
             {
@@ -227,29 +117,7 @@ namespace AlgorithmsAndDataStructures.Tests
             };
         }
 
-        public static TheoryData<int[], int[]> GetDataForTestingInOrderTraverseOnIntegers()
-        {
-            return new TheoryData<int[], int[]>()
-            {
-                // In-order traverse on a binary search tree can be used to sort data stored in the tree in ascending order
-                {
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 },
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 }
-                },
-
-                {
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 },
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 }
-                },
-
-                {
-                    new int[] { 15, 12, 9, 7, 6, 4, 2 },
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 }
-                }
-            };
-        }
-
-        public static TheoryData<string[], string[]> GetDataForTestingInOrderTraverseOnStrings()
+        public static TheoryData<string[], string[]> GetDataForTestingInOrderTraverse()
         {
             return new TheoryData<string[], string[]>()
             {
@@ -271,29 +139,7 @@ namespace AlgorithmsAndDataStructures.Tests
             };
         }
 
-        public static TheoryData<int[], int[]> GetDataForTestingPreOrderTraverseOnIntegers()
-        {
-            return new TheoryData<int[], int[]>()
-            {
-                // Pre-order traverse on a binary search tree can be used to get data stored in the tree in the same order they were stored
-                {
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 },
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 }
-                },
-
-                {
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 },
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 }
-                },
-
-                {
-                    new int[] { 15, 12, 9, 7, 6, 4, 2 },
-                    new int[] { 15, 12, 9, 7, 6, 4, 2 }
-                }
-            };
-        }
-
-        public static TheoryData<string[], string[]> GetDataForTestingPreOrderTraverseOnStrings()
+        public static TheoryData<string[], string[]> GetDataForTestingPreOrderTraverse()
         {
             return new TheoryData<string[], string[]>()
             {
@@ -315,29 +161,7 @@ namespace AlgorithmsAndDataStructures.Tests
             };
         }
 
-        public static TheoryData<int[], int[]> GetDataForTestingPostOrderTraverseOnIntegers()
-        {
-            return new TheoryData<int[], int[]>()
-            {
-                {
-                    new int[] { 6, 4, 2, 9, 7, 12, 15 },
-                    new int[] { 2, 4, 7, 15, 12, 9, 6 }
-                },
-
-                // Though sorted data should not be stored in a binary search tree, post-order traverse on a binary search tree can be used to reverse order of sorted data stored in the tree
-                {
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 },
-                    new int[] { 15, 12, 9, 7, 6, 4, 2 }
-                },
-
-                {
-                    new int[] { 15, 12, 9, 7, 6, 4, 2 },
-                    new int[] { 2, 4, 6, 7, 9, 12, 15 }
-                }
-            };
-        }
-
-        public static TheoryData<string[], string[]> GetDataForTestingPostOrderTraverseOnStrings()
+        public static TheoryData<string[], string[]> GetDataForTestingPostOrderTraverse()
         {
             return new TheoryData<string[], string[]>()
             {                

@@ -1,16 +1,13 @@
 using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
 {
     public class QuickSort
     {
         /// <summary>
-        /// Sorts <paramref name="items"/> from <paramref name="startIndex"/> to <paramref name="endIndex"/> using quick sort algorithm
+        /// Sorts <paramref name="items"/> using quick sort algorithm
         /// </summary>
         /// <param name="items">List of items to be sorted</param>
-        /// <param name="startIndex">Index in list to start sorting from</param>
-        /// <param name="endIndex">Index in list to stop sorting</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="items"/> is null</exception>
         /// <remarks>
         /// BEST CASE- TIME: Ω(n*log(n)), MEMORY: Ω(n)
@@ -21,12 +18,17 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// thereby making it log(n) base2 steps. At each step, another n steps are required for sorting.
         /// maximum of n steps required for sorting in each of the log(n) base 2 steps = n*log(n) base 2 
         /// </remarks>
-        public static void Sort(int[] items, int startIndex, int endIndex)
+        public static void Sort<T>(T[] items) where T : IComparable
         {
             #region Not part of the algorithm
             if (items == null) { throw new ArgumentNullException("items cannot be null"); }
             #endregion
 
+            Sort(items, 0, items.Length - 1);
+        }
+    
+        static void Sort<T>(T[] items, int startIndex, int endIndex) where T : IComparable
+        {
             if (startIndex < endIndex)
             {
                 int partitionIndex = Partition(items, startIndex, endIndex); // Divide
@@ -37,96 +39,47 @@ namespace AlgorithmsAndDataStructures.Algorithms
         }
 
         // Partitioning and sorting is done here
-        static int Partition(int[] array, int startIndex, int endIndex)
+        static int Partition<T>(T[] items, int startIndex, int endIndex) where T : IComparable
         {
-            int leftArrayIndex = startIndex;
-            int rightArrayIndex = endIndex;
-            int partitionIndex = leftArrayIndex; 
-            int tempForSwapping;
+            int leftSideIndex = startIndex;
+            int rightSideIndex = endIndex;
+            int partitionIndex = leftSideIndex; 
+            T tempForSwapping;
             bool shouldContinuePartitioning = true;
 
             while (shouldContinuePartitioning) 
             {
-                while ((array[partitionIndex] <= array[rightArrayIndex]) && partitionIndex != rightArrayIndex) 
-                { rightArrayIndex--; }
+                while ((items[partitionIndex].CompareTo(items[rightSideIndex]) < 1) && partitionIndex != rightSideIndex) 
+                { rightSideIndex--; }
 
-                if (partitionIndex == rightArrayIndex) { shouldContinuePartitioning = false; }
-                else if (array[partitionIndex] > array[rightArrayIndex]) 
+                if (partitionIndex == rightSideIndex) { shouldContinuePartitioning = false; }
+                else if (items[partitionIndex].CompareTo(items[rightSideIndex]) > 0) 
                 {
-                    tempForSwapping = array[partitionIndex];
-                    array[partitionIndex] = array[rightArrayIndex];
-                    array[rightArrayIndex] = tempForSwapping;
+                    tempForSwapping = items[partitionIndex];
+                    items[partitionIndex] = items[rightSideIndex];
+                    items[rightSideIndex] = tempForSwapping;
 
-                    partitionIndex = rightArrayIndex;
+                    partitionIndex = rightSideIndex;
                 }
 
                 if (shouldContinuePartitioning)
                 {
-                    while ((array[partitionIndex] >= array[leftArrayIndex]) && partitionIndex != leftArrayIndex) 
-                    { leftArrayIndex++; }
+                    while ((items[partitionIndex].CompareTo(items[leftSideIndex]) > -1) && partitionIndex != leftSideIndex) 
+                    { leftSideIndex++; }
 
-                    if (partitionIndex == leftArrayIndex) { shouldContinuePartitioning = false; }
-                    else if (array[partitionIndex] < array[leftArrayIndex]) 
+                    if (partitionIndex == leftSideIndex) { shouldContinuePartitioning = false; }
+                    else if (items[partitionIndex].CompareTo(items[leftSideIndex]) < 0) 
                     {
-                        tempForSwapping = array[partitionIndex];
-                        array[partitionIndex] = array[leftArrayIndex];
-                        array[leftArrayIndex] = tempForSwapping;
+                        tempForSwapping = items[partitionIndex];
+                        items[partitionIndex] = items[leftSideIndex];
+                        items[leftSideIndex] = tempForSwapping;
 
-                        partitionIndex = leftArrayIndex;
+                        partitionIndex = leftSideIndex;
                     }
                 }
             }
 
             return partitionIndex;
-        }
-
-        public static void Run(string[] args)
-        {
-            var defaultForegroundColor = Console.ForegroundColor;
-
-            Console.WriteLine("*******QUICK SORT*******");
-            Console.WriteLine($"{Environment.NewLine}Enter list of numbers. Separate numbers by a space e.g 1 20 3:");
-            string listInput = Console.ReadLine();
-            // Validate input
-            if (string.IsNullOrEmpty(listInput))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-
-            var intList = new List<int>();
-            var stringArray = listInput.Split(" ");
-            foreach (string s in stringArray)
-            {
-                if (int.TryParse(s, out int sAsInt))
-                {
-                    intList.Add(sAsInt);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"ERROR: {s} is not a valid integer");
-                    Console.ForegroundColor = defaultForegroundColor;
-                    return;
-                }
-            }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{Environment.NewLine}Sorting...");
-            var array = intList.ToArray();
-            // Execute
-            Sort(array, 0, array.Length-1);
-
-            // Display result
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($"{Environment.NewLine}Result: ");
-            Console.WriteLine(string.Join(" ", array));
-
-            // Terminate
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}*******END OF QUICK SORT*******{Environment.NewLine}");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AlgorithmsAndDataStructures.Tests
         [MemberData(nameof(GetData))]
         public void Sort_WhenItemsIsNotNull_ReturnsValidResult(int[] items, int[] expected)
         {
-            MergeSort.Sort(items, 0, items.Length - 1);
+            MergeSort.Sort(items);
 
             Assert.Equal(expected, items);
         }
@@ -18,7 +18,7 @@ namespace AlgorithmsAndDataStructures.Tests
         [Fact]
         public void Sort_WhenItemsIsNull_ThrowsArgumentNullException()
         {
-            Action actual = () => MergeSort.Sort(null, 0, 0);
+            Action actual = () => MergeSort.Sort<int>(null);
 
             Assert.Throws<ArgumentNullException>(actual);
         }

@@ -75,7 +75,26 @@ namespace AlgorithmsAndDataStructures.Tests
                         new Tuple<int, int>(0, 2),
                         new Tuple<int, int>(0, 20),
                     }
-                }
+                },
+
+                {
+                    new List<int>() { 4, 0, 2, 8 },
+                    0,
+                    new List<Tuple<int, int>>()
+                    {
+                        new Tuple<int, int>(4, 0),
+                        new Tuple<int, int>(0, 2),
+                        new Tuple<int, int>(0, 8),
+                    }
+                },
+
+                {
+                    new List<int>() { 4, 6, 2, 8 },
+                    10,
+                    new List<Tuple<int, int>>()
+                    {
+                    }
+                },
             };
         }
     }

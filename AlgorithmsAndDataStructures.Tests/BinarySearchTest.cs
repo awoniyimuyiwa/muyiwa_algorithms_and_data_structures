@@ -20,7 +20,7 @@ namespace AlgorithmsAndDataStructures.Tests
         {
             var anyBoolean = true;
 
-            Action actual = () => BinarySearch.IsSorted(null, anyBoolean);
+            Action actual = () => BinarySearch.IsSorted<int>(null, anyBoolean);
 
             Assert.Throws<ArgumentNullException>(actual);
         }
