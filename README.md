@@ -1,4 +1,4 @@
-# Algorithms & data structures
+# Algorithms & Data structures
 [![Build Status](https://dev.azure.com/muyiwaawoniyi/algorithms-data-structures/_apis/build/status/awoniyimuyiwa.muyiwa_algorithms_and_data_structures?branchName=master)](https://dev.azure.com/muyiwaawoniyi/algorithms-data-structures/_build/latest?definitionId=1&branchName=master)
 [![Coverage Status](https://coveralls.io/repos/github/awoniyimuyiwa/muyiwa_algorithms_and_data_structures/badge.svg?branch=master)](https://coveralls.io/github/awoniyimuyiwa/muyiwa_algorithms_and_data_structures?branch=master)
 
@@ -14,10 +14,11 @@ $ dotnet run -- -h
 # Run algorithms
 $ dotnet run run addition-pairs --numbers:4 6 2 8 --x:6
 $ dotnet run run binary-search --needle:cat --haystack:lion cat tiger --verbose
-$ dotnet run run binary-search-tree-traversal --items:lion cat tiger
+$ dotnet run run bst-traversal --items:lion cat tiger
 $ dotnet run run merge-sort --items:lion cat tiger
 $ dotnet run run multiplication-pairs --numbers:4 6 2 8 --x:8
 $ dotnet run run quick-sort --items:lion cat tiger
+$ dotnet run run proj-euler-prob-54 --hand1:5H 5C 6S 7S KD --hand2:2C 3S 8S 8D TD
 ```
 
 ### Unit Tests ###

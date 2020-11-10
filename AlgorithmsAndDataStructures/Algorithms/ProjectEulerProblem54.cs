@@ -360,53 +360,51 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// <summary>
         /// Given 5 cards each for two players in a game of poker, determines the winner.
         /// </summary>
-        /// <param name="cards1">5 Cards for player 1, each card seperated by a space</param>
-        /// <param name="cards2">5 Cards for player 2, each card seperated by a space</param>
+        /// <param name="hand1">5 Cards for player 1</param>
+        /// <param name="hand2">5 Cards for player 2</param>
         /// <returns>1 if player 1 wins, 2 if player 2 wins and 0 if there is a tie</returns>
-        /// <exception cref="ArgumentException">Thrown when cards1 <paramref name="cards1"/> or <paramref name="cards2"/> is invalid</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="cards1"/> or <paramref name="cards2"/> is null</exception>
-        public static int GetWinner(string cards1, string cards2)
+        /// <exception cref="ArgumentException">Thrown when cards1 <paramref name="hand1"/> or <paramref name="hand2"/> is invalid</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="hand1"/> or <paramref name="hand2"/> is null</exception>
+        public static int GetWinner(string[] hand1, string[] hand2)
         {
-            if (cards1 == null) { throw new ArgumentNullException("cards1 cannot be null"); }
-            if (cards2 == null) { throw new ArgumentNullException("cards2 cannot be null"); }
+            if (hand1 == null) { throw new ArgumentNullException("hand1 cannot be null"); }
+            if (hand2 == null) { throw new ArgumentNullException("hand2 cannot be null"); }
             
-            var cardsForPlayer1 = cards1.Split(" "); 
             try
             {
-                ValidateCards(cardsForPlayer1);
+                ValidateCards(hand1);
             } 
             catch (ArgumentException ex)
             {
-                throw new ArgumentException($"Error in cards for player 1. {ex.Message}");
+                throw new ArgumentException($"Error in cards1 {ex.Message}");
             }
 
-            var cardsForPlayer2 = cards2.Split(" ");
             try
             {
-                ValidateCards(cardsForPlayer2);
+                ValidateCards(hand2);
             }
             catch (ArgumentException ex)
             {
                 throw new ArgumentException($"Error in cards for player 2. { ex.Message}");
             }
 
-            var player1Score = GetScore(cardsForPlayer1);
-            var player2Score = GetScore(cardsForPlayer2);
+            var player1Score = GetScore(hand1);
+            var player2Score = GetScore(hand2);
 
             if (player1Score > player2Score) { return 1;}
             else if (player2Score > player1Score) { return 2; }
             else if (player1Score == (int)Score.OnePair && player2Score == (int)Score.OnePair)
             {
-                var rankToCountMap = GetRankToCountMap(cardsForPlayer1);
+                var rankToCountMap = GetRankToCountMap(hand1);
                 player1Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);
 
-                rankToCountMap = GetRankToCountMap(cardsForPlayer2);
+                rankToCountMap = GetRankToCountMap(hand2);
                 player2Score = GetValueOfRankThat2CardsBelongTo(rankToCountMap);
             }
             else if (player1Score == (int)Score.TwoPairs && player2Score == (int)Score.TwoPairs)
             {
-                var pairedRankValuesPlayer1 = GetPairedRankValues(GetRankToCountMap(cardsForPlayer1));
-                var pairedRankValuesPlayer2 = GetPairedRankValues(GetRankToCountMap(cardsForPlayer2));
+                var pairedRankValuesPlayer1 = GetPairedRankValues(GetRankToCountMap(hand1));
+                var pairedRankValuesPlayer2 = GetPairedRankValues(GetRankToCountMap(hand2));
                 Array.Sort(pairedRankValuesPlayer1);
                 Array.Sort(pairedRankValuesPlayer2);
 
@@ -421,26 +419,26 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
             else if (player1Score == (int)Score.ThreeOfAKind && player2Score == (int)Score.ThreeOfAKind)
             {
-                var rankToCountMap = GetRankToCountMap(cardsForPlayer1);
+                var rankToCountMap = GetRankToCountMap(hand1);
                 player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
 
-                rankToCountMap = GetRankToCountMap(cardsForPlayer2);
+                rankToCountMap = GetRankToCountMap(hand2);
                 player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMap);
             }
             else if (player1Score == (int)Score.FourOfAKind && player2Score == (int)Score.FourOfAKind)
             {
-                var rankToCountMap = GetRankToCountMap(cardsForPlayer1);
+                var rankToCountMap = GetRankToCountMap(hand1);
                 player1Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
 
-                rankToCountMap = GetRankToCountMap(cardsForPlayer2);
+                rankToCountMap = GetRankToCountMap(hand2);
                 player2Score = GetValueOfRankThat4CardsBelongTo(rankToCountMap);
             }
             else if (player1Score == (int)Score.FullHouse && player2Score == (int)Score.FullHouse)
             {
-                var rankToCountMapPlayer1 = GetRankToCountMap(cardsForPlayer1);
+                var rankToCountMapPlayer1 = GetRankToCountMap(hand1);
                 player1Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer1);
 
-                var rankToCountMapPlayer2 = GetRankToCountMap(cardsForPlayer2);
+                var rankToCountMapPlayer2 = GetRankToCountMap(hand2);
                 player2Score = GetValueOfRankThat3CardsBelongTo(rankToCountMapPlayer2);
 
                 if (player1Score == player2Score)
@@ -456,8 +454,8 @@ namespace AlgorithmsAndDataStructures.Algorithms
             else
             {
                 // Finally try to resolve tie by comparing value of ranks
-                var player1RankValues = GetRankValues(cardsForPlayer1);
-                var player2RankValues = GetRankValues(cardsForPlayer2);
+                var player1RankValues = GetRankValues(hand1);
+                var player2RankValues = GetRankValues(hand2);
                 Array.Sort(player1RankValues);
                 Array.Sort(player2RankValues);
 
@@ -469,68 +467,6 @@ namespace AlgorithmsAndDataStructures.Algorithms
                 else if (player2RankValues[index] > player1RankValues[index]) { return 2; }
                 else { return 0; }
             }
-        }
-
-        public static void Run(string[] args) 
-        {
-            var defaultForegroundColor = Console.ForegroundColor;
-
-            Console.WriteLine("*******PROJECT EULER PROBLEM 54: https://projecteuler.net/problem=54*******");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"{Environment.NewLine}Given 5 cards each for two players in a game of poker, determines which of the two players is the winner");
-            Console.WriteLine("Each card should be a string of 2 characters. The first character represents the card's rank, the second character represents the card's suit");
-            Console.WriteLine($"Valid ranks are: {string.Join(" ", RankToValueMap.Keys)}. Where T is for Ten, J for Jack, Q for Queen, K for King, and A is for Ace");
-            Console.WriteLine($"Valid suits are: {string.Join(" ", Suits)}. Where C is for Club, D is for Diamond, H is for Heart and S is for Spades");
-            Console.WriteLine("Cards should be separated by a space e.g 2S 3D 4H 9C QH:");
-            
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}Enter 5 cards for player 1:");
-            string hand1 = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            // Validate input 
-            if (string.IsNullOrEmpty(hand1))
-            {
-                Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-            
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}Enter 5 cards for player 2:");
-            string hand2 = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            if (string.IsNullOrEmpty(hand2))
-            {
-                Console.WriteLine($"ERROR: Input must be a valid string");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-            
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{Environment.NewLine}Executing...");
-            // Execute
-            int winner;
-            try
-            {
-                winner = GetWinner(hand1, hand2);
-            } 
-            catch (ArgumentException ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{Environment.NewLine}ERROR: {ex.Message}");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-
-            // Display result
-            Console.ForegroundColor = ConsoleColor.Green;
-            if (winner == 0) { Console.WriteLine($"{Environment.NewLine}TIE. No Winner!"); }
-            else if (winner == 1) { Console.WriteLine($"{Environment.NewLine}Player 1 wins!"); }
-            else if (winner == 2) { Console.WriteLine($"{Environment.NewLine}Player 2 wins!"); } 
-
-            // Terminate
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}*******END OF PROJECT EULER PROBLEM 54*******{Environment.NewLine}");
         }
     }
 }
