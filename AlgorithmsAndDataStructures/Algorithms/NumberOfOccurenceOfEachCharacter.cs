@@ -6,11 +6,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
     public class NumberOfOccurenceOfEachCharacter
     {
         /// <summary>
-        /// Finds and returns a dictionary containing characters in the text as keys
-        /// and the number of times each character occurs as value     
+        /// Finds the number of times each character in <paramref name="text"/> occurs    
         /// </summary>
-        /// <param name="text">Text to check</param>
-        /// <returns>Dictionary containing characters in the text as keys and the number of times each character occurs as value</returns>
+        /// <param name="text">Text to find the number of occurence of its characters</param>
+        /// <returns>A dictionary containing characters in <paramref name="text"/> as keys and the number of times they occur as value</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="text"/> is null</exception>
         /// <remarks>
         /// Where n is length of the text
@@ -40,45 +39,6 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
 
             return charToCountMap;
-        }
-
-        public static void Run(string[] args)
-        {
-            var defaultForegroundColor = Console.ForegroundColor;
-            Console.WriteLine("*******NUMBER OF OCCURENCE OF EACH CHARACTER*******");
-            
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"{Environment.NewLine}Finds and prints the number of times each character in a text occurs");
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}Enter text: ");
-
-            // Validate input
-            string text = Console.ReadLine();
-            if (string.IsNullOrEmpty(text))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: Text must be provided");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{Environment.NewLine}Executing...");
-            // Execute
-            var charToCountMap = Run(text);
-
-            // Display result
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{Environment.NewLine}Result:");
-            
-            foreach(char c in charToCountMap.Keys)
-            {
-                Console.WriteLine($"{c} occurs {charToCountMap[c]} time(s)");
-            }
-
-            // Terminate
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}*******END OF NUMBER OF OCCURENCE OF EACH CHARACTER*******{Environment.NewLine}");
         }
     }
 }

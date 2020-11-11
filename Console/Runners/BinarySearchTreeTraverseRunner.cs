@@ -1,13 +1,20 @@
 ﻿using AlgorithmsAndDataStructures.DataStructures;
 using System;
 using System.CommandLine;
+using System.CommandLine.IO;
 
 namespace Console.Runners
 {
-    class BinarySearchTreeTraversalRunner
+    class BinarySearchTreeTraverseRunner
     {
-        public static void Run(string[] items, IConsole console)
+        public static int Run(string[] items, IConsole console)
         {
+            if (items == null)
+            {
+                console.Out.WriteLine("Error: items must be specified");
+                return 1;
+            }
+
             var binarySearchTree = new BinarySearchTree<string>();
 
             foreach (string item in items)
@@ -17,14 +24,17 @@ namespace Console.Runners
 
             var nodeDataProcessor = new CustomNodeDataProcessor<string>(console);
 
-            console.Out.Write($"{Environment.NewLine}In-order traversal: ");
+            console.Out.Write($"In-order traverse: ");
             binarySearchTree.InOrderTraverse(nodeDataProcessor);
 
-            console.Out.Write($"{Environment.NewLine}Pre-order traversal: ");
+            console.Out.Write($"{Environment.NewLine}Pre-order traverse: ");
             binarySearchTree.PreOrderTraverse(nodeDataProcessor);
 
-            console.Out.Write($"{Environment.NewLine}Post-order traversal: ");
+            console.Out.Write($"{Environment.NewLine}Post-order traverse: ");
             binarySearchTree.PostOrderTraverse(nodeDataProcessor);
+            console.Out.WriteLine();
+
+            return 0;
         }
     }
 

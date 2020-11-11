@@ -1,5 +1,4 @@
 ﻿using AlgorithmsAndDataStructures.Algorithms;
-using System;
 using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests

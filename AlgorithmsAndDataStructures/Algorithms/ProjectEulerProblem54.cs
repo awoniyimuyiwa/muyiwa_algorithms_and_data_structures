@@ -376,7 +376,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             } 
             catch (ArgumentException ex)
             {
-                throw new ArgumentException($"Error in cards1 {ex.Message}");
+                throw new ArgumentException($"Error in hand1. {ex.Message}");
             }
 
             try
@@ -385,7 +385,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
             catch (ArgumentException ex)
             {
-                throw new ArgumentException($"Error in cards for player 2. { ex.Message}");
+                throw new ArgumentException($"Error in hand2. { ex.Message}");
             }
 
             var player1Score = GetScore(hand1);

@@ -1,5 +1,4 @@
 ﻿using AlgorithmsAndDataStructures.Algorithms;
-using System;
 using System.CommandLine;
 using System.CommandLine.IO;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace Console.Runners
             {
                 if (verbose)
                 {
-                    console.Out.WriteLine($"{Environment.NewLine}Items in haystack are not sorted! Sorting...");
+                    console.Out.WriteLine($"Items in haystack are not sorted! Sorting...");
                 }
 
                 haystack = haystack.OrderBy(item => item).ToArray();
@@ -29,7 +28,7 @@ namespace Console.Runners
 
             if (verbose)
             {
-                console.Out.WriteLine($"{Environment.NewLine}Searching...");
+                console.Out.WriteLine($"Searching...");
             }
 
             // Execute
@@ -38,11 +37,11 @@ namespace Console.Runners
             // Display result
             if (index > -1)
             {
-                console.Out.WriteLine($"{Environment.NewLine}{needle} is at position: {index + 1} in haystack");
+                console.Out.WriteLine($"{needle} is at position: {index + 1} in haystack");
             }
             else
             {
-                console.Out.WriteLine($"{Environment.NewLine}{needle} was not found in haystack");
+                console.Out.WriteLine($"{needle} was not found in haystack");
             }
         }
     }

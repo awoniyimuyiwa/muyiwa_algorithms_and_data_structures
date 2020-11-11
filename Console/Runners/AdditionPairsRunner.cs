@@ -14,7 +14,7 @@ namespace Console.Runners
             var tuples = AdditionPairs.GetPairs(numbers, x);
             if (tuples.Count() > 0)
             {
-                console.Out.WriteLine($"{Environment.NewLine}Pairs of numbers that can be added to get {x}:");
+                console.Out.WriteLine($"Pairs of numbers that can be added to get {x}:");
                 foreach (Tuple<int, int> tuple in tuples)
                 {
                     console.Out.WriteLine($"{tuple.Item1}, {tuple.Item2}");
@@ -22,7 +22,7 @@ namespace Console.Runners
             }
             else
             {
-                console.Out.WriteLine($"{Environment.NewLine}None of the numbers can be added to get {x}");
+                console.Out.WriteLine($"None of the numbers can be added to get {x}");
             }
         }
     }

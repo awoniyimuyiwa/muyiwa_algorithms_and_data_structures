@@ -8,17 +8,30 @@
 * From your CLI, navigate to Console folder of the solution and run any of the following commands:
 
 ```bash
-# Help
+# Show help and usage information
 $ dotnet run -- -h
 
 # Run algorithms
-$ dotnet run run addition-pairs --numbers:4 6 2 8 --x:6
-$ dotnet run run binary-search --needle:cat --haystack:lion cat tiger --verbose
-$ dotnet run run bst-traversal --items:lion cat tiger
-$ dotnet run run merge-sort --items:lion cat tiger
-$ dotnet run run multiplication-pairs --numbers:4 6 2 8 --x:8
-$ dotnet run run quick-sort --items:lion cat tiger
-$ dotnet run run proj-euler-prob-54 --hand1:5H 5C 6S 7S KD --hand2:2C 3S 8S 8D TD
+$ dotnet run algo addition-pairs --numbers:4 6 2 8 --x:6
+$ dotnet run algo binary-search --needle:cat --haystack:lion cat tiger --verbose
+$ dotnet run algo bst-traverse lion cat tiger
+$ dotnet run algo fib 5
+$ dotnet run algo fib-seq --to:5
+$ dotnet run algo fib-seq --from:0 --to:5
+$ dotnet run algo fib-seq --from:5 --to:0
+$ dotnet run algo is-palindrome 51515
+$ dotnet run algo merge-sort dog lion cat
+$ dotnet run algo multip-pairs --numbers:4 6 2 8 --x:8
+$ dotnet run algo num-occur --text:"hello world" --pattern:hello
+$ dotnet run algo num-occur-each-char "hello world"
+$ dotnet run algo num-words "hello world"
+$ dotnet run algo proj-euler-prob-54 --hand1:5H 5C 6S 7S KD --hand2:2C 3S 8S 8D TD
+$ dotnet run algo quick-sort lion cat tiger
+$ dotnet run algo rem-all-cons-char foobarrbazz
+$ dotnet run algo rem-cons-char --text:foo --character:o
+$ dotnet run algo rem-cons-word-dels "hello      world"
+$ dotnet run algo reverse "hello world"
+$ dotnet run algo weather-to-json --temp:50 --summary:"Extremely hot"
 ```
 
 ### Unit Tests ###

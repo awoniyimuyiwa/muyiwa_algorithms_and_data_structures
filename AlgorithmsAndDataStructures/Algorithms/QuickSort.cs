@@ -21,7 +21,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static void Sort<T>(T[] items) where T : IComparable
         {
             #region Not part of the algorithm
-            if (items == null) { throw new ArgumentNullException("items cannot be null"); }
+            if (items == null) { throw new ArgumentNullException("items"); }
             #endregion
 
             Sort(items, 0, items.Length - 1);

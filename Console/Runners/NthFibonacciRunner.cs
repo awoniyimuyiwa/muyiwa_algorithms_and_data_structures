@@ -5,25 +5,25 @@ using System.CommandLine.IO;
 
 namespace Console.Runners
 {
-    class MergeSortRunner
+    class NthFibonacciRunner
     {
-        public static int Run(string[] items, IConsole console)
+        public static int Run(int n, IConsole console)
         {
             try
             {
                 // Execute
-                MergeSort.Sort(items);
+                var result = NthFibonacci.Fibonacci(n);
 
                 // Display result
-                console.Out.WriteLine($"Result: {string.Join(" ", items)}");
+                console.Out.WriteLine($"Result: {result}");
 
                 return 0;
             } 
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
-                console.Error.WriteLine($"Error: {e.ParamName} must be specified");
+                console.Error.WriteLine($"Error: n must not be less than zero");
                 return 1;
-            }   
+            }
         }
     }
 }

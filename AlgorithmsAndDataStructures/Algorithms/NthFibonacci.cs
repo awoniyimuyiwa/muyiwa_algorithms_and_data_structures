@@ -5,9 +5,9 @@ namespace AlgorithmsAndDataStructures.Algorithms
     public class NthFibonacci
     {
         /// <summary> 
-        /// Returns the number in the fibonacci series at position n
+        /// Finds the number in the fibonacci series at position n
         /// </summary>
-        /// <param name="n">Position in the fibonacci series</param>
+        /// <param name="n">Position in the fibonacci series. Must not be less than zero</param>
         /// <returns>Number in the fibonacci series at position <paramref name="n"/></returns>
         /// <remarks>
         /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1) when n is 0 or 1
@@ -74,40 +74,6 @@ namespace AlgorithmsAndDataStructures.Algorithms
             } while (iteration <= n);
 
             return sumOfPrevious;
-        }
-
-        public static void Run(string[] args)
-        {
-            var defaultForegroundColor = Console.ForegroundColor;
-
-            Console.WriteLine("*******NTH FIBONACCI*******");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"{Environment.NewLine}Finds the number at position n in the fibonacci sequence");
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("Enter n: ");
-            string input = Console.ReadLine();
-
-            // Validate input
-            if (!int.TryParse(input, out int n) || n < 1)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: n must be a valid integer not less than 1");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{Environment.NewLine}Executing...");
-            // Execute
-            var result = Fibonacci(n - 1); //var result = FibonacciIterative(n - 1);
-
-            // Display result
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{Environment.NewLine}Number at position {n} in the fibonacci sequence is: {result}");
-
-            // Terminate
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}*******END OF NTH FIBONACCI*******{Environment.NewLine}");
         }
     }
 }

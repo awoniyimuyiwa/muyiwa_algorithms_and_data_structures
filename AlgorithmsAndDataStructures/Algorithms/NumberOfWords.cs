@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 
 namespace AlgorithmsAndDataStructures.Algorithms
@@ -6,9 +5,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
     public class NumberOfWords
     {
         /// <summary>
-        /// Returns the number of words in <paramref name="text"/>
+        /// Finds the number of words in <paramref name="text"/>
         /// </summary>
-        /// <param name="text">Text to search</param>
+        /// <param name="text">Text to find its number of words</param>
+        /// <returns>Number of words in <paramref name="text"/></returns>
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n)
@@ -42,9 +42,10 @@ namespace AlgorithmsAndDataStructures.Algorithms
         }
 
         /// <summary>
-        /// Returns the number of words in <paramref name="text"/> using regular expression
+        /// Finds the number of words in <paramref name="text"/> using regular expression
         /// </summary>
-        /// <param name="text">Text to search</param>
+        /// <param name="text">Text to find its number of words</param>
+        /// <returns>The number of words in <paramref name="text"/></returns>
         public static int RunUsingRegex(string text)
         {
             if (string.IsNullOrWhiteSpace(text)) { return 0; }
@@ -53,40 +54,6 @@ namespace AlgorithmsAndDataStructures.Algorithms
             Regex regex = new Regex(pattern);
 
             return regex.Matches(text).Count;
-        }
-
-        public static void Run(string[] args)
-        {
-            var defaultForegroundColor = Console.ForegroundColor;
-
-            Console.WriteLine("*******NUMBER OF WORDS*******");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"{Environment.NewLine}Counts the number of words in a text");
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine("Enter text: ");
-            string text = Console.ReadLine();
-
-            // Validate input
-            if (string.IsNullOrEmpty(text))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: Text must be provided");
-                Console.ForegroundColor = defaultForegroundColor;
-                return;
-            }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{Environment.NewLine}Executing...");
-            // Execute
-            var result = Run(text);
-            
-            // Display result
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{Environment.NewLine}{result} word(s)");
-
-            // Terminate
-            Console.ForegroundColor = defaultForegroundColor;
-            Console.WriteLine($"{Environment.NewLine}*******END OF NUMBER OF WORDS*******{Environment.NewLine}");
         }
     }
 }
