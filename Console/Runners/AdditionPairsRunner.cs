@@ -22,7 +22,7 @@ namespace Console.Runners
             }
             else
             {
-                console.Out.WriteLine($"None of the numbers can be added to get {x}");
+                console.Out.WriteLine($"No addition pairs found for {x}");
             }
         }
     }

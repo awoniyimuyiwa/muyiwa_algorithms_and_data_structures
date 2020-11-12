@@ -18,7 +18,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         {
             var weatherForecast = new WeatherForeCast
             {
-                DateTimeOffset = DateTimeOffset.UtcNow,
+                Date = DateTimeOffset.UtcNow.ToString("dd-MM-yyyy"),
                 TemperatureC = temperature,
                 Summary = summary
             };
@@ -34,10 +34,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
     class WeatherForeCast
     {
-        public DateTimeOffset DateTimeOffset { get; set; }
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
 
         [JsonPropertyName("temperatureInCelsius")]
         public double TemperatureC { get; set; }
+
+        [JsonPropertyName("summary")]
         public string Summary { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace Console.Runners
             // Display result
             if (index > -1)
             {
-                console.Out.WriteLine($"{needle} is at position: {index + 1} in haystack");
+                console.Out.WriteLine($"Result: {index + 1}");
             }
             else
             {

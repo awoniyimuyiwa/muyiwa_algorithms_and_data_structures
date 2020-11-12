@@ -5,9 +5,21 @@ using System.CommandLine;
 
 namespace Console
 {
-    class Program
+    public class Program
     {
-        public static int Main(string[] args)
+        static int Main(string[] args)
+        {
+            // No logic should be here
+            return Run(args);
+        }
+
+        /// <summary>
+        /// Support for unit tests
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="console"></param>
+        /// <returns></returns>
+        public static int Run(string[] args, IConsole console = null)
         {
             var algoCommand = new RootCommand("Runs an algorithm")
             {
@@ -144,7 +156,7 @@ namespace Console
                 new Command("rem-cons-word-dels", "Removes consecutive word delimeters (' ', '\\t', '\\n') from text")
                 {
                     new Argument<string>("text", "Text to remove consecutive word delimeters from")
-                }.WithHandler(typeof(RemoveAllConsecutiveCharactersRunner).GetMethod(nameof(RemoveAllConsecutiveCharactersRunner.Run))),
+                }.WithHandler(typeof(RemoveConsecutiveWordDelimetersRunner).GetMethod(nameof(RemoveConsecutiveWordDelimetersRunner.Run))),
 
                 new Command("reverse", "Reverses a text")
                 {
@@ -165,8 +177,7 @@ namespace Console
             };
 
             algoCommand.Name = "algo";
-
-            return algoCommand.Invoke(args);
+            return algoCommand.Invoke(args, console);
         }
     }
 }

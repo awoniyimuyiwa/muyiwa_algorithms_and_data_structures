@@ -1,11 +1,10 @@
 ﻿using AlgorithmsAndDataStructures.Algorithms;
-using System;
 using System.CommandLine;
 using System.CommandLine.IO;
 
 namespace Console.Runners
 {
-    class RemovConsecutiveWordDelimetersRunner
+    class RemoveConsecutiveWordDelimetersRunner
     {
         public static void Run(string text, IConsole console)
         {
