@@ -15,6 +15,9 @@ namespace AlgorithmsAndDataStructures.Tests
         [InlineData(null, null, 1)]
         [InlineData(null, " ", 0)]
         [InlineData(" ", null, 0)]
+        [InlineData("", "", 1)]
+        [InlineData("", " ", 0)]
+        [InlineData(" ", "", 0)]
         public void Run_WhenCalled_ReturnsValidResult(string pattern, string text, int expected)
         {
             var actual = NumberOfOccurence.Run(pattern, text);
@@ -31,6 +34,9 @@ namespace AlgorithmsAndDataStructures.Tests
         [InlineData(null, null, 1)]
         [InlineData(null, " ", 0)]
         [InlineData(" ", null, 0)]
+        [InlineData("", "", 1)]
+        [InlineData("", " ", 0)]
+        [InlineData(" ", "", 0)]
         public void RunUsingRegex_WhenCalled_ReturnsValidResult(string pattern, string text, int expected)
         {
             var actual = NumberOfOccurence.RunUsingRegex(pattern, text);

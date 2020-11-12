@@ -20,9 +20,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </remarks>
         public static void Sort<T>(T[] items) where T : IComparable
         {
-            #region Not part of the algorithm
-            if (items == null) { throw new ArgumentNullException("items"); }
-            #endregion
+            if (items == null) { throw new ArgumentNullException(nameof(items)); }
 
             Sort(items, 0, items.Length - 1);
         }

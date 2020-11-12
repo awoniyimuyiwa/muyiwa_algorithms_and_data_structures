@@ -30,7 +30,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static int Fibonacci(int n)
         {
             #region Not part of the algorithm
-            if (n < 0) { throw new ArgumentException($"{n} must be at least 0"); }
+            if (n < 0) { throw new ArgumentException($"{ nameof(n) } must be at least 0"); }
             #endregion
 
             if (n == 0 || n == 1) { return n; }
@@ -54,7 +54,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static int FibonacciIterative(int n)
         {
             #region Not part of the algorithm
-            if (n < 0) { throw new ArgumentException($"{n} must be at least 0"); }
+            if (n < 0) { throw new ArgumentException($"{ nameof(n) } must be at least 0"); }
             #endregion
 
             if (n == 0 || n == 1) { return n; }

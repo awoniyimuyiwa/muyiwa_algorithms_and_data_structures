@@ -15,13 +15,13 @@ namespace Console.Runners
                 var result = NthFibonacci.Fibonacci(n);
 
                 // Display result
-                console.Out.WriteLine($"Result: {result}");
+                console.Out.WriteLine($"Result: { result }");
 
                 return 0;
             } 
             catch (ArgumentException)
             {
-                console.Error.WriteLine($"Error: n must not be less than zero");
+                console.Error.WriteLine($"Error: { nameof(n) } must at least zero");
                 return 1;
             }
         }

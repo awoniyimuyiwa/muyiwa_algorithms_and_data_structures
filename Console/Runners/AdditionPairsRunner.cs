@@ -14,15 +14,15 @@ namespace Console.Runners
             var tuples = AdditionPairs.GetPairs(numbers, x);
             if (tuples.Count() > 0)
             {
-                console.Out.WriteLine($"Pairs of numbers that can be added to get {x}:");
+                console.Out.WriteLine($"Pairs of numbers that can be added to get { x }:");
                 foreach (Tuple<int, int> tuple in tuples)
                 {
-                    console.Out.WriteLine($"{tuple.Item1}, {tuple.Item2}");
+                    console.Out.WriteLine($"{ tuple.Item1 }, { tuple.Item2 }");
                 }
             }
             else
             {
-                console.Out.WriteLine($"No addition pairs found for {x}");
+                console.Out.WriteLine($"No addition pairs found for { x }");
             }
         }
     }

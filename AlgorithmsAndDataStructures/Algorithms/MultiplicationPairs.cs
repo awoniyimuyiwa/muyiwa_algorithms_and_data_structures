@@ -22,7 +22,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static List<Tuple<int, int>> GetPairs(List<int> numbers, int X)
         {
             #region Not part of the algorithm
-            if (numbers == null) { throw new ArgumentNullException("numbers cannot be null"); }
+            if (numbers == null) { throw new ArgumentNullException(nameof(numbers)); }
             #endregion
 
             numbers = numbers.Distinct().ToList();

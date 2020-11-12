@@ -25,8 +25,8 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static int Search<T>(T needle, T[] haystack) where T : IComparable
         {
             #region Not part of the algorithm
-            if (haystack == null) { throw new ArgumentNullException("haystack cannot be null"); }
-            if (!IsSorted(haystack)) { throw new ArgumentException($"Items in haystack must be sorted in ascending order"); }
+            if (haystack == null) { throw new ArgumentNullException(nameof(haystack)); }
+            if (!IsSorted(haystack)) { throw new ArgumentException($"{ nameof(haystack) } must be sorted in ascending order", nameof(haystack)); }
             #endregion
 
             int startIndex = 0;
@@ -55,7 +55,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static bool IsSorted<T>(T[] items, bool isAscending = true) where T : IComparable
         {
             #region Not part of the algorithm
-            if (items == null) { throw new ArgumentNullException("items cannot be null"); }
+            if (items == null) { throw new ArgumentNullException(nameof(items)); }
             #endregion
 
             var isSorted = true;

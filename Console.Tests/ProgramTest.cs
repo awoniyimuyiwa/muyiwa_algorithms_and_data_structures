@@ -131,6 +131,65 @@ namespace Console.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData("addition-pairs --numbers:4 6 2 8", 1)]
+        [InlineData("addition-pairs -x:6", 1)]
+
+        [InlineData("binary-search --needle:cat", 1)]
+        [InlineData("binary-search --haystack:lion cat tiger", 1)]
+
+        [InlineData("bst-traverse", 1)]
+
+        [InlineData("fib", 1)]
+
+        [InlineData("fib-seq", 1)]
+
+        [InlineData("is-palindrome", 1)]
+
+        [InlineData("merge-sort", 1)]
+
+        [InlineData("multip-pairs --numbers:4 6 2 8", 1)]
+        [InlineData("multip-pairs -x:8", 1)]
+
+        [InlineData("num-occur --pattern:hello", 1)]
+        [InlineData("num-occur --text:helloworld", 1)]
+
+        [InlineData("num-occur-each-char", 1)]
+
+        [InlineData("num-words", 1)]
+
+        [InlineData("proj-euler-prob-54 -h2:2C 3S 8S 8D TD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:5H 5C 6S 7S KD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:5 6S 7S KD -h2:2C 3S 8S 8D TD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:5H 6S 7S KD -h2:2 3S 8S 8D TD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:AH 6S 7S KD -h2:2C 3S 8S 8D TD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:5H 6S 7S KD -h2:AC 3S 8S 8D TD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:5h 6S 7S KD -h2:2C 3S 8S 8D TD", 1)]
+        [InlineData("proj-euler-prob-54 -h1:5H 6S 7S KD -h2:2c 3S 8S 8D TD", 1)]
+       
+        [InlineData("quick-sort", 1)]
+
+        [InlineData("rem-all-cons-char", 1)]
+
+        [InlineData("rem-cons-char --character:o", 1)]
+        [InlineData("rem-cons-char -text:foo", 1)]
+
+        [InlineData("rem-cons-word-dels", 1)]
+
+        [InlineData("reverse", 1)]
+
+        [InlineData("weather-to-json --temp:50", 1)]
+        [InlineData("weather-to-json --summary:hot", 1)]
+        public void Run_WhenCalledWithInValidArgs_ReturnsValidResult(string command, int expected)
+        {
+            var args = command.Split(" ");
+            var console = GetCustomConsole();
+
+            var actual = Program.Run(args, console);
+
+            Assert.Equal(expected, actual);
+        }
+
         CustomConsole GetCustomConsole() => new CustomConsole();
     }
 

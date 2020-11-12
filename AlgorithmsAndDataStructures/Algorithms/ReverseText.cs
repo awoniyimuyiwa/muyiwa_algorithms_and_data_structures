@@ -8,8 +8,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// Reverses <paramref name="text"/>  
         /// </summary>
         /// <param name="text">Text to reverse</param>
-        /// <returns>The reversed text</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="text"/> is null</exception>
+        /// <returns>The reversed text</returns>       
         /// <remarks>
         /// Where n is length of the text
         /// BEST CASE- TIME: Ω(n), MEMORY: Ω(n) 

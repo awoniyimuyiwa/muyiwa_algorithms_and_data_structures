@@ -20,7 +20,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         public static Dictionary<char, int> Run(string text)
         {
             #region Not part of the algorithm
-            if (text == null) { throw new ArgumentNullException("text cannot be null"); }
+            if (text == null) { throw new ArgumentNullException(nameof(text)); }
             #endregion
 
             var array = text.ToCharArray();

@@ -27,8 +27,4 @@
     <ProjectReference Include="..\AlgorithmsAndDataStructures\AlgorithmsAndDataStructures.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TestResults\" />
-  </ItemGroup>
-
 </Project>

@@ -12,10 +12,10 @@ namespace Console.Runners
             var charToCountMap = NumberOfOccurenceOfEachCharacter.Run(text);
 
             // Display result
-            console.Out.WriteLine($"Result:");
+            console.Out.WriteLine("Result:");
             foreach (char c in charToCountMap.Keys)
             {
-                console.Out.WriteLine($"{c}: {charToCountMap[c]}");
+                console.Out.WriteLine($"{ c }: { charToCountMap[c] }");
             }
         }
     }

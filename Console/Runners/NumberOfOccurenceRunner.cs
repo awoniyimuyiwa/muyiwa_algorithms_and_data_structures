@@ -12,7 +12,7 @@ namespace Console.Runners
             int numOcccurence = NumberOfOccurence.RunUsingRegex(pattern, text);
 
             // Display result
-            console.Out.WriteLine($"Result: {numOcccurence}");
+            console.Out.WriteLine($"Result: { numOcccurence }");
         }
     }
 }

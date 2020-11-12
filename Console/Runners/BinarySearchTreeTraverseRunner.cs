@@ -11,7 +11,7 @@ namespace Console.Runners
         {
             if (items == null)
             {
-                console.Out.WriteLine("Error: items must be specified");
+                console.Out.WriteLine($"Error: { nameof(items) } must be specified");
                 return 1;
             }
 
@@ -27,10 +27,10 @@ namespace Console.Runners
             console.Out.Write($"In-order traverse: ");
             binarySearchTree.InOrderTraverse(nodeDataProcessor);
 
-            console.Out.Write($"{Environment.NewLine}Pre-order traverse: ");
+            console.Out.Write($"{ Environment.NewLine }Pre-order traverse: ");
             binarySearchTree.PreOrderTraverse(nodeDataProcessor);
 
-            console.Out.Write($"{Environment.NewLine}Post-order traverse: ");
+            console.Out.Write($"{ Environment.NewLine }Post-order traverse: ");
             binarySearchTree.PostOrderTraverse(nodeDataProcessor);
             console.Out.WriteLine();
 

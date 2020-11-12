@@ -7,7 +7,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
     public class SerializeToJson
     {
         /// <summary>
-        /// Serializes an in-memory object to json
+        /// Serializes an in-memory weather object to json
         /// </summary>
         /// <remarks>
         /// BEST CASE- TIME: Ω(1), MEMORY: Ω(1)

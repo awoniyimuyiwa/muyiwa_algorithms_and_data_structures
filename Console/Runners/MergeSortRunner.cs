@@ -15,13 +15,13 @@ namespace Console.Runners
                 MergeSort.Sort(items);
 
                 // Display result
-                console.Out.WriteLine($"Result: {string.Join(" ", items)}");
+                console.Out.WriteLine($"Result: { string.Join(" ", items) }");
 
                 return 0;
             } 
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
-                console.Error.WriteLine($"Error: {e.ParamName} must be specified");
+                console.Error.WriteLine($"Error: { nameof(items) } must be specified");
                 return 1;
             }   
         }

@@ -20,22 +20,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </remarks>
         public static void Sort<T>(T[] items) where T : IComparable
         {
-            #region Not part of the algorithm
-            if (items == null) { throw new ArgumentNullException("items"); }
-            #endregion
-
+            if (items == null) { throw new ArgumentNullException(nameof(items)); }
+            
             Sort(items, 0, items.Length - 1);
         }
 
         static void Sort<T>(T[] items, int startIndex, int endIndex) where T : IComparable
         {
-            #region Not part of the algorithm
-            if (items == null) { throw new ArgumentNullException("items cannot be null"); }
-            if (startIndex < 0) { throw new ArgumentException("startIndex cannot be less than zero"); }
-            if (startIndex > endIndex) { throw new ArgumentException("startIndex cannot be greater than endIndex"); }
-            if (endIndex > items.Length - 1) { throw new ArgumentException($"endIndex cannot be greater than { items.Length -1 }"); }
-            #endregion
-
             if (startIndex < endIndex)
             {
                 int middleIndex = (startIndex + endIndex) / 2;

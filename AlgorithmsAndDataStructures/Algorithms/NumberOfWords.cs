@@ -17,7 +17,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </remarks>
         public static int Run(string text)
         {
-            if (string.IsNullOrWhiteSpace(text)) { return 0; }
+            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrEmpty(text)) { return 0; }
 
             // Pre processing, new memory will be allocated by methods called for preprocessing 
             // Remove consecutive word delimeters

@@ -12,7 +12,7 @@ namespace Console.Runners
             var result = SerializeToJson.Run(temp, summary);
 
             // Display result
-            console.Out.WriteLine($"{result}");
+            console.Out.WriteLine($"{ result }");
         }
     }
 }

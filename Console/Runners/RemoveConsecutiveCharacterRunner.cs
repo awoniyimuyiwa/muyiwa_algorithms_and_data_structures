@@ -12,7 +12,7 @@ namespace Console.Runners
             var result = RemoveConsecutiveCharacter.Run(text, character);
 
             // Display result
-            console.Out.WriteLine($"Result: {result}");
+            console.Out.WriteLine($"Result: { result }");
         }
     }
 }

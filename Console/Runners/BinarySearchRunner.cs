@@ -22,7 +22,7 @@ namespace Console.Runners
 
                 if (verbose)
                 {
-                    console.Out.WriteLine($"Sorted haystack: {string.Join(" ", haystack)}");
+                    console.Out.WriteLine($"Sorted haystack: { string.Join(" ", haystack) }");
                 }
             }
 
@@ -37,11 +37,11 @@ namespace Console.Runners
             // Display result
             if (index > -1)
             {
-                console.Out.WriteLine($"Result: {index + 1}");
+                console.Out.WriteLine($"Result: { index + 1 }");
             }
             else
             {
-                console.Out.WriteLine($"{needle} was not found in haystack");
+                console.Out.WriteLine($"{ needle } was not found in haystack");
             }
         }
     }

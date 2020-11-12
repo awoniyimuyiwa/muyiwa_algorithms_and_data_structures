@@ -12,7 +12,7 @@ namespace Console.Runners
             var result = ReverseText.Run(text);
 
             // Display result
-            console.Out.WriteLine($"Result: {result}");
+            console.Out.WriteLine($"Result: { result }");
         }
     }
 }

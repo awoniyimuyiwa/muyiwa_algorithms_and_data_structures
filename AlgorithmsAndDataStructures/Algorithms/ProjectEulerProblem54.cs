@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.Algorithms
-{
-    /// <summary>
-    /// https://projecteuler.net/problem=54
-    /// </summary>
+{   
     public class ProjectEulerProblem54
     {
         static readonly Dictionary<char, int> RankToValueMap = new Dictionary<char, int>() {
@@ -13,9 +10,6 @@ namespace AlgorithmsAndDataStructures.Algorithms
             {'6', 6}, {'7', 7}, {'8', 8}, {'9', 9}, 
             {'T', 10}, {'J', 11}, {'Q', 12}, {'K', 13}, {'A', 14}
         };
-
-        // Club, Diamond, Heart and Spade
-        static readonly List<char> Suits = new List<char>() {'C', 'D', 'H', 'S'};
 
         enum Score 
         {
@@ -333,42 +327,48 @@ namespace AlgorithmsAndDataStructures.Algorithms
 
         static void ValidateCards(string[] cards)
         {
-            if (cards.Length > 5 || cards.Length < 5) 
-            {
-                throw new ArgumentException("Cards must be 5");
-            }
+            // Club, Diamond, Heart and Spade
+            var Suits = new List<char>() { 'C', 'D', 'H', 'S' };
+
+            if (cards.Length > 5 || cards.Length < 5) { throw new ArgumentException($"{ nameof(cards) } must be at least 5", nameof(cards)); }
     
             foreach (string s in cards)
             {
                 if (s.Length < 2 || s.Length > 2) 
                 {
-                    throw new ArgumentException($"{s} must be two characters");
+                    throw new ArgumentException($"{ s } in { nameof(cards) } has more than two characters", nameof(cards));
                 }
 
                 if (!RankToValueMap.ContainsKey(s[0])) 
                 {
-                    throw new ArgumentException($"{s[0]} is not a valid rank");
+                    throw new ArgumentException($"{ s[0] } of { s } in { nameof(cards) } is not a valid rank");
                 }
 
                 if (!Suits.Contains(s[1])) 
                 {
-                    throw new ArgumentException($"{s[1]} is not a valid suit");
+                    throw new ArgumentException($"{ s[1] } of { s } in { nameof(cards) } is not a valid suit");
                 }
             }
         }
 
         /// <summary>
         /// Given 5 cards each for two players in a game of poker, determines the winner.
+        /// Each card is represented by 2 characters, the first character is the card's rank and the second is the card's suit.
+        /// Valid ranks are: 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K and A (where T is Ten, J is Jack, Q is Queen, K is King, and A is Ace).
+        /// Valid suits are: C, D, H and S (where C is Club, D is Diamond, H is Heart and S is Spade).
+        /// More info here: https://projecteuler.net/problem=54
         /// </summary>
         /// <param name="hand1">5 Cards for player 1</param>
         /// <param name="hand2">5 Cards for player 2</param>
         /// <returns>1 if player 1 wins, 2 if player 2 wins and 0 if there is a tie</returns>
-        /// <exception cref="ArgumentException">Thrown when cards1 <paramref name="hand1"/> or <paramref name="hand2"/> is invalid</exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown when <paramref name="hand1"/> or <paramref name="hand2"/> doesn't have up to 5 cards or any of the cards in them has an invalid rank or suit
+        /// </exception>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="hand1"/> or <paramref name="hand2"/> is null</exception>
         public static int GetWinner(string[] hand1, string[] hand2)
         {
-            if (hand1 == null) { throw new ArgumentNullException("hand1 cannot be null"); }
-            if (hand2 == null) { throw new ArgumentNullException("hand2 cannot be null"); }
+            if (hand1 == null) { throw new ArgumentNullException(nameof(hand1)); }
+            if (hand2 == null) { throw new ArgumentNullException(nameof(hand2)); }
             
             try
             {
@@ -376,7 +376,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             } 
             catch (ArgumentException ex)
             {
-                throw new ArgumentException($"Error in hand1. {ex.Message}");
+                throw new ArgumentException(ex.Message, nameof(hand1) );
             }
 
             try
@@ -385,7 +385,7 @@ namespace AlgorithmsAndDataStructures.Algorithms
             }
             catch (ArgumentException ex)
             {
-                throw new ArgumentException($"Error in hand2. { ex.Message}");
+                throw new ArgumentException(ex.Message, nameof(hand2));
             }
 
             var player1Score = GetScore(hand1);

@@ -10,7 +10,7 @@ namespace Console.Runners
         {
             if (from < 0 || to < 0) 
             { 
-                console.Error.WriteLine("Error: from and to must be at least 0");
+                console.Error.WriteLine($"Error: { nameof(from) } and { nameof(to) } must be at least 0");
                 return 1;
             }
 
@@ -26,7 +26,7 @@ namespace Console.Runners
                     result = NthFibonacci.FibonacciIterative(from);
 
                     // Display result
-                    console.Out.Write($"{result} ");
+                    console.Out.Write($"{ result } ");
 
                     from++;        
                 }
@@ -36,7 +36,7 @@ namespace Console.Runners
                 while (from >= to)
                 {
                     result = NthFibonacci.FibonacciIterative(from);
-                    console.Out.Write($"{result} ");
+                    console.Out.Write($"{ result } ");
 
                     from--;
                 }

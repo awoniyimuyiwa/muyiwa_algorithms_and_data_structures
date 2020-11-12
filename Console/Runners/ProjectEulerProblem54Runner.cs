@@ -15,15 +15,15 @@ namespace Console.Runners
                 var winner = ProjectEulerProblem54.GetWinner(hand1, hand2);
 
                 // Display result
-                if (winner == 0) { console.Out.WriteLine($"TIE. No Winner!"); }
-                else if (winner == 1) { console.Out.WriteLine($"Player 1 wins!"); }
-                else if (winner == 2) { console.Out.WriteLine($"Player 2 wins!"); }
+                if (winner == 0) { console.Out.WriteLine("TIE. No Winner!"); }
+                else if (winner == 1) { console.Out.WriteLine("Player 1 wins!"); }
+                else if (winner == 2) { console.Out.WriteLine("Player 2 wins!"); }
                 
                 return 0;
             }
             catch (ArgumentException e)
             {
-                console.Error.WriteLine(e.Message);
+                console.Error.WriteLine($"Error: { e.Message }");
                 return 1;
             }        
         }
