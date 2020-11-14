@@ -43,7 +43,30 @@ namespace Console.Tests
         [InlineData("num-words hello", "Result: 1")]
 
         [InlineData("proj-euler-prob-54 --hand1:5H 5C 6S 7S KD --hand2:2C 3S 8S 8D TD", "Player 2")]
-        [InlineData("proj-euler-prob-54 -h1:5H 5C 6S 7S KD -h2:2C 3S 8S 8D TD", "Player 2")]
+        [InlineData("proj-euler-prob-54 -h1:5D 8C 9S JS AC -h2:2C 5C 7D 8S QH", "Player 1")]
+        [InlineData("proj-euler-prob-54 -h1:2D 9C AS AH AC -h2:3D 6D 7D TD QD", "Player 2")]
+        [InlineData("proj-euler-prob-54 -h1:4D 6S 9H QH QC -h2:3D 6D 7H QD QS", "Player 1")]
+        [InlineData("proj-euler-prob-54 -h1:2H 2D 4C 4D 4S -h2:3C 3D 3S 9S 9D", "Player 1")]
+        [InlineData("proj-euler-prob-54 -h1:5D 8C 9S JS AC -h2:5D 8C 9S JS AC", "No winner")]
+        // One pair
+        [InlineData("proj-euler-prob-54 -h1:5D 5C 4S 3S QC -h2:5D 5C 4S 3S QC", "No winner")]
+        // Two pairs
+        [InlineData("proj-euler-prob-54 -h1:5D 5C 4S 4S QC -h2:5D 5C 4S 4S QC", "No winner")]
+        // Three of a kind
+        [InlineData("proj-euler-prob-54 -h1:5D 5C 5S 4S QC -h2:5D 5C 5S 4S QC", "No winner")]
+        // Straight
+        [InlineData("proj-euler-prob-54 -h1:2D 3C 4S 5S 6C -h2:2D 3C 4S 5S 6C", "No winner")]
+        [InlineData("proj-euler-prob-54 -h1:2D 3C 4S 5H QD -h2:2D 3C 4S 5S QD", "No winner")]
+        // Flush
+        [InlineData("proj-euler-prob-54 -h1:5D 4D 6D 2D 7D -h2:5D 4D 6D 2D 7D", "No winner")]
+        // Full house
+        [InlineData("proj-euler-prob-54 -h1:2D 2C 2S 3H 3D -h2:2D 2C 2S 3H 3D", "No winner")]
+        // Four of a kind
+        [InlineData("proj-euler-prob-54 -h1:2D 2C 2S 2H 3D -h2:2D 2C 2S 2H 3D", "No winner")]
+        // Straight flush
+        [InlineData("proj-euler-prob-54 -h1:2D 3D 4D 5D 6D -h2:2D 3D 4D 5D 6D", "No winner")]
+        // Royal flush
+        [InlineData("proj-euler-prob-54 -h1:TD JD QD KC AC -h2:TD JD QD KC AC", "No winner")]
 
         [InlineData("quick-sort lion cat tiger", "Result: cat lion tiger")]
 
@@ -141,8 +164,11 @@ namespace Console.Tests
         [InlineData("bst-traverse", 1)]
 
         [InlineData("fib", 1)]
+        [InlineData("fib -1", 1)]
 
         [InlineData("fib-seq", 1)]
+        [InlineData("fib-seq -to:-1", 1)]
+        [InlineData("fib-seq --from:-1 -to:-1", 1)]
 
         [InlineData("is-palindrome", 1)]
 

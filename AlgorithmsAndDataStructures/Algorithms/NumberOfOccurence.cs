@@ -18,8 +18,13 @@ namespace AlgorithmsAndDataStructures.Algorithms
         /// </remarks>
         public static int Run(string pattern, string text)
         {
-            if (string.IsNullOrEmpty(text) && string.IsNullOrEmpty(pattern)) { return 1; }
-            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(pattern)) { return 0; }
+            if (text == null && pattern == null) { return 1;  }
+            if (text == null && pattern != null) { return 0; }
+            if (text != null && pattern == null) { return 0; }
+            
+            if (text == "" && pattern == "") { return 1; }
+            if (text == "" && pattern != "") { return 0; }
+            if (text != "" && pattern == "") { return 0; }
 
             var patternLength = pattern.Length;
             var count = 0;

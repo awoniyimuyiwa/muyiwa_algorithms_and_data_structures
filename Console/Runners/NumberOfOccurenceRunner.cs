@@ -9,7 +9,7 @@ namespace Console.Runners
         public static void Run(string text, string pattern, IConsole console)
         {
             // Execute
-            int numOcccurence = NumberOfOccurence.RunUsingRegex(pattern, text);
+            var numOcccurence = NumberOfOccurence.RunUsingRegex(pattern, text);
 
             // Display result
             console.Out.WriteLine($"Result: { numOcccurence }");

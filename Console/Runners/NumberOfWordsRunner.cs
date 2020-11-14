@@ -10,7 +10,7 @@ namespace Console.Runners
         {
             // Execute
             var result = NumberOfWords.RunUsingRegex(text);
-
+            
             // Display result
             console.Out.WriteLine($"Result: { result }");
         }

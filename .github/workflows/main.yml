@@ -26,7 +26,7 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./Console.Tests/TestResults/coverage.info
+        path-to-lcov: ./AlgorithmsAndDataStructures.Tests/TestResults/coverage.info
     - name: Build and deploy
       run: |
         dotnet build --configuration Release --no-restore

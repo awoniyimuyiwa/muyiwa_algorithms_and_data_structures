@@ -30,6 +30,7 @@ namespace AlgorithmsAndDataStructures.Tests
         [InlineData("", 0)]
         [InlineData("     ", 0)]
         [InlineData(" \t    \t", 0)]
+        [InlineData("a", 1)]
         public void RunUsingRegex_WhenCalled_ReturnsValidResult(string text, int expected)
         {
             var actual = NumberOfWords.RunUsingRegex(text);

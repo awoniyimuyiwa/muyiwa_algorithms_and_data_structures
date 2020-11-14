@@ -53,6 +53,25 @@ namespace AlgorithmsAndDataStructures.Tests
         [InlineData("4D 6S 9H QH QC", "3D 6D 7H QD QS", 1)]
         [InlineData("2H 2D 4C 4D 4S", "3C 3D 3S 9S 9D", 1)]
         [InlineData("5D 8C 9S JS AC", "5D 8C 9S JS AC", 0)]
+        // One pair
+        [InlineData("5D 5C 4S 3S QC", "5D 5C 4S 3S QC", 0)]
+        // Two pairs
+        [InlineData("5D 5C 4S 4S QC", "5D 5C 4S 4S QC", 0)]
+        // Three of a kind
+        [InlineData("5D 5C 5S 4S QC", "5D 5C 5S 4S QC", 0)]
+        // Straight
+        [InlineData("2D 3C 4S 5S 6C", "2D 3C 4S 5S 6C", 0)]
+        [InlineData("2D 3C 4S 5H QD", "2D 3C 4S 5S QD", 0)]
+        // Flush
+        [InlineData("5D 4D 6D 2D 7D", "5D 4D 6D 2D 7D", 0)]
+        // Full house
+        [InlineData("2D 2C 2S 3H 3D", "2D 2C 2S 3H 3D", 0)]
+        // Four of a kind
+        [InlineData("2D 2C 2S 2H 3D", "2D 2C 2S 2H 3D", 0)]
+        // Straight flush
+        [InlineData("2D 3D 4D 5D 6D", "2D 3D 4D 5D 6D", 0)]
+        // Royal flush
+        [InlineData("TD JD QD KC AC", "TD JD QD KC AC", 0)]
         public void GetWinner_WhenHand1AndHand2AreValid_ReturnsValidResult(string hand1, string hand2, int expected)
         {
             var actual = ProjectEulerProblem54.GetWinner(hand1.Split(" "), hand2.Split(" "));
