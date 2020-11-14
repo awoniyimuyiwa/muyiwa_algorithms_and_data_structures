@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class BinarySearchTest
+    public class BinarySearchTests
     {
         [Theory]
         [MemberData(nameof(GetDataForIsSorted))]

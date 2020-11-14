@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class NthFibonacciTest
+    public class NthFibonacciTests
     {
         [Theory]
         [InlineData(0, 0)]

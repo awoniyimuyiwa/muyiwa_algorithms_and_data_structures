@@ -4,21 +4,21 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class MergeSortTest
+    public class QuickSortTests
     {
         [Theory]
         [MemberData(nameof(GetData))]
         public void Sort_WhenItemsIsNotNull_ReturnsValidResult(int[] items, int[] expected)
         {
-            MergeSort.Sort(items);
-
+            QuickSort.Sort(items);
+           
             Assert.Equal(expected, items);
         }
 
         [Fact]
         public void Sort_WhenItemsIsNull_ThrowsArgumentNullException()
         {
-            Action actual = () => MergeSort.Sort<int>(null);
+            Action actual = () => QuickSort.Sort<int>(null);
 
             Assert.Throws<ArgumentNullException>(actual);
         }

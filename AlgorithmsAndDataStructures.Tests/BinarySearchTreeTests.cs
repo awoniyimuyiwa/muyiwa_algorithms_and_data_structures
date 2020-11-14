@@ -5,7 +5,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class BinarySearchTreeTest
+    public class BinarySearchTreeTests
     {
         [Theory]
         [MemberData(nameof(GetDataForTestingContains))]

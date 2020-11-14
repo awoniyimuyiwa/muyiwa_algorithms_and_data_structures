@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class NumberOfWordsTest
+    public class NumberOfWordsTests
     {
         [Theory]
         [InlineData("\t\t \nhello     \t", 1)]

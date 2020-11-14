@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class RemoveAllConsecutiveCharactersTest
+    public class RemoveAllConsecutiveCharactersTests
     {
         [Theory]
         [InlineData("hello  world", "helo world")]

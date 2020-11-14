@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Console.Tests
 {
-    public class ProgramTest
+    public class ProgramTests
     {
         [Theory]
         [InlineData("addition-pairs --numbers:4 6 2 8 --x:6", "4, 2")]

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class NumberOfOccurenceTest
+    public class NumberOfOccurenceTests
     {
         [Theory]
         [InlineData("hello", "hello world", 1)]

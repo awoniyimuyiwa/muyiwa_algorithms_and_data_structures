@@ -5,7 +5,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class AdditionPairsTest
+    public class AdditionPairsTests
     {
         [Theory]
         [MemberData(nameof(GetData))]

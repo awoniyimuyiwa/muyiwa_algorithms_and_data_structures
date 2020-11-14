@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class PalindromeTest
+    public class PalindromeTests
     {
         [Theory]
         [InlineData("51515", true)]

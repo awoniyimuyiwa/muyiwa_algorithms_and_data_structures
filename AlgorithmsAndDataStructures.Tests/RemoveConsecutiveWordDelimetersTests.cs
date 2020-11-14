@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class RemoveConsecutiveWordDelimetersTest
+    public class RemoveConsecutiveWordDelimetersTests
     {
         [Theory]
         [InlineData("hello\n\t\t\n  world\t", "hello\nworld\t")]

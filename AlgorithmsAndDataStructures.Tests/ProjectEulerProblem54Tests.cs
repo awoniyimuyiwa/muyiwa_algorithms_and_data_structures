@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class ProjectEulerProblem54Test
+    public class ProjectEulerProblem54Tests
     {
         [Theory]
         [InlineData("-1H 5C 6S 7S KD", "2C 3S 8S 8D TD")]

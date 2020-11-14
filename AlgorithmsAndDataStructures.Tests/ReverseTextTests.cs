@@ -3,7 +3,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class ReverseTextTest
+    public class ReverseTextTests
     {
         [Theory]
         [InlineData("hello", "olleh")]

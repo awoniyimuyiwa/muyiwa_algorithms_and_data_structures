@@ -5,7 +5,7 @@ using Xunit;
 
 namespace AlgorithmsAndDataStructures.Tests
 {
-    public class NumberOfOccurenceOfEachCharacterTest
+    public class NumberOfOccurenceOfEachCharacterTests
     {
         [Theory]
         [MemberData(nameof(GetData))]
