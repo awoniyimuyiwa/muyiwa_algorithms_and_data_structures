@@ -9,7 +9,7 @@ namespace AlgorithmsAndDataStructures.Tests
     {
         [Theory]
         [MemberData(nameof(GetDataForTestingContains))]
-        public void Contains_WhenCalled_ExecutesCorrectly(string[] items, string item, bool expected)
+        public void Contains_WhenCalled_ReturnsValidResult(string[] items, string item, bool expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
 
@@ -23,12 +23,12 @@ namespace AlgorithmsAndDataStructures.Tests
         public void Delete_WhenCalled_ExecutesCorrectly(string[] items, string item, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<string>();
+            var nodeDataProcessor = new CustomNodeDataProcessor<string>();
 
             binarySearchTree.Delete(item);
 
-            binarySearchTree.InOrderTraverse(visitor);
-            var actual = visitor.ReadOnlyItems;
+            binarySearchTree.InOrderTraverse(nodeDataProcessor);
+            var actual = nodeDataProcessor.ReadOnlyItems;
             IReadOnlyCollection<string> expectedAsReadOnly = Array.AsReadOnly(expected);
             Assert.Equal(expectedAsReadOnly, actual);
         }
@@ -38,11 +38,11 @@ namespace AlgorithmsAndDataStructures.Tests
         public void InOrderTraverse_WhenCalled_ExecutesCorrectly(string[] items, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<string>();
+            var nodeDataProcessor = new CustomNodeDataProcessor<string>();
  
-            binarySearchTree.InOrderTraverse(visitor);
+            binarySearchTree.InOrderTraverse(nodeDataProcessor);
 
-            var actual = visitor.ReadOnlyItems;
+            var actual = nodeDataProcessor.ReadOnlyItems;
             IReadOnlyCollection<string> expectedAsReadOnly = Array.AsReadOnly(expected);
             Assert.Equal(expectedAsReadOnly, actual);
         }
@@ -52,11 +52,11 @@ namespace AlgorithmsAndDataStructures.Tests
         public void PreOrderTraverse_WhenCalled_ExecutesCorrectly(string[] items, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<string>();
+            var nodeDataProcessor = new CustomNodeDataProcessor<string>();
  
-            binarySearchTree.PreOrderTraverse(visitor);
+            binarySearchTree.PreOrderTraverse(nodeDataProcessor);
 
-            var actual = visitor.ReadOnlyItems;
+            var actual = nodeDataProcessor.ReadOnlyItems;
             IReadOnlyCollection<string> expectedAsReadOnly = Array.AsReadOnly(expected);
             Assert.Equal(expectedAsReadOnly, actual);
         }
@@ -66,11 +66,11 @@ namespace AlgorithmsAndDataStructures.Tests
         public void PostOrderTraverse_WhenCalled_ExecutesCorrectly(string[] items, string[] expected)
         {
             var binarySearchTree = GetBinarySearchTree(items);
-            var visitor = new CustomNodeDataProcessor<string>();
+            var nodeDataProcessor = new CustomNodeDataProcessor<string>();
  
-            binarySearchTree.PostOrderTraverse(visitor);
+            binarySearchTree.PostOrderTraverse(nodeDataProcessor);
 
-            var actual = visitor.ReadOnlyItems;
+            var actual = nodeDataProcessor.ReadOnlyItems;
             IReadOnlyCollection<string> expectedAsReadOnly = Array.AsReadOnly(expected);
             Assert.Equal(expectedAsReadOnly, actual);
         }
@@ -87,7 +87,7 @@ namespace AlgorithmsAndDataStructures.Tests
 
                 {
                     new string[] { "pineapple", "mango", "orange", "pear" },
-                    "non-existing",
+                    "apple",
                     false
                 },
             };
@@ -111,7 +111,7 @@ namespace AlgorithmsAndDataStructures.Tests
 
                 {
                     new string[] { "pineapple", "mango", "orange", "pear" },
-                    "non-existing",
+                    "apple",
                     new string[] { "mango", "orange", "pear", "pineapple" }
                 },
             };
