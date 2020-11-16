@@ -111,6 +111,11 @@ namespace Console
                     new Argument<string>("text", "Text to find its number of words") {}
                 }.WithHandler(typeof(NumberOfWordsRunner).GetMethod(nameof(NumberOfWordsRunner.Run))),
 
+                new Command("num-to-words", "Converts a number to words")
+                {
+                    new Argument<decimal>("number", "Number to convert to words") {}
+                }.WithHandler(typeof(NumberToWordsRunner).GetMethod(nameof(NumberToWordsRunner.Run))),
+
                 new Command(
                     "proj-euler-prob-54", 
                     "Project euler problem 54. Given 5 cards each for two players in a game of poker, determines which of the two players is the winner. " +

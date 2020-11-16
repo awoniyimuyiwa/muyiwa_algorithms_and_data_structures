@@ -25,6 +25,7 @@ $ dotnet run multip-pairs --numbers:4 6 2 8 --x:8
 $ dotnet run num-occur --text:"hello world" --pattern:hello
 $ dotnet run num-occur-each-char "hello world"
 $ dotnet run num-words "hello world"
+$ dotnet run num-to-words 911
 $ dotnet run proj-euler-prob-54 --hand1:5H 5C 6S 7S KD --hand2:2C 3S 8S 8D TD
 $ dotnet run quick-sort lion cat tiger
 $ dotnet run rem-all-cons-char foobarrbazz

@@ -72,10 +72,7 @@ namespace AlgorithmsAndDataStructures.DataStructures
         public bool Contains(T data)
         {
             if (Root == null) { return false; }
-            else
-            {
-                return Contains(data, Root);
-            }
+            return Contains(data, Root);
         }
 
         /// <summary>
