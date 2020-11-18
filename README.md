@@ -4,7 +4,7 @@
 
 > Implements common algorithms and data structures
 
-* Ensure you have installed [dotnet 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1).
+* Ensure you have installed [dotnet 5.0](https://dotnet.microsoft.com/download/dotnet/5.0).
 * From your CLI, navigate to Console folder of the solution and run any of the following commands:
 
 ```bash
